@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blooms &amp; Butterflies — Franklin Park Conservatory</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Droid+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== BRAND COLORS =====
+      Primary: #F8971D (orange PMS 144), #572700 (dark brown PMS 4625), #935D3C (brown PMS 464)
+      #A1D2DD (light blue PMS 304), #D5D10E (yellow-green PMS 397), #B8B308 (olive PMS 398)
+      Secondary: #CFDD3A (lime PMS 380), #006682 (teal PMS 3145), #F99F1C (gold PMS 122)
+      #77833C (dark green PMS 7496), #C0B88D (beige PMS 453), #80866E (sage PMS 5763)
+      #9C2F31 (red PMS 1805), #DA6126 (orange-red PMS 1385), #DBD095 (tan PMS 615)
+    */
+
+    /* ===== RESET & BASE ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      font-family: Arial, 'Helvetica Neue', sans-serif;
+      background: #572700;
+      user-select: none;
+      -webkit-user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* ===== SCREEN CONTAINER ===== */
+    .screen {
+      position: fixed; inset: 0;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      overflow-y: auto;
+    }
+    .screen.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    /* ===== COMMON BACKGROUNDS ===== */
+    .bg-meadow {
+      background: linear-gradient(180deg, #A1D2DD 0%, #CFDD3A 35%, #77833C 55%, #572700 100%);
+    }
+    .bg-sky {
+      background: linear-gradient(180deg, #A1D2DD 0%, #DBD095 50%, #C0B88D 100%);
+    }
+    .bg-forest {
+      background: linear-gradient(180deg, #77833C 0%, #572700 40%, #3a1a00 100%);
+    }
+    .bg-warm {
+      background: linear-gradient(135deg, #DBD095 0%, #C0B88D 50%, #B8B1AB 100%);
+    }
+    .bg-guide {
+      background: linear-gradient(135deg, #DBD095 0%, #C0B88D 50%, #80866E 100%);
+    }
+
+    /* ===== TYPOGRAPHY ===== */
+    h1 {
+      font-family: 'Droid Serif', Georgia, serif;
+      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      color: #572700;
+      text-align: center;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+    }
+    h2 {
+      font-family: 'Droid Serif', Georgia, serif;
+      font-size: clamp(1.4rem, 3.5vw, 2.2rem);
+      color: #935D3C;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    h3 {
+      font-family: 'Droid Serif', Georgia, serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.6rem);
+      color: #572700;
+      margin-bottom: 0.75rem;
+    }
+    p, li {
+      font-family: Arial, 'Helvetica Neue', sans-serif;
+      font-size: clamp(0.95rem, 2vw, 1.15rem);
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 2.2rem;
+      border: none;
+      border-radius: 50px;
+      font-family: Arial, 'Helvetica Neue', sans-serif;
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-decoration: none;
+      text-align: center;
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); }
+    .btn:active { transform: translateY(0); }
+
+    .btn-green { background: #77833C; color: #fff; }
+    .btn-orange { background: #F8971D; color: #fff; }
+    .btn-brown { background: #935D3C; color: #fff; }
+    .btn-teal { background: #006682; color: #fff; }
+    .btn-red { background: #9C2F31; color: #fff; }
+    .btn-white { background: #fff; color: #572700; border: 2px solid #935D3C; }
+
+    /* ===== ARROW BUTTON (bottom-right, brown per brand) ===== */
+    .arrow-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      width: 60px;
+      height: 60px;
+      background: #935D3C;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transition: transform 0.2s, box-shadow 0.2s;
+      z-index: 100;
+    }
+    .arrow-btn:hover { transform: scale(1.1); box-shadow: 0 6px 25px rgba(0,0,0,0.4); }
+    .arrow-btn svg { width: 28px; height: 28px; fill: #fff; }
+
+    /* ===== ORANGE RECTANGLE (return to meadow) ===== */
+    .meadow-return-btn {
+      position: fixed;
+      bottom: 2rem;
+      right: 2rem;
+      padding: 0.7rem 1.5rem;
+      background: #F8971D;
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      font-family: Arial, 'Helvetica Neue', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transition: transform 0.2s;
+      z-index: 100;
+    }
+    .meadow-return-btn:hover { transform: scale(1.05); }
+
+    /* ===== BACK BUTTON ===== */
+    .back-btn {
+      position: fixed;
+      bottom: 2rem;
+      left: 2rem;
+      width: 60px;
+      height: 60px;
+      background: #80866E;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+      transition: transform 0.2s;
+      z-index: 100;
+    }
+    .back-btn:hover { transform: scale(1.1); }
+    .back-btn svg { width: 28px; height: 28px; fill: #fff; transform: rotate(180deg); }
+
+    /* ===== MENU LINK ===== */
+    .menu-link {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.6rem 1.5rem;
+      color: #DA6126;
+      font-weight: 600;
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      cursor: pointer;
+      text-decoration: underline;
+      transition: color 0.2s;
+    }
+    .menu-link:hover { color: #9C2F31; }
+
+    /* ===== CARD ===== */
+    .card {
+      background: rgba(255,255,255,0.92);
+      border-radius: 20px;
+      padding: 2rem 2.5rem;
+      max-width: 700px;
+      width: 100%;
+      box-shadow: 0 8px 32px rgba(87,39,0,0.15);
+      text-align: center;
+    }
+    .card-wide {
+      max-width: 900px;
+    }
+
+    /* ===== TITLE SCREEN SPECIFIC ===== */
+    #slide-1 {
+      background: linear-gradient(180deg, #A1D2DD 0%, #DBD095 20%, #C0B88D 45%, #CFDD3A 65%, #77833C 85%, #572700 100%);
+      position: relative;
+    }
+    .title-butterfly {
+      font-size: 4rem;
+      margin-bottom: 0.5rem;
+      animation: float 3s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+    .title-subtitle {
+      font-family: 'Droid Serif', Georgia, serif;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: #572700;
+      margin-bottom: 2rem;
+      font-style: italic;
+    }
+    .title-fpc {
+      font-family: 'Droid Serif', Georgia, serif;
+      font-size: clamp(0.85rem, 2vw, 1rem);
+      color: #935D3C;
+      margin-top: 1.5rem;
+    }
+    .menu-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      align-items: center;
+    }
+    .menu-buttons .btn {
+      min-width: 220px;
+    }
+
+    /* ===== FLOWER DECORATIONS ===== */
+    .flowers-row {
+      display: flex;
+      gap: 1rem;
+      font-size: 2rem;
+      margin: 1rem 0;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* ===== MEADOW HUB ===== */
+    .meadow-container {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      aspect-ratio: 16/10;
+      border-radius: 20px;
+      overflow: hidden;
+      background: linear-gradient(180deg, #A1D2DD 0%, #CFDD3A 50%, #77833C 100%);
+      box-shadow: 0 8px 32px rgba(87,39,0,0.25);
+    }
+    .meadow-area {
+      position: absolute;
+      cursor: pointer;
+      border-radius: 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-align: center;
+      padding: 0.5rem;
+    }
+    .meadow-area:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    }
+    .meadow-area .area-icon { font-size: clamp(2rem, 5vw, 3.5rem); }
+    .meadow-area .area-label {
+      font-family: Arial, 'Helvetica Neue', sans-serif;
+      font-size: clamp(0.7rem, 1.5vw, 1rem);
+      font-weight: 700;
+      color: #fff;
+      text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+      margin-top: 0.25rem;
+    }
+
+    .area-host-plants {
+      top: 15%; left: 5%;
+      width: 35%; height: 40%;
+      background: linear-gradient(135deg, rgba(119,131,60,0.9), rgba(128,134,110,0.9));
+      border: 3px solid rgba(255,255,255,0.5);
+    }
+    .area-camouflage {
+      top: 15%; right: 5%;
+      width: 35%; height: 40%;
+      background: linear-gradient(135deg, rgba(147,93,60,0.9), rgba(87,39,0,0.9));
+      border: 3px solid rgba(255,255,255,0.5);
+    }
+    .area-net {
+      bottom: 8%; left: 50%; transform: translateX(-50%);
+      width: 30%; height: 28%;
+      background: linear-gradient(135deg, rgba(248,151,29,0.9), rgba(218,97,38,0.9));
+      border: 3px solid rgba(255,255,255,0.5);
+    }
+
+    /* Meadow decorative elements */
+    .meadow-sun {
+      position: absolute;
+      top: 5%; right: 8%;
+      width: 50px; height: 50px;
+      background: #F8971D;
+      border-radius: 50%;
+      box-shadow: 0 0 30px rgba(248,151,29,0.6);
+    }
+    .meadow-cloud {
+      position: absolute;
+      background: rgba(255,255,255,0.7);
+      border-radius: 50px;
+      height: 20px;
+    }
+    .cloud-1 { top: 8%; left: 15%; width: 80px; animation: drift 20s linear infinite; }
+    .cloud-2 { top: 15%; left: 45%; width: 60px; animation: drift 25s linear infinite reverse; }
+    @keyframes drift {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(40px); }
+    }
+
+    /* ===== PLANT MATCHING ===== */
+    .plant-card {
+      background: rgba(255,255,255,0.95);
+      border-radius: 20px;
+      padding: 2rem;
+      max-width: 650px;
+      width: 100%;
+      box-shadow: 0 8px 32px rgba(87,39,0,0.18);
+      text-align: center;
+    }
+    .plant-image-area {
+      width: 100%;
+      aspect-ratio: 16/10;
+      border-radius: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 1rem 0;
+      font-size: clamp(3rem, 8vw, 5rem);
+      transition: transform 0.3s, box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .plant-image-area:hover { transform: scale(1.02); box-shadow: 0 8px 25px rgba(87,39,0,0.2); }
+
+    .plant-reveal {
+      display: none;
+      background: rgba(255,255,255,0.95);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-top: 1rem;
+      border: 3px solid #77833C;
+      animation: revealIn 0.5s ease;
+    }
+    .plant-reveal.show { display: block; }
+    @keyframes revealIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .plant-reveal h3 { color: #DA6126; margin-bottom: 0.5rem; }
+
+    /* ===== CAMOUFLAGE ===== */
+    .camo-scene {
+      position: relative;
+      width: 100%;
+      max-width: 700px;
+      aspect-ratio: 16/10;
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: crosshair;
+      box-shadow: 0 8px 32px rgba(87,39,0,0.35);
+    }
+    .camo-scene .leaf-bg {
+      position: absolute; inset: 0;
+      background-size: 400% 400%;
+      animation: leafShift 8s ease infinite;
+    }
+    @keyframes leafShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    .camo-leaf {
+      position: absolute;
+      font-size: clamp(1.5rem, 4vw, 3rem);
+      opacity: 0.6;
+      pointer-events: none;
+    }
+    .camo-hidden-butterfly {
+      position: absolute;
+      width: 60px; height: 50px;
+      cursor: pointer;
+      z-index: 10;
+      opacity: 0.35;
+      transition: opacity 0.3s, outline 0.3s;
+    }
+    .camo-hidden-butterfly:hover { opacity: 0.45; }
+    .camo-hidden-butterfly.hint-outline {
+      outline: 3px solid #F8971D;
+      outline-offset: 4px;
+      border-radius: 8px;
+      opacity: 0.6;
+    }
+
+    /* ===== FOUND IT OVERLAY ===== */
+    .found-overlay {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(87,39,0,0.6);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+    }
+    .found-overlay.show {
+      display: flex;
+    }
+    .found-card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 2.5rem;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+      animation: popIn 0.4s ease;
+    }
+    @keyframes popIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    /* ===== ERROR MODAL ===== */
+    .error-modal {
+      display: none;
+      position: fixed; inset: 0;
+      background: rgba(87,39,0,0.5);
+      z-index: 300;
+      align-items: center;
+      justify-content: center;
+    }
+    .error-modal.show { display: flex; }
+    .error-content {
+      background: #fff;
+      border-radius: 20px;
+      padding: 2rem;
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      animation: popIn 0.3s ease;
+      border: 3px solid #9C2F31;
+    }
+    .error-content h3 { color: #9C2F31; font-size: 1.3rem; margin-bottom: 0.5rem; }
+    .error-content p { color: #555; margin-bottom: 1rem; }
+
+    /* ===== LARRY CHARACTER ===== */
+    .larry-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    .larry-avatar {
+      width: clamp(100px, 20vw, 160px);
+      height: clamp(100px, 20vw, 160px);
+      border-radius: 50%;
+      background: linear-gradient(135deg, #F8971D, #F99F1C);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(3rem, 8vw, 5rem);
+      box-shadow: 0 8px 25px rgba(87,39,0,0.2);
+      border: 4px solid #fff;
+    }
+    .speech-bubble {
+      background: #fff;
+      border-radius: 20px;
+      padding: 1.5rem 2rem;
+      max-width: 600px;
+      width: 100%;
+      box-shadow: 0 6px 20px rgba(87,39,0,0.12);
+      position: relative;
+    }
+    .speech-bubble::before {
+      content: '';
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-left: 12px solid transparent;
+      border-right: 12px solid transparent;
+      border-bottom: 12px solid #fff;
+    }
+
+    /* ===== TEACHER GUIDE SECTIONS ===== */
+    .guide-sections {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 1.5rem 0;
+      width: 100%;
+      max-width: 500px;
+    }
+    .guide-section-btn {
+      padding: 1.2rem 1.5rem;
+      border: none;
+      border-radius: 16px;
+      font-family: Arial, 'Helvetica Neue', sans-serif;
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .guide-section-btn:hover { transform: translateX(5px); box-shadow: 0 4px 15px rgba(87,39,0,0.15); }
+    .guide-section-btn .section-icon { font-size: 1.5rem; }
+
+    .section-resources { background: #DBD095; color: #572700; }
+    .section-standards { background: #A1D2DD; color: #006682; }
+    .section-prompts { background: #C0B88D; color: #572700; }
+
+    /* ===== RESOURCE LINKS ===== */
+    .resource-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin: 1rem 0;
+      text-align: left;
+    }
+    .resource-links a {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.8rem 1.2rem;
+      background: #DBD095;
+      border-radius: 12px;
+      color: #572700;
+      text-decoration: none;
+      font-weight: 500;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .resource-links a:hover { background: #C0B88D; transform: translateX(4px); }
+    .resource-links a .link-icon { font-size: 1.3rem; }
+
+    /* ===== CLICK ANYWHERE HINT ===== */
+    .click-hint {
+      position: fixed;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(87,39,0,0.6);
+      color: #fff;
+      padding: 0.6rem 1.5rem;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      animation: pulse 2s ease-in-out infinite;
+      pointer-events: none;
+      z-index: 50;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
+
+    /* ===== PROGRESS DOTS ===== */
+    .progress-dots {
+      display: flex;
+      gap: 0.5rem;
+      margin: 1rem 0;
+      justify-content: center;
+    }
+    .progress-dot {
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: #C0B88D;
+      transition: background 0.3s;
+    }
+    .progress-dot.active { background: #F8971D; }
+    .progress-dot.done { background: #572700; }
+
+    /* ===== BUTTERFLY GALLERY HUB (Slide 29) ===== */
+    .butterfly-hub {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+      max-width: 700px;
+      width: 100%;
+      padding: 1rem;
+    }
+    .butterfly-hub-item {
+      background: rgba(255,255,255,0.9);
+      border-radius: 16px;
+      padding: 1.2rem;
+      cursor: pointer;
+      text-align: center;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border: 3px solid transparent;
+      position: relative;
+    }
+    .butterfly-hub-item:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 20px rgba(87,39,0,0.2);
+    }
+    .butterfly-hub-item.visited {
+      border-color: #77833C;
+      background: rgba(207,221,58,0.2);
+    }
+    .butterfly-hub-item.visited::after {
+      content: '\2713';
+      position: absolute;
+      top: 8px; right: 10px;
+      color: #77833C;
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+    .butterfly-hub-item .hub-emoji {
+      font-size: clamp(2rem, 5vw, 3rem);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+    .butterfly-hub-item .hub-label {
+      font-family: 'Droid Serif', Georgia, serif;
+      font-size: clamp(0.75rem, 1.5vw, 0.95rem);
+      color: #572700;
+      font-weight: 600;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 600px) {
+      .screen { padding: 1rem; }
+      .card { padding: 1.5rem; }
+      .arrow-btn, .back-btn { width: 50px; height: 50px; }
+      .arrow-btn svg, .back-btn svg { width: 22px; height: 22px; }
+      .meadow-container { aspect-ratio: 4/5; }
+      .meadow-area .area-icon { font-size: 2rem; }
+      .camo-scene { aspect-ratio: 4/3; }
+      .butterfly-hub { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== SLIDE 1: MAIN MENU ===== -->
+<div id="slide-1" class="screen active">
+  <div class="title-butterfly" aria-hidden="true">&#x1F98B;</div>
+  <h1>Blooms &amp; Butterflies</h1>
+  <p class="title-subtitle">Classroom Extension</p>
+  <div class="flowers-row" aria-hidden="true">
+    <span>&#x1F338;</span><span>&#x1F33C;</span><span>&#x1F33A;</span><span>&#x1F33B;</span><span>&#x1F337;</span>
+  </div>
+  <div class="menu-buttons">
+    <button class="btn btn-green" onclick="goToSlide(7)">Start</button>
+    <button class="btn btn-teal" onclick="goToSlide(2)">Tutorial</button>
+    <button class="btn btn-brown" onclick="goToSlide(3)">Teacher's Guide</button>
+  </div>
+  <p class="title-fpc">Franklin Park Conservatory &amp; Botanical Gardens</p>
+</div>
+
+<!-- ===== SLIDE 2: TUTORIAL ===== -->
+<div id="slide-2" class="screen bg-warm">
+  <div class="card">
+    <h2>How to Play</h2>
+    <div style="text-align:left; margin: 1.5rem 0;">
+      <p style="margin-bottom:1rem;">Welcome to Blooms &amp; Butterflies! Here's how to explore:</p>
+      <ul style="padding-left: 1.5rem; display:flex; flex-direction:column; gap:0.75rem;">
+        <li><strong>Click or tap</strong> to interact with everything on screen.</li>
+        <li>When you see a <strong>brown arrow</strong> in the bottom-right corner, click it to go to the next screen.</li>
+        <li>When you see an <strong>orange rectangle</strong>, click it to return to the meadow hub.</li>
+        <li>In the meadow, <strong>click on butterfly areas</strong> to learn about different species.</li>
+        <li>Click the <strong>butterfly net</strong> when you're done exploring.</li>
+        <li>If you click the wrong thing, don't worry — you'll get a helpful message!</li>
+      </ul>
+    </div>
+    <span class="menu-link" onclick="goToSlide(1)">Click here to return to the main menu!</span>
+  </div>
+</div>
+
+<!-- ===== SLIDE 3: TEACHER'S GUIDE ===== -->
+<div id="slide-3" class="screen bg-guide">
+  <div class="card">
+    <h2>Teacher's Guide</h2>
+    <p>Select a section below to explore resources for your classroom.</p>
+    <div class="guide-sections">
+      <button class="guide-section-btn section-resources" onclick="goToSlide(4)">
+        <span class="section-icon">&#x1F4D6;</span>
+        Additional Resources
+      </button>
+      <button class="guide-section-btn section-standards" onclick="goToSlide(5)">
+        <span class="section-icon">&#x1F4CB;</span>
+        Standards &amp; Adaptations
+      </button>
+      <button class="guide-section-btn section-prompts" onclick="goToSlide(6)">
+        <span class="section-icon">&#x270F;&#xFE0F;</span>
+        Prompts &amp; Projects
+      </button>
+    </div>
+    <span class="menu-link" onclick="goToSlide(1)">Click here to return to the main menu!</span>
+  </div>
+</div>
+
+<!-- ===== SLIDE 4: ADDITIONAL RESOURCES ===== -->
+<div id="slide-4" class="screen bg-guide">
+  <div class="card">
+    <h2>Additional Resources</h2>
+    <p>Explore these videos and documentaries to learn more about butterflies:</p>
+    <div class="resource-links">
+      <a href="https://www.youtube.com/results?search_query=butterfly+mimicry" target="_blank" rel="noopener">
+        <span class="link-icon">&#x1F3AC;</span> Butterfly Mimicry
+      </a>
+      <a href="https://www.youtube.com/results?search_query=migrating+monarchs+documentary" target="_blank" rel="noopener">
+        <span class="link-icon">&#x1F3AC;</span> Migrating Monarchs
+      </a>
+      <a href="https://www.youtube.com/results?search_query=wild+kratts+butterflies" target="_blank" rel="noopener">
+        <span class="link-icon">&#x1F3AC;</span> Wild Kratts
+      </a>
+      <a href="https://www.youtube.com/results?search_query=how+do+monarch+butterflies+know+where+to+migrate" target="_blank" rel="noopener">
+        <span class="link-icon">&#x1F3AC;</span> How do Monarch Butterflies Know Where to Migrate?
+      </a>
+    </div>
+  </div>
+  <button class="back-btn" onclick="goToSlide(3)" title="Go back">
+    <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+  </button>
+</div>
+
+<!-- ===== SLIDE 5: STANDARDS & ADAPTATIONS ===== -->
+<div id="slide-5" class="screen bg-guide">
+  <div class="card">
+    <h2>Standards &amp; Adaptations</h2>
+    <div style="text-align:left; margin: 1rem 0;">
+      <h3>Science Standards Alignment</h3>
+      <ul style="padding-left: 1.5rem; display:flex; flex-direction:column; gap:0.5rem; margin-bottom:1rem;">
+        <li><strong>NGSS 3-LS1-1:</strong> Develop models to describe that organisms have unique and diverse life cycles.</li>
+        <li><strong>NGSS 3-LS4-2:</strong> Use evidence to construct an explanation for how the variations in characteristics among individuals of the same species may provide advantages in surviving.</li>
+        <li><strong>NGSS 4-LS1-1:</strong> Construct an argument that plants and animals have internal and external structures that function to support survival, growth, behavior, and reproduction.</li>
+      </ul>
+      <h3>Adaptations for Diverse Learners</h3>
+      <ul style="padding-left: 1.5rem; display:flex; flex-direction:column; gap:0.5rem;">
+        <li><strong>Visual Learners:</strong> All content is paired with visual cues and illustrations.</li>
+        <li><strong>ELL Students:</strong> Simple, clear language with visual support throughout.</li>
+        <li><strong>Advanced Learners:</strong> Encourage deeper exploration with additional resource links.</li>
+        <li><strong>Accessibility:</strong> Large click targets, high-contrast text, and clear navigation.</li>
+      </ul>
+    </div>
+  </div>
+  <button class="back-btn" onclick="goToSlide(4)" title="Go back">
+    <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+  </button>
+</div>
+
+<!-- ===== SLIDE 6: PROMPTS & PROJECTS ===== -->
+<div id="slide-6" class="screen bg-guide">
+  <div class="card">
+    <h2>Prompts &amp; Projects</h2>
+    <div style="text-align:left; margin: 1rem 0;">
+      <h3>Discussion Prompts</h3>
+      <ul style="padding-left: 1.5rem; display:flex; flex-direction:column; gap:0.5rem; margin-bottom:1rem;">
+        <li>Why do you think butterflies need specific host plants?</li>
+        <li>How does camouflage help butterflies survive in the wild?</li>
+        <li>What would happen if a butterfly's host plant disappeared from an area?</li>
+        <li>Compare two butterfly species — how are their adaptations different?</li>
+      </ul>
+      <h3>Project Ideas</h3>
+      <ul style="padding-left: 1.5rem; display:flex; flex-direction:column; gap:0.5rem;">
+        <li><strong>Butterfly Journal:</strong> Students observe and sketch butterflies found in their neighborhood.</li>
+        <li><strong>Host Plant Garden:</strong> Plan and design a butterfly-friendly garden for the school.</li>
+        <li><strong>Life Cycle Model:</strong> Create a 3D model showing the stages of a butterfly's life cycle.</li>
+        <li><strong>Camouflage Art:</strong> Design a butterfly with camouflage patterns for a specific habitat.</li>
+      </ul>
+    </div>
+  </div>
+  <button class="back-btn" onclick="goToSlide(5)" title="Go back">
+    <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+  </button>
+</div>
+
+<!-- ===== SLIDE 7: LARRY INTRO ===== -->
+<div id="slide-7" class="screen bg-meadow" onclick="goToSlide(8)" style="cursor:pointer;">
+  <div class="larry-container">
+    <div class="larry-avatar">&#x1F9D1;&#x200D;&#x1F52C;</div>
+    <div class="speech-bubble">
+      <h2 style="margin-bottom:0.75rem;">Meet Larry the Lepidopterist!</h2>
+      <p>Hello there, young explorer! I'm Larry, and I study butterflies. Today, we're going on an adventure through a beautiful meadow filled with amazing butterflies and the plants they love.</p>
+      <p style="margin-top:0.75rem;">Are you ready? Let's go!</p>
+    </div>
+  </div>
+  <div class="click-hint">Click anywhere to continue</div>
+</div>
+
+<!-- ===== SLIDE 8: BUTTERFLY INSTRUCTIONS ===== -->
+<div id="slide-8" class="screen bg-sky" onclick="goToSlide(9)" style="cursor:pointer;">
+  <div class="card">
+    <h2>Exploring the Meadow</h2>
+    <p style="margin: 1rem 0;">In the meadow, you'll find different areas to explore. <strong>Click on the butterfly icons</strong> to learn about different butterfly species and their fascinating world.</p>
+    <p>Each area will teach you something new about butterflies — from the plants they depend on, to how they hide from predators!</p>
+    <div class="flowers-row" aria-hidden="true">
+      <span>&#x1F33F;</span><span>&#x1F338;</span><span>&#x1F98B;</span><span>&#x1F33A;</span><span>&#x1F33F;</span>
+    </div>
+  </div>
+  <div class="click-hint">Click anywhere to continue</div>
+</div>
+
+<!-- ===== SLIDE 9: WHAT YOU WILL LEARN ===== -->
+<div id="slide-9" class="screen bg-sky" onclick="goToSlide(10)" style="cursor:pointer;">
+  <div class="card">
+    <h2>What You'll Discover</h2>
+    <div style="text-align:left; margin: 1.5rem 0;">
+      <ul style="padding-left: 1.5rem; display:flex; flex-direction:column; gap:1rem;">
+        <li><strong>Host Plants:</strong> Learn which plants each butterfly species needs to survive and lay their eggs.</li>
+        <li><strong>Camouflage:</strong> Discover how butterflies use clever disguises to hide from predators.</li>
+        <li><strong>Life Cycles:</strong> Explore the amazing transformation from caterpillar to butterfly.</li>
+        <li><strong>Adaptations:</strong> See the incredible ways butterflies have adapted to their environment.</li>
+      </ul>
+    </div>
+  </div>
+  <div class="click-hint">Click anywhere to continue</div>
+</div>
+
+<!-- ===== SLIDE 10: MEADOW HUB ===== -->
+<div id="slide-10" class="screen" style="background: linear-gradient(180deg, #A1D2DD 0%, #CFDD3A 60%, #77833C 100%);">
+  <h2 style="color:#fff; text-shadow: 1px 2px 4px rgba(87,39,0,0.4); margin-bottom:1rem;">The Meadow</h2>
+  <p style="color:#fff; text-shadow: 1px 1px 3px rgba(87,39,0,0.3); margin-bottom:1.5rem; font-weight:500;">Click any area to begin exploring. Click the net when you're finished!</p>
+  <div class="meadow-container">
+    <div class="meadow-sun"></div>
+    <div class="meadow-cloud cloud-1"></div>
+    <div class="meadow-cloud cloud-2"></div>
+    <div class="meadow-area area-host-plants" onclick="goToSlide(11)" role="button" tabindex="0" aria-label="Host Plants activity">
+      <span class="area-icon">&#x1F331;&#x1F98B;</span>
+      <span class="area-label">Host Plants</span>
+    </div>
+    <div class="meadow-area area-camouflage" onclick="goToSlide(16)" role="button" tabindex="0" aria-label="Camouflage activity">
+      <span class="area-icon">&#x1F343;&#x1F50D;</span>
+      <span class="area-label">Camouflage</span>
+    </div>
+    <div class="meadow-area area-net" onclick="goToSlide(20)" role="button" tabindex="0" aria-label="Finish activity with butterfly net">
+      <span class="area-icon">&#x1F3C6;&#x1F98B;</span>
+      <span class="area-label">Butterfly Net</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 11: HOST PLANTS INTRO ===== -->
+<div id="slide-11" class="screen bg-meadow">
+  <div class="card">
+    <h2>Host Plants</h2>
+    <p style="margin: 1rem 0;">Did you know that each butterfly species has a <strong>special plant</strong> where it lays its eggs? These are called <strong>host plants</strong>.</p>
+    <p>The caterpillars eat the leaves of their host plant as they grow. Without the right plant, the butterflies can't survive!</p>
+    <p style="margin-top: 1rem; font-weight: 600; color: #DA6126;">Click the arrow to explore which plants match with which butterflies.</p>
+  </div>
+  <button class="arrow-btn" onclick="startHostPlants()" title="Next">
+    <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+  </button>
+</div>
+
+<!-- ===== SLIDE 12: HOST PLANTS MATCHING (DYNAMIC) ===== -->
+<div id="slide-12" class="screen bg-meadow">
+  <div class="plant-card" id="plant-card">
+    <div class="progress-dots" id="plant-progress"></div>
+    <h3 id="plant-title" style="color:#572700; font-size:1.3rem;"></h3>
+    <p style="margin-bottom:0.5rem; color:#555;">Click the plant to reveal which butterfly species depends on it!</p>
+    <div class="plant-image-area" id="plant-image" onclick="revealButterfly()">
+    </div>
+    <div class="plant-reveal" id="plant-reveal">
+      <h3 id="butterfly-name"></h3>
+      <p id="butterfly-desc"></p>
+      <div style="font-size:2rem; margin-top:0.5rem;" id="butterfly-emoji"></div>
+    </div>
+  </div>
+  <button class="arrow-btn" id="plant-next-btn" onclick="nextPlant()" title="Next plant" style="display:none;">
+    <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+  </button>
+</div>
+
+<!-- Placeholder slides for nav compatibility -->
+<div id="slide-13" class="screen" style="display:none;"></div>
+<div id="slide-14" class="screen" style="display:none;"></div>
+<div id="slide-15" class="screen" style="display:none;"></div>
+
+<!-- ===== SLIDE 16: CAMOUFLAGE INTRO ===== -->
+<div id="slide-16" class="screen bg-forest" onclick="goToSlide(17)" style="cursor:pointer;">
+  <div class="card">
+    <h2>Camouflage</h2>
+    <p style="margin: 1rem 0;">Some butterflies are masters of disguise! They use <strong>camouflage</strong> to blend in with their surroundings and hide from predators.</p>
+    <p>Can you spot a hidden butterfly in the next scene? Look closely — it won't be easy!</p>
+  </div>
+  <div class="click-hint">Click anywhere to continue</div>
+</div>
+
+<!-- ===== SLIDE 17: FIND THE BUTTERFLY ===== -->
+<div id="slide-17" class="screen bg-forest">
+  <h2 style="color:#fff; text-shadow: 1px 2px 4px rgba(87,39,0,0.5); margin-bottom:1rem;">Find the Camouflaged Butterfly!</h2>
+  <p style="color:#DBD095; margin-bottom:1rem;">Look carefully at the scene below. Click where you think the butterfly is hiding.</p>
+  <div class="camo-scene" id="camo-scene" onclick="camoWrongClick(event)">
+    <div class="leaf-bg" style="background: linear-gradient(145deg, #77833C, #572700, #935D3C, #77833C, #572700);"></div>
+    <span class="camo-leaf" style="top:10%;left:8%;">&#x1F342;</span>
+    <span class="camo-leaf" style="top:25%;left:20%;">&#x1F343;</span>
+    <span class="camo-leaf" style="top:60%;left:12%;">&#x1F33F;</span>
+    <span class="camo-leaf" style="top:15%;left:65%;">&#x1F342;</span>
+    <span class="camo-leaf" style="top:70%;left:75%;">&#x1F343;</span>
+    <span class="camo-leaf" style="top:45%;left:35%;">&#x1F33F;</span>
+    <span class="camo-leaf" style="top:80%;left:45%;">&#x1F342;</span>
+    <span class="camo-leaf" style="top:30%;left:80%;">&#x1F33F;</span>
+    <span class="camo-leaf" style="top:55%;left:60%;">&#x1F342;</span>
+    <span class="camo-leaf" style="top:75%;left:25%;">&#x1F343;</span>
+    <span class="camo-leaf" style="top:20%;left:45%;">&#x1F342;</span>
+    <span class="camo-leaf" style="top:65%;left:50%;">&#x1F33F;</span>
+    <span class="camo-leaf" style="top:40%;left:70%;">&#x1F343;</span>
+    <span class="camo-leaf" style="top:85%;left:65%;">&#x1F342;</span>
+    <span class="camo-leaf" style="top:50%;left:15%;">&#x1F343;</span>
+    <div class="camo-hidden-butterfly" id="hidden-butterfly" style="top:40%; left:55%;" onclick="camoCorrectClick(event)" title="Is this a butterfly?">
+      <svg viewBox="0 0 60 50" style="width:100%;height:100%;">
+        <ellipse cx="20" cy="18" rx="16" ry="14" fill="#5D4037" opacity="0.8"/>
+        <ellipse cx="40" cy="18" rx="16" ry="14" fill="#5D4037" opacity="0.8"/>
+        <ellipse cx="18" cy="35" rx="12" ry="10" fill="#4E342E" opacity="0.7"/>
+        <ellipse cx="42" cy="35" rx="12" ry="10" fill="#4E342E" opacity="0.7"/>
+        <rect x="29" y="8" width="2" height="35" rx="1" fill="#3E2723"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 18: FOUND IT - DEAD LEAF BUTTERFLY INFO ===== -->
+<div id="slide-18" class="screen bg-forest">
+  <div class="card">
+    <h2 style="color:#DA6126;">YOU FOUND IT!</h2>
+    <p style="margin: 1rem 0; font-size: 1.1rem;">This is a <strong>Dead Leaf Butterfly</strong> (Orange Oakleaf).</p>
+    <div style="display:flex; gap:1.5rem; margin:1.5rem 0; flex-wrap:wrap; justify-content:center;">
+      <div style="flex:1; min-width:200px; background:#DBD095; border-radius:16px; padding:1.2rem;">
+        <h3 style="color:#572700;">Wings Closed</h3>
+        <p>When the wings are closed, they look exactly like a dead, brown leaf — complete with veins and even spots that mimic decay!</p>
+      </div>
+      <div style="flex:1; min-width:200px; background:#A1D2DD; border-radius:16px; padding:1.2rem;">
+        <h3 style="color:#006682;">Wings Open</h3>
+        <p>When the wings open, they reveal beautiful bright orange and blue colors that surprise predators!</p>
+      </div>
+    </div>
+    <p style="color:#555;">This amazing adaptation helps the butterfly hide in plain sight among fallen leaves on the forest floor.</p>
+  </div>
+  <button class="arrow-btn" onclick="goToSlide(19)" title="Next">
+    <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+  </button>
+</div>
+
+<!-- ===== SLIDE 19: CAMOUFLAGE COMPLETE ===== -->
+<div id="slide-19" class="screen bg-forest">
+  <div class="card">
+    <h2>Great Job, Explorer!</h2>
+    <p style="margin: 1rem 0;">You've learned about how butterflies use camouflage to survive. The Dead Leaf Butterfly is just one example of nature's incredible disguises.</p>
+    <p>Head back to the meadow to continue exploring!</p>
+  </div>
+  <button class="meadow-return-btn" onclick="goToSlide(10)">Return to the Meadow</button>
+</div>
+
+<!-- ===== SLIDE 20: ACTIVITY COMPLETE ===== -->
+<div id="slide-20" class="screen" style="background: linear-gradient(180deg, #F8971D 0%, #DBD095 30%, #CFDD3A 70%, #77833C 100%);">
+  <div class="card">
+    <h1 style="font-size:clamp(1.5rem,4vw,2.5rem);">Thanks for Exploring the Meadow!</h1>
+    <p style="margin: 1.5rem 0; font-size: 1.1rem;">You've learned about host plants, camouflage, and the amazing world of butterflies.</p>
+    <p style="color:#555;">Keep exploring nature — there's always something new to discover!</p>
+    <div class="flowers-row" style="margin:1.5rem 0;" aria-hidden="true">
+      <span>&#x1F338;</span><span>&#x1F98B;</span><span>&#x1F33C;</span><span>&#x1F98B;</span><span>&#x1F33A;</span><span>&#x1F98B;</span><span>&#x1F33B;</span>
+    </div>
+    <button class="btn btn-green" onclick="goToSlide(21)" style="margin-top:1rem;">Continue the Adventure</button>
+    <br>
+    <button class="btn btn-white" onclick="goToSlide(1)" style="margin-top:0.75rem;">Return to Main Menu</button>
+  </div>
+</div>
+
+<!-- ===== SLIDE 21: CAMOUFLAGE SCENE 2 - Comma Butterfly ===== -->
+<div id="slide-21" class="screen bg-forest">
+  <h2 style="color:#fff; text-shadow: 1px 2px 4px rgba(87,39,0,0.5); margin-bottom:1rem;">Find the Hidden Butterfly!</h2>
+  <p style="color:#DBD095; margin-bottom:1rem;">A butterfly is hiding near the top-left of this scene. Can you spot it?</p>
+  <div class="camo-scene" id="camo-scene-21" onclick="camoWrongClick21(event)">
+    <div class="leaf-bg" style="background: linear-gradient(145deg, #4a6741, #2d4a28, #5a7d50, #3b5e34, #2d4a28);"></div>
+    <span class="camo-leaf" style="top:5%;left:5%;">&#x1F343;</span>
+    <span class="camo-leaf" style="top:15%;left:25%;">&#x1F342;</span>
+    <span class="camo-leaf" style="top:30%;left:10%;">&#x1F33F;</span>
+    <span class="camo-leaf" style="top:45%;left:40%;">&#x1F342;</span>
+    <span class="camo-leaf" style="top:60%;left:20%;">&#x1F343;</span>
+    <span class="camo-leaf" style="top:20%;left:60%;">&#x1F342;</span>
+    <span class="camo-leaf" style="top:70%;left:55%;">&#x1F33F;</span>
+    <span class="camo-leaf" style="top:35%;left:75%;">&#x1F343;</span>
+    <span class="camo-leaf" style="top:80%;left:40%;">&#x1F342;</span>
+    <span class="camo-leaf" style="top:50%;left:85%;">&#x1F33F;</span>
+    <span class="camo-leaf" style="top:10%;left:80%;">&#x1F342;</span>
+    <span class="camo-leaf" style="top:90%;left:15%;">&#x1F343;</span>
+    <span class="camo-leaf" style="top:75%;left:70%;">&#x1F342;</span>
+    <span class="camo-leaf" style="top:55%;left:5%;">&#x1F33F;</span>
+    <div class="camo-hidden-butterfly" id="hidden-butterfly-21" style="top:12%; left:15%;" onclick="camoCorrectClick21(event)">
+      <svg viewBox="0 0 60 50" style="width:100%;height:100%;">
+        <ellipse cx="20" cy="18" rx="16" ry="14" fill="#4a6741" opacity="0.75"/>
+        <ellipse cx="40" cy="18" rx="16" ry="14" fill="#3b5e34" opacity="0.75"/>
+        <ellipse cx="18" cy="35" rx="12" ry="10" fill="#2d4a28" opacity="0.65"/>
+        <ellipse cx="42" cy="35" rx="12" ry="10" fill="#2d4a28" opacity="0.65"/>
+        <rect x="29" y="8" width="2" height="35" rx="1" fill="#1a3a1a"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 22: BUTTERFLY INFO - Comma Butterfly ===== -->
+<div id="slide-22" class="screen bg-forest">
+  <div class="card">
+    <h2 style="color:#DA6126;">You Found It!</h2>
+    <p style="margin: 1rem 0; font-size: 1.1rem;">This is a <strong>Comma Butterfly</strong>!</p>
+    <div style="display:flex; gap:1.5rem; margin:1.5rem 0; flex-wrap:wrap; justify-content:center;">
+      <div style="flex:1; min-width:200px; background:#DBD095; border-radius:16px; padding:1.2rem;">
+        <h3 style="color:#572700;">How It Hides</h3>
+        <p>The Comma Butterfly has jagged wing edges that look like torn leaves. When resting on a branch, it becomes nearly invisible!</p>
+      </div>
+      <div style="flex:1; min-width:200px; background:#A1D2DD; border-radius:16px; padding:1.2rem;">
+        <h3 style="color:#006682;">Fun Fact</h3>
+        <p>It gets its name from a tiny white comma-shaped mark on the underside of its hindwing.</p>
+      </div>
+    </div>
+  </div>
+  <button class="arrow-btn" onclick="goToSlide(23)" title="Next">
+    <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+  </button>
+</div>
+
+<!-- ===== SLIDE 23: CAMOUFLAGE SCENE 3 - Leaf Wing ===== -->
+<div id="slide-23" class="screen bg-forest">
+  <h2 style="color:#fff; text-shadow: 1px 2px 4px rgba(87,39,0,0.5); margin-bottom:1rem;">Find Another Hidden Butterfly!</h2>
+  <p style="color:#DBD095; margin-bottom:1rem;">This one is also near the top-left. Look carefully among the bark and leaves!</p>
+  <div class="camo-scene" id="camo-scene-23" onclick="camoWrongClick23(event)">
+    <div class="leaf-bg" style="background: linear-gradient(145deg, #8B6914, #6B4E12, #a07828, #7a5d1e, #5a4010);"></div>
+    <span class="camo-leaf" style="top:8%;left:10%;">&#x1F342;</span>
+    <span class="camo-leaf" style="top:22%;left:35%;">&#x1F343;</span>
+    <span class="camo-leaf" style="top:40%;left:15%;">&#x1F342;</span>
+    <span class="camo-leaf" style="top:55%;left:50%;">&#x1F33F;</span>
+    <span class="camo-leaf" style="top:70%;left:30%;">&#x1F342;</span>
+    <span class="camo-leaf" style="top:15%;left:70%;">&#x1F343;</span>
+    <span class="camo-leaf" style="top:85%;left:60%;">&#x1F342;</span>
+    <span class="camo-leaf" style="top:35%;left:85%;">&#x1F33F;</span>
+    <span class="camo-leaf" style="top:60%;left:75%;">&#x1F342;</span>
+    <span class="camo-leaf" style="top:45%;left:5%;">&#x1F343;</span>
+    <span class="camo-leaf" style="top:75%;left:80%;">&#x1F342;</span>
+    <span class="camo-leaf" style="top:25%;left:55%;">&#x1F33F;</span>
+    <span class="camo-leaf" style="top:90%;left:20%;">&#x1F342;</span>
+    <div class="camo-hidden-butterfly" id="hidden-butterfly-23" style="top:10%; left:18%;" onclick="camoCorrectClick23(event)">
+      <svg viewBox="0 0 60 50" style="width:100%;height:100%;">
+        <ellipse cx="20" cy="18" rx="16" ry="14" fill="#8B6914" opacity="0.7"/>
+        <ellipse cx="40" cy="18" rx="16" ry="14" fill="#7a5d1e" opacity="0.7"/>
+        <ellipse cx="18" cy="35" rx="12" ry="10" fill="#6B4E12" opacity="0.6"/>
+        <ellipse cx="42" cy="35" rx="12" ry="10" fill="#6B4E12" opacity="0.6"/>
+        <rect x="29" y="8" width="2" height="35" rx="1" fill="#5a4010"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 24: BUTTERFLY INFO - Leaf Wing ===== -->
+<div id="slide-24" class="screen bg-forest">
+  <div class="card">
+    <h2 style="color:#DA6126;">Excellent Eye!</h2>
+    <p style="margin: 1rem 0; font-size: 1.1rem;">This is a <strong>Leaf Wing Butterfly</strong>!</p>
+    <div style="display:flex; gap:1.5rem; margin:1.5rem 0; flex-wrap:wrap; justify-content:center;">
+      <div style="flex:1; min-width:200px; background:#DBD095; border-radius:16px; padding:1.2rem;">
+        <h3 style="color:#572700;">Bark Mimic</h3>
+        <p>The Leaf Wing's brown, textured underwings perfectly mimic tree bark and dried leaves. Predators walk right past!</p>
+      </div>
+      <div style="flex:1; min-width:200px; background:#A1D2DD; border-radius:16px; padding:1.2rem;">
+        <h3 style="color:#006682;">Fun Fact</h3>
+        <p>When it opens its wings, bright orange and red patterns flash to startle predators. It's a defense called "flash coloration."</p>
+      </div>
+    </div>
+  </div>
+  <button class="arrow-btn" onclick="goToSlide(25)" title="Next">
+    <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+  </button>
+</div>
+
+<!-- ===== SLIDE 25: CAMOUFLAGE SCENE 4 - Peppered Moth ===== -->
+<div id="slide-25" class="screen bg-forest">
+  <h2 style="color:#fff; text-shadow: 1px 2px 4px rgba(87,39,0,0.5); margin-bottom:1rem;">One More Hidden Butterfly!</h2>
+  <p style="color:#DBD095; margin-bottom:1rem;">This last one is hiding near the top-left too. Can you find it among the lichen?</p>
+  <div class="camo-scene" id="camo-scene-25" onclick="camoWrongClick25(event)">
+    <div class="leaf-bg" style="background: linear-gradient(145deg, #B8B1AB, #80866E, #C0B88D, #80866E, #B8B1AB);"></div>
+    <span class="camo-leaf" style="top:5%;left:30%;">&#x1F343;</span>
+    <span class="camo-leaf" style="top:20%;left:50%;">&#x1F342;</span>
+    <span class="camo-leaf" style="top:38%;left:20%;">&#x1F33F;</span>
+    <span class="camo-leaf" style="top:55%;left:65%;">&#x1F342;</span>
+    <span class="camo-leaf" style="top:72%;left:10%;">&#x1F343;</span>
+    <span class="camo-leaf" style="top:30%;left:78%;">&#x1F342;</span>
+    <span class="camo-leaf" style="top:85%;left:50%;">&#x1F33F;</span>
+    <span class="camo-leaf" style="top:15%;left:90%;">&#x1F343;</span>
+    <span class="camo-leaf" style="top:65%;left:40%;">&#x1F342;</span>
+    <span class="camo-leaf" style="top:48%;left:8%;">&#x1F33F;</span>
+    <span class="camo-leaf" style="top:80%;left:75%;">&#x1F342;</span>
+    <span class="camo-leaf" style="top:10%;left:55%;">&#x1F343;</span>
+    <div class="camo-hidden-butterfly" id="hidden-butterfly-25" style="top:8%; left:12%;" onclick="camoCorrectClick25(event)">
+      <svg viewBox="0 0 60 50" style="width:100%;height:100%;">
+        <ellipse cx="20" cy="18" rx="16" ry="14" fill="#B8B1AB" opacity="0.7"/>
+        <ellipse cx="40" cy="18" rx="16" ry="14" fill="#C0B88D" opacity="0.7"/>
+        <ellipse cx="18" cy="35" rx="12" ry="10" fill="#80866E" opacity="0.6"/>
+        <ellipse cx="42" cy="35" rx="12" ry="10" fill="#80866E" opacity="0.6"/>
+        <rect x="29" y="8" width="2" height="35" rx="1" fill="#6a6a5a"/>
+        <circle cx="15" cy="15" r="2" fill="#999" opacity="0.4"/>
+        <circle cx="45" cy="20" r="1.5" fill="#aaa" opacity="0.3"/>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 26: BUTTERFLY INFO - Peppered Moth ===== -->
+<div id="slide-26" class="screen bg-forest">
+  <div class="card">
+    <h2 style="color:#DA6126;">Amazing Find!</h2>
+    <p style="margin: 1rem 0; font-size: 1.1rem;">This is a <strong>Peppered Moth</strong>!</p>
+    <div style="display:flex; gap:1.5rem; margin:1.5rem 0; flex-wrap:wrap; justify-content:center;">
+      <div style="flex:1; min-width:200px; background:#DBD095; border-radius:16px; padding:1.2rem;">
+        <h3 style="color:#572700;">Lichen Mimic</h3>
+        <p>The Peppered Moth's speckled wings blend perfectly with lichen-covered bark. Its pattern matches the background so well that birds can't see it!</p>
+      </div>
+      <div style="flex:1; min-width:200px; background:#A1D2DD; border-radius:16px; padding:1.2rem;">
+        <h3 style="color:#006682;">Fun Fact</h3>
+        <p>During the Industrial Revolution, dark-colored Peppered Moths became more common because pollution darkened tree bark. This is one of the most famous examples of natural selection!</p>
+      </div>
+    </div>
+  </div>
+  <button class="arrow-btn" onclick="goToSlide(27)" title="Next">
+    <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+  </button>
+</div>
+
+<!-- ===== SLIDE 27: TRANSITION ===== -->
+<div id="slide-27" class="screen" style="background: linear-gradient(180deg, #A1D2DD 0%, #CFDD3A 50%, #77833C 100%); cursor:pointer;" onclick="goToSlide(28)">
+  <div class="card">
+    <h2>You're a Camouflage Expert!</h2>
+    <p style="margin: 1rem 0;">You've found all three hidden butterflies! Now it's time to learn more about different butterfly species up close.</p>
+    <p style="font-weight:600; color:#DA6126;">In the next section, you'll explore a butterfly gallery and discover fascinating facts about six different species.</p>
+  </div>
+  <div class="click-hint">Click anywhere to continue</div>
+</div>
+
+<!-- ===== SLIDE 28: BUTTERFLY GALLERY INTRO ===== -->
+<div id="slide-28" class="screen bg-sky">
+  <div class="card">
+    <h2>Butterfly Species Gallery</h2>
+    <p style="margin: 1rem 0;">Welcome to the gallery! Here you'll meet six incredible butterfly species. Click on each one to discover what makes it unique.</p>
+    <p style="font-weight:600; color:#572700;">Visit all six butterflies to complete your exploration!</p>
+  </div>
+  <button class="arrow-btn" onclick="goToSlide(29)" title="Next">
+    <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+  </button>
+</div>
+
+<!-- ===== SLIDE 29: BUTTERFLY SELECTION HUB ===== -->
+<div id="slide-29" class="screen" style="background: linear-gradient(180deg, #A1D2DD 0%, #DBD095 40%, #C0B88D 100%);">
+  <h2 style="color:#572700; margin-bottom:0.5rem;">Choose a Butterfly to Explore</h2>
+  <p style="color:#935D3C; margin-bottom:1.5rem; font-weight:500;">Click each butterfly to learn about it. Visit all six to continue!</p>
+  <div class="butterfly-hub" id="butterfly-hub">
+    <div class="butterfly-hub-item" id="hub-btn-31" onclick="visitButterfly(31)">
+      <span class="hub-emoji">&#x1F98B;</span>
+      <span class="hub-label">Monarch</span>
+    </div>
+    <div class="butterfly-hub-item" id="hub-btn-32" onclick="visitButterfly(32)">
+      <span class="hub-emoji">&#x1F99A;</span>
+      <span class="hub-label">Blue Morpho</span>
+    </div>
+    <div class="butterfly-hub-item" id="hub-btn-33" onclick="visitButterfly(33)">
+      <span class="hub-emoji">&#x1F3A8;</span>
+      <span class="hub-label">Painted Lady</span>
+    </div>
+    <div class="butterfly-hub-item" id="hub-btn-34" onclick="visitButterfly(34)">
+      <span class="hub-emoji">&#x2B50;</span>
+      <span class="hub-label">Swallowtail</span>
+    </div>
+    <div class="butterfly-hub-item" id="hub-btn-35" onclick="visitButterfly(35)">
+      <span class="hub-emoji">&#x1F525;</span>
+      <span class="hub-label">Red Admiral</span>
+    </div>
+    <div class="butterfly-hub-item" id="hub-btn-36" onclick="visitButterfly(36)">
+      <span class="hub-emoji">&#x1F31F;</span>
+      <span class="hub-label">Viceroy</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SLIDE 30: (unused placeholder) ===== -->
+<div id="slide-30" class="screen" style="display:none;"></div>
+
+<!-- ===== SLIDE 31: MONARCH INFO ===== -->
+<div id="slide-31" class="screen bg-sky">
+  <div class="card">
+    <h2 style="color:#DA6126;">Monarch Butterfly</h2>
+    <p style="margin: 1rem 0; font-size: 1.1rem;">The <strong>Monarch</strong> is one of the most recognized butterflies in North America.</p>
+    <div style="display:flex; gap:1.5rem; margin:1.5rem 0; flex-wrap:wrap; justify-content:center;">
+      <div style="flex:1; min-width:200px; background:#DBD095; border-radius:16px; padding:1.2rem;">
+        <h3 style="color:#572700;">Migration</h3>
+        <p>Monarchs travel up to 3,000 miles to overwinter in Mexico. They are the only butterfly known to make such a long two-way migration!</p>
+      </div>
+      <div style="flex:1; min-width:200px; background:#A1D2DD; border-radius:16px; padding:1.2rem;">
+        <h3 style="color:#006682;">Defense</h3>
+        <p>Their bright orange color warns predators: "I taste terrible!" Toxins from milkweed make them poisonous to birds.</p>
+      </div>
+    </div>
+    <button class="btn btn-brown" onclick="returnToHub(31)">Back to Gallery</button>
+  </div>
+</div>
+
+<!-- ===== SLIDE 32: BLUE MORPHO INFO ===== -->
+<div id="slide-32" class="screen bg-sky">
+  <div class="card">
+    <h2 style="color:#006682;">Blue Morpho Butterfly</h2>
+    <p style="margin: 1rem 0; font-size: 1.1rem;">The <strong>Blue Morpho</strong> is one of the largest and most dazzling butterflies in the world.</p>
+    <div style="display:flex; gap:1.5rem; margin:1.5rem 0; flex-wrap:wrap; justify-content:center;">
+      <div style="flex:1; min-width:200px; background:#DBD095; border-radius:16px; padding:1.2rem;">
+        <h3 style="color:#572700;">Iridescent Wings</h3>
+        <p>The Blue Morpho's brilliant blue color isn't from pigment — it's caused by microscopic scales that reflect light! This is called structural coloration.</p>
+      </div>
+      <div style="flex:1; min-width:200px; background:#A1D2DD; border-radius:16px; padding:1.2rem;">
+        <h3 style="color:#006682;">Camouflage Trick</h3>
+        <p>When its wings are closed, the brown underside helps it blend in with the forest floor. When it flies, the flashing blue confuses predators!</p>
+      </div>
+    </div>
+    <button class="btn btn-brown" onclick="returnToHub(32)">Back to Gallery</button>
+  </div>
+</div>
+
+<!-- ===== SLIDE 33: PAINTED LADY INFO ===== -->
+<div id="slide-33" class="screen bg-sky">
+  <div class="card">
+    <h2 style="color:#DA6126;">Painted Lady Butterfly</h2>
+    <p style="margin: 1rem 0; font-size: 1.1rem;">The <strong>Painted Lady</strong> is the most widespread butterfly species in the world!</p>
+    <div style="display:flex; gap:1.5rem; margin:1.5rem 0; flex-wrap:wrap; justify-content:center;">
+      <div style="flex:1; min-width:200px; background:#DBD095; border-radius:16px; padding:1.2rem;">
+        <h3 style="color:#572700;">World Traveler</h3>
+        <p>Painted Ladies are found on every continent except Antarctica and Australia. They migrate long distances, sometimes crossing the Sahara Desert!</p>
+      </div>
+      <div style="flex:1; min-width:200px; background:#A1D2DD; border-radius:16px; padding:1.2rem;">
+        <h3 style="color:#006682;">Many Host Plants</h3>
+        <p>Unlike most butterflies, Painted Ladies can feed on over 100 different host plants, including thistles, mallows, and sunflowers.</p>
+      </div>
+    </div>
+    <button class="btn btn-brown" onclick="returnToHub(33)">Back to Gallery</button>
+  </div>
+</div>
+
+<!-- ===== SLIDE 34: SWALLOWTAIL INFO ===== -->
+<div id="slide-34" class="screen bg-sky">
+  <div class="card">
+    <h2 style="color:#F8971D;">Eastern Tiger Swallowtail</h2>
+    <p style="margin: 1rem 0; font-size: 1.1rem;">The <strong>Eastern Tiger Swallowtail</strong> is known for its striking yellow and black tiger stripes.</p>
+    <div style="display:flex; gap:1.5rem; margin:1.5rem 0; flex-wrap:wrap; justify-content:center;">
+      <div style="flex:1; min-width:200px; background:#DBD095; border-radius:16px; padding:1.2rem;">
+        <h3 style="color:#572700;">Tail Trick</h3>
+        <p>The "tails" on their hindwings look like antennae, tricking predators into attacking the wrong end. The butterfly escapes while the predator gets a mouthful of wing!</p>
+      </div>
+      <div style="flex:1; min-width:200px; background:#A1D2DD; border-radius:16px; padding:1.2rem;">
+        <h3 style="color:#006682;">Caterpillar Disguise</h3>
+        <p>Young caterpillars look like bird droppings to avoid being eaten. Older caterpillars have large eye spots that make them look like a small snake!</p>
+      </div>
+    </div>
+    <button class="btn btn-brown" onclick="returnToHub(34)">Back to Gallery</button>
+  </div>
+</div>
+
+<!-- ===== SLIDE 35: RED ADMIRAL INFO ===== -->
+<div id="slide-35" class="screen bg-sky">
+  <div class="card">
+    <h2 style="color:#9C2F31;">Red Admiral Butterfly</h2>
+    <p style="margin: 1rem 0; font-size: 1.1rem;">The <strong>Red Admiral</strong> is a common and boldly patterned butterfly found throughout North America and Europe.</p>
+    <div style="display:flex; gap:1.5rem; margin:1.5rem 0; flex-wrap:wrap; justify-content:center;">
+      <div style="flex:1; min-width:200px; background:#DBD095; border-radius:16px; padding:1.2rem;">
+        <h3 style="color:#572700;">Friendly Butterfly</h3>
+        <p>Red Admirals are known for landing on people! They are territorial and often return to the same perching spot day after day.</p>
+      </div>
+      <div style="flex:1; min-width:200px; background:#A1D2DD; border-radius:16px; padding:1.2rem;">
+        <h3 style="color:#006682;">Unusual Diet</h3>
+        <p>Unlike many butterflies, Red Admirals prefer tree sap, rotting fruit, and even animal droppings over flower nectar!</p>
+      </div>
+    </div>
+    <button class="btn btn-brown" onclick="returnToHub(35)">Back to Gallery</button>
+  </div>
+</div>
+
+<!-- ===== SLIDE 36: VICEROY INFO + BACK TO MEADOW ===== -->
+<div id="slide-36" class="screen bg-sky">
+  <div class="card">
+    <h2 style="color:#DA6126;">Viceroy Butterfly</h2>
+    <p style="margin: 1rem 0; font-size: 1.1rem;">The <strong>Viceroy</strong> is famous for looking almost exactly like a Monarch — but it's a completely different species!</p>
+    <div style="display:flex; gap:1.5rem; margin:1.5rem 0; flex-wrap:wrap; justify-content:center;">
+      <div style="flex:1; min-width:200px; background:#DBD095; border-radius:16px; padding:1.2rem;">
+        <h3 style="color:#572700;">Mimicry Master</h3>
+        <p>The Viceroy copies the Monarch's orange-and-black pattern. Predators who've learned Monarchs taste bad avoid Viceroys too — even though Viceroys are also distasteful!</p>
+      </div>
+      <div style="flex:1; min-width:200px; background:#A1D2DD; border-radius:16px; padding:1.2rem;">
+        <h3 style="color:#006682;">How to Tell Apart</h3>
+        <p>Look for a black line crossing the hindwing veins. Monarchs don't have this line, but Viceroys always do!</p>
+      </div>
+    </div>
+    <p style="margin-top:1rem; color:#555;">You've explored all the butterflies in the gallery!</p>
+    <button class="btn btn-orange" onclick="goToSlide(37)" style="margin-top:1rem;">Back to the Meadow</button>
+  </div>
+</div>
+
+<!-- ===== SLIDE 37: FAREWELL TRANSITION ===== -->
+<div id="slide-37" class="screen" style="background: linear-gradient(180deg, #A1D2DD 0%, #CFDD3A 50%, #77833C 100%); cursor:pointer;" onclick="goToSlide(38)">
+  <div class="card">
+    <h2>What a Journey!</h2>
+    <p style="margin: 1rem 0;">You've explored camouflage masters, learned about incredible species, and discovered the amazing adaptations butterflies use to survive.</p>
+    <p style="font-weight:600; color:#572700;">The natural world is full of wonders — keep your eyes open, and you might spot some of these butterflies in your own backyard!</p>
+  </div>
+  <div class="click-hint">Click anywhere to continue</div>
+</div>
+
+<!-- ===== SLIDE 38: FINAL SLIDE ===== -->
+<div id="slide-38" class="screen" style="background: linear-gradient(180deg, #F8971D 0%, #DBD095 30%, #CFDD3A 70%, #77833C 100%);">
+  <div class="card">
+    <h1 style="font-size:clamp(1.5rem,4vw,2.5rem);">Congratulations, Explorer!</h1>
+    <p style="margin: 1.5rem 0; font-size: 1.1rem;">You've completed the Blooms &amp; Butterflies adventure! You now know about host plants, camouflage, butterfly mimicry, and so much more.</p>
+    <p style="color:#555;">Thank you for visiting the Franklin Park Conservatory &amp; Botanical Gardens virtual meadow.</p>
+    <div class="flowers-row" style="margin:1.5rem 0;" aria-hidden="true">
+      <span>&#x1F338;</span><span>&#x1F98B;</span><span>&#x1F33C;</span><span>&#x1F98B;</span><span>&#x1F33A;</span><span>&#x1F98B;</span><span>&#x1F33B;</span>
+    </div>
+    <button class="btn btn-green" onclick="goToSlide(1)" style="margin-top:1rem;">Return to Main Menu</button>
+  </div>
+  <button class="arrow-btn" onclick="goToSlide(1)" title="Return to Menu">
+    <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+  </button>
+</div>
+
+<!-- ===== ERROR MODAL ===== -->
+<div id="error-modal" class="error-modal">
+  <div class="error-content">
+    <h3>Oops!</h3>
+    <p id="error-message">It looks like you flew too far!</p>
+    <button class="btn btn-orange" onclick="closeError()">Try Again</button>
+  </div>
+</div>
+
+<script>
+  // ===== GLOBAL STATE =====
+  let currentSlide = 1;
+  let currentPlantIndex = 0;
+  let plantRevealed = false;
+
+  // Camouflage wrong-click counters (for slides 21, 23, 25)
+  let wrongClicks21 = 0;
+  let wrongClicks23 = 0;
+  let wrongClicks25 = 0;
+
+  // Butterfly hub visited tracking (slide 29)
+  const visitedButterflies = new Set();
+
+  // ===== PLANT DATA =====
+  const plants = [
+    {
+      plant: "Milkweed",
+      butterfly: "Monarch",
+      plantEmoji: "\u{1F338}",
+      butterflyEmoji: "\u{1F98B}",
+      plantColor: "linear-gradient(135deg, #DBD095, #C0B88D)",
+      desc: "Monarch caterpillars feed exclusively on milkweed. The toxins in milkweed make Monarchs taste bad to predators!"
+    },
+    {
+      plant: "Carrot",
+      butterfly: "Black Swallowtail",
+      plantEmoji: "\u{1F955}",
+      butterflyEmoji: "\u{1F98B}",
+      plantColor: "linear-gradient(135deg, #F8971D, #F99F1C)",
+      desc: "Black Swallowtail caterpillars love plants in the carrot family, including parsley, dill, and fennel."
+    },
+    {
+      plant: "Pawpaw",
+      butterfly: "Zebra Swallowtail",
+      plantEmoji: "\u{1F333}",
+      butterflyEmoji: "\u{1F98B}",
+      plantColor: "linear-gradient(135deg, #CFDD3A, #77833C)",
+      desc: "The Zebra Swallowtail depends on pawpaw trees. Its striking black and white stripes make it easy to identify!"
+    },
+    {
+      plant: "Nettle",
+      butterfly: "Red Admiral",
+      plantEmoji: "\u{1F33F}",
+      butterflyEmoji: "\u{1F98B}",
+      plantColor: "linear-gradient(135deg, #A1D2DD, #80866E)",
+      desc: "Red Admiral caterpillars feed on stinging nettles. Despite the plant's sting, these tough caterpillars thrive on it!"
+    },
+    {
+      plant: "Clover",
+      butterfly: "Orange Sulphur",
+      plantEmoji: "\u2618\uFE0F",
+      butterflyEmoji: "\u{1F98B}",
+      plantColor: "linear-gradient(135deg, #CFDD3A, #C0B88D)",
+      desc: "Orange Sulphur butterflies are common in meadows and fields where clover grows abundantly."
+    },
+    {
+      plant: "Cabbage",
+      butterfly: "Cabbage White",
+      plantEmoji: "\u{1F96C}",
+      butterflyEmoji: "\u{1F98B}",
+      plantColor: "linear-gradient(135deg, #DBD095, #77833C)",
+      desc: "Cabbage White butterflies lay eggs on cabbage and related plants. Gardeners often see their green caterpillars!"
+    },
+    {
+      plant: "Violet",
+      butterfly: "Fritillary",
+      plantEmoji: "\u{1F49C}",
+      butterflyEmoji: "\u{1F98B}",
+      plantColor: "linear-gradient(135deg, #A1D2DD, #006682)",
+      desc: "Fritillary butterflies depend on violets. Their orange wings with silver spots shimmer in the sunlight!"
+    },
+    {
+      plant: "Sunflower",
+      butterfly: "Silvery Checkerspot",
+      plantEmoji: "\u{1F33B}",
+      butterflyEmoji: "\u{1F98B}",
+      plantColor: "linear-gradient(135deg, #F8971D, #DBD095)",
+      desc: "Silvery Checkerspots use sunflowers and related plants. Their checkered wing pattern is a beautiful sight!"
+    }
+  ];
+
+  // ===== NAVIGATION =====
+  function goToSlide(num) {
+    var prev = document.getElementById('slide-' + currentSlide);
+    var next = document.getElementById('slide-' + num);
+    if (!next) return;
+
+    if (prev) {
+      prev.classList.remove('active');
+      prev.style.display = 'none';
+      prev.style.opacity = '0';
+    }
+
+    currentSlide = num;
+    next.style.display = 'flex';
+    void next.offsetWidth;
+    next.classList.add('active');
+    next.style.opacity = '1';
+
+    if (num === 12) {
+      renderPlant();
+    }
+    if (num === 29) {
+      updateHubVisited();
+    }
+  }
+
+  // ===== HOST PLANTS LOGIC =====
+  function startHostPlants() {
+    currentPlantIndex = 0;
+    plantRevealed = false;
+    goToSlide(12);
+  }
+
+  function renderPlant() {
+    var plant = plants[currentPlantIndex];
+    if (!plant) return;
+
+    document.getElementById('plant-title').textContent = plant.plant;
+    document.getElementById('plant-image').style.background = plant.plantColor;
+    document.getElementById('plant-image').innerHTML =
+      '<span style="font-size:clamp(3rem,10vw,6rem);">' + plant.plantEmoji + '</span>' +
+      '<span style="position:absolute;bottom:0.5rem;font-size:0.85rem;color:#666;">Click the plant!</span>';
+    document.getElementById('plant-reveal').classList.remove('show');
+    document.getElementById('plant-next-btn').style.display = 'none';
+    document.getElementById('butterfly-name').textContent = '';
+    document.getElementById('butterfly-desc').textContent = '';
+    document.getElementById('butterfly-emoji').textContent = '';
+    plantRevealed = false;
+
+    var dotsHTML = '';
+    for (var i = 0; i < plants.length; i++) {
+      var cls = 'progress-dot';
+      if (i < currentPlantIndex) cls += ' done';
+      if (i === currentPlantIndex) cls += ' active';
+      dotsHTML += '<div class="' + cls + '"></div>';
+    }
+    document.getElementById('plant-progress').innerHTML = dotsHTML;
+  }
+
+  function revealButterfly() {
+    if (plantRevealed) return;
+    plantRevealed = true;
+    var plant = plants[currentPlantIndex];
+
+    document.getElementById('butterfly-name').textContent = plant.butterfly + ' Butterfly';
+    document.getElementById('butterfly-desc').textContent = plant.desc;
+    document.getElementById('butterfly-emoji').textContent = plant.butterflyEmoji;
+    document.getElementById('plant-reveal').classList.add('show');
+    document.getElementById('plant-next-btn').style.display = 'flex';
+  }
+
+  function nextPlant() {
+    currentPlantIndex++;
+    if (currentPlantIndex >= plants.length) {
+      goToSlide(10);
+      currentPlantIndex = 0;
+    } else {
+      renderPlant();
+    }
+  }
+
+  // ===== CAMOUFLAGE LOGIC (Original - Slide 17) =====
+  function camoCorrectClick(event) {
+    event.stopPropagation();
+    goToSlide(18);
+  }
+
+  function camoWrongClick(event) {
+    if (event.target.closest('.camo-hidden-butterfly')) return;
+    showError("Sorry, that's not the butterfly. Try again!", true);
+  }
+
+  // ===== CAMOUFLAGE LOGIC (Slide 21) =====
+  function camoCorrectClick21(event) {
+    event.stopPropagation();
+    wrongClicks21 = 0;
+    goToSlide(22);
+  }
+
+  function camoWrongClick21(event) {
+    if (event.target.closest('.camo-hidden-butterfly')) return;
+    wrongClicks21++;
+    if (wrongClicks21 >= 3) {
+      document.getElementById('hidden-butterfly-21').classList.add('hint-outline');
+    }
+    showError("Sorry, that's not the butterfly. Try again!", true);
+  }
+
+  // ===== CAMOUFLAGE LOGIC (Slide 23) =====
+  function camoCorrectClick23(event) {
+    event.stopPropagation();
+    wrongClicks23 = 0;
+    goToSlide(24);
+  }
+
+  function camoWrongClick23(event) {
+    if (event.target.closest('.camo-hidden-butterfly')) return;
+    wrongClicks23++;
+    if (wrongClicks23 >= 3) {
+      document.getElementById('hidden-butterfly-23').classList.add('hint-outline');
+    }
+    showError("Sorry, that's not the butterfly. Try again!", true);
+  }
+
+  // ===== CAMOUFLAGE LOGIC (Slide 25) =====
+  function camoCorrectClick25(event) {
+    event.stopPropagation();
+    wrongClicks25 = 0;
+    goToSlide(26);
+  }
+
+  function camoWrongClick25(event) {
+    if (event.target.closest('.camo-hidden-butterfly')) return;
+    wrongClicks25++;
+    if (wrongClicks25 >= 3) {
+      document.getElementById('hidden-butterfly-25').classList.add('hint-outline');
+    }
+    showError("Sorry, that's not the butterfly. Try again!", true);
+  }
+
+  // ===== BUTTERFLY HUB LOGIC (Slide 29) =====
+  function visitButterfly(slideNum) {
+    visitedButterflies.add(slideNum);
+    goToSlide(slideNum);
+  }
+
+  function returnToHub(slideNum) {
+    visitedButterflies.add(slideNum);
+    if (visitedButterflies.size >= 6) {
+      goToSlide(36);
+    } else {
+      goToSlide(29);
+    }
+  }
+
+  function updateHubVisited() {
+    [31, 32, 33, 34, 35, 36].forEach(function(num) {
+      var btn = document.getElementById('hub-btn-' + num);
+      if (btn && visitedButterflies.has(num)) {
+        btn.classList.add('visited');
+      }
+    });
+  }
+
+  // ===== ERROR HANDLING =====
+  var errorStayOnScreen = false;
+
+  function showError(message, stayOnScreen) {
+    errorStayOnScreen = !!stayOnScreen;
+    document.getElementById('error-message').textContent = message || "It looks like you flew too far!";
+    document.getElementById('error-modal').classList.add('show');
+  }
+
+  function closeError() {
+    document.getElementById('error-modal').classList.remove('show');
+    if (!errorStayOnScreen) {
+      goToSlide(10);
+    }
+  }
+
+  // ===== DISABLE ARROW KEYS =====
+  document.addEventListener('keydown', function(e) {
+    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+      e.preventDefault();
+    }
+  });
+
+  // ===== INITIALIZE =====
+  document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.screen').forEach(function(el) {
+      if (el.id !== 'slide-1') {
+        el.classList.remove('active');
+        el.style.display = 'none';
+      }
+    });
+  });
+</script>
+
+</body>
+</html>
