@@ -656,7 +656,7 @@
 <body>
 
 <!-- ===== SLIDE 1: MAIN MENU ===== -->
-<div id="slide-1" class="screen active">
+<div id="slide-1" class="screen active" style="background-image: url('images/meadow_background.jpg'); background-size: cover; background-position: center;">
   <div class="title-butterfly" aria-hidden="true">&#x1F98B;</div>
   <h1>Blooms &amp; Butterflies</h1>
   <p class="title-subtitle">Classroom Extension</p>
@@ -790,9 +790,11 @@
 </div>
 
 <!-- ===== SLIDE 7: LARRY INTRO ===== -->
-<div id="slide-7" class="screen bg-meadow" onclick="goToSlide(8)" style="cursor:pointer;">
+<div id="slide-7" class="screen" onclick="goToSlide(8)" style="cursor:pointer; background-image: url('images/meadow_background.jpg'); background-size: cover; background-position: center;">
   <div class="larry-container">
-    <div class="larry-avatar">&#x1F9D1;&#x200D;&#x1F52C;</div>
+    <div class="larry-avatar">
+      <img src="images/slide07_larry_lepidopterist_character.jpg" alt="Larry the Lepidopterist" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+    </div>
     <div class="speech-bubble">
       <h2 style="margin-bottom:0.75rem;">Meet Larry the Lepidopterist!</h2>
       <p>Hello there, young explorer! I'm Larry, and I study butterflies. Today, we're going on an adventure through a beautiful meadow filled with amazing butterflies and the plants they love.</p>
@@ -803,7 +805,7 @@
 </div>
 
 <!-- ===== SLIDE 8: BUTTERFLY INSTRUCTIONS ===== -->
-<div id="slide-8" class="screen bg-sky" onclick="goToSlide(9)" style="cursor:pointer;">
+<div id="slide-8" class="screen" onclick="goToSlide(9)" style="cursor:pointer; background-image: url('images/meadow_background.jpg'); background-size: cover; background-position: center;">
   <div class="card">
     <h2>Exploring the Meadow</h2>
     <p style="margin: 1rem 0;">In the meadow, you'll find different areas to explore. <strong>Click on the butterfly icons</strong> to learn about different butterfly species and their fascinating world.</p>
@@ -816,7 +818,7 @@
 </div>
 
 <!-- ===== SLIDE 9: WHAT YOU WILL LEARN ===== -->
-<div id="slide-9" class="screen bg-sky" onclick="goToSlide(10)" style="cursor:pointer;">
+<div id="slide-9" class="screen" onclick="goToSlide(10)" style="cursor:pointer; background-image: url('images/meadow_background.jpg'); background-size: cover; background-position: center;">
   <div class="card">
     <h2>What You'll Discover</h2>
     <div style="text-align:left; margin: 1.5rem 0;">
@@ -832,13 +834,10 @@
 </div>
 
 <!-- ===== SLIDE 10: MEADOW HUB ===== -->
-<div id="slide-10" class="screen" style="background: linear-gradient(180deg, #A1D2DD 0%, #CFDD3A 60%, #77833C 100%);">
+<div id="slide-10" class="screen" style="background-image: url('images/meadow_background.jpg'); background-size: cover; background-position: center;">
   <h2 style="color:#fff; text-shadow: 1px 2px 4px rgba(87,39,0,0.4); margin-bottom:1rem;">The Meadow</h2>
   <p style="color:#fff; text-shadow: 1px 1px 3px rgba(87,39,0,0.3); margin-bottom:1.5rem; font-weight:500;">Click any area to begin exploring. Click the net when you're finished!</p>
   <div class="meadow-container">
-    <div class="meadow-sun"></div>
-    <div class="meadow-cloud cloud-1"></div>
-    <div class="meadow-cloud cloud-2"></div>
     <div class="meadow-area area-host-plants" onclick="goToSlide(11)" role="button" tabindex="0" aria-label="Host Plants activity">
       <span class="area-icon">&#x1F331;&#x1F98B;</span>
       <span class="area-label">Host Plants</span>
@@ -848,14 +847,14 @@
       <span class="area-label">Camouflage</span>
     </div>
     <div class="meadow-area area-net" onclick="goToSlide(20)" role="button" tabindex="0" aria-label="Finish activity with butterfly net">
-      <span class="area-icon">&#x1F3C6;&#x1F98B;</span>
+      <span class="area-icon"><img src="images/slide10_butterfly_net_icon.png" alt="Butterfly Net" style="max-width: 100%; max-height: 3.5rem; width: auto; height: auto;"></span>
       <span class="area-label">Butterfly Net</span>
     </div>
   </div>
 </div>
 
 <!-- ===== SLIDE 11: HOST PLANTS INTRO ===== -->
-<div id="slide-11" class="screen bg-meadow">
+<div id="slide-11" class="screen" style="background-image: url('images/meadow_background.jpg'); background-size: cover; background-position: center;">
   <div class="card">
     <h2>Host Plants</h2>
     <p style="margin: 1rem 0;">Did you know that each butterfly species has a <strong>special plant</strong> where it lays its eggs? These are called <strong>host plants</strong>.</p>
@@ -887,14 +886,70 @@
 </div>
 
 <!-- Placeholder slides for nav compatibility -->
-<div id="slide-13" class="screen" style="display:none;"></div>
-<div id="slide-14" class="screen" style="display:none;"></div>
-<div id="slide-15" class="screen" style="display:none;"></div>
+<div id="slide-13" class="screen bg-sky">
+  <div class="card card-wide">
+    <h2>Host Plants Match Butterfly Species</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem;">
+      <!-- Left: Milkweed → Monarch -->
+      <div style="text-align: center;">
+        <h3 style="color:#F8971D;">Milkweed → Monarch</h3>
+        <img src="images/monarch_milkweed.jpg" alt="Monarch butterfly and caterpillar on milkweed" style="max-width: 100%; height: auto; border-radius: 12px; margin: 0.5rem 0;">
+      </div>
+      <!-- Right: Carrot → Black Swallowtail -->
+      <div style="text-align: center;">
+        <h3 style="color:#F8971D;">Carrot → Black Swallowtail</h3>
+        <img src="images/swallowtail_carrot.jpg" alt="Black Swallowtail butterfly and caterpillar on carrot" style="max-width: 100%; height: auto; border-radius: 12px; margin: 0.5rem 0;">
+      </div>
+    </div>
+  </div>
+  <button class="arrow-btn" onclick="goToSlide(14)">
+    <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+  </button>
+</div>
+<div id="slide-14" class="screen bg-sky">
+  <div class="card card-wide">
+    <h2>More Host Plant Matches</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem;">
+      <!-- Left: Pawpaw → Zebra Swallowtail -->
+      <div style="text-align: center;">
+        <h3 style="color:#F8971D;">Pawpaw → Zebra Swallowtail</h3>
+        <img src="images/zebra_pawpaw.jpg" alt="Zebra Swallowtail on pawpaw" style="max-width: 100%; height: auto; border-radius: 12px; margin: 0.5rem 0;">
+      </div>
+      <!-- Right: Nettle → Red Admiral -->
+      <div style="text-align: center;">
+        <h3 style="color:#F8971D;">Nettle → Red Admiral</h3>
+        <img src="images/admiral_nettle.jpg" alt="Red Admiral on nettle" style="max-width: 100%; height: auto; border-radius: 12px; margin: 0.5rem 0;">
+      </div>
+    </div>
+  </div>
+  <button class="arrow-btn" onclick="goToSlide(15)">
+    <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+  </button>
+</div>
+<div id="slide-15" class="screen bg-sky">
+  <div class="card card-wide">
+    <h2>Even More Host Plant Matches</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem;">
+      <!-- Left: Cabbage → Cabbage White -->
+      <div style="text-align: center;">
+        <h3 style="color:#F8971D;">Cabbage → Cabbage White</h3>
+        <img src="images/cabbage_white.jpg" alt="Cabbage White on cabbage" style="max-width: 100%; height: auto; border-radius: 12px; margin: 0.5rem 0;">
+      </div>
+      <!-- Right: Clover → Orange Sulphur -->
+      <div style="text-align: center;">
+        <h3 style="color:#F8971D;">Clover → Orange Sulphur</h3>
+        <img src="images/sulphur_clover.jpg" alt="Orange Sulphur on clover" style="max-width: 100%; height: auto; border-radius: 12px; margin: 0.5rem 0;">
+      </div>
+    </div>
+  </div>
+  <button class="meadow-return-btn" onclick="goToSlide(10)">Return to the Meadow</button>
+</div>
 
 <!-- ===== SLIDE 16: CAMOUFLAGE INTRO ===== -->
 <div id="slide-16" class="screen bg-forest" onclick="goToSlide(17)" style="cursor:pointer;">
   <div class="card">
     <h2>Camouflage</h2>
+    <img src="images/slide18_35_49_tigerwing_butterfly_on_leaf.png" alt="Butterfly camouflage example" style="max-width: 100%; height: auto; border-radius: 12px; margin: 1rem 0;">
     <p style="margin: 1rem 0;">Some butterflies are masters of disguise! They use <strong>camouflage</strong> to blend in with their surroundings and hide from predators.</p>
     <p>Can you spot a hidden butterfly in the next scene? Look closely — it won't be easy!</p>
   </div>
@@ -902,7 +957,7 @@
 </div>
 
 <!-- ===== SLIDE 17: FIND THE BUTTERFLY ===== -->
-<div id="slide-17" class="screen bg-forest">
+<div id="slide-17" class="screen" style="background-image: url('images/autumn_leaves.jpg'); background-size: cover; background-position: center;">
   <h2 style="color:#fff; text-shadow: 1px 2px 4px rgba(87,39,0,0.5); margin-bottom:1rem;">Find the Camouflaged Butterfly!</h2>
   <p style="color:#DBD095; margin-bottom:1rem;">Look carefully at the scene below. Click where you think the butterfly is hiding.</p>
   <div class="camo-scene" id="camo-scene" onclick="camoWrongClick(event)">
@@ -942,10 +997,12 @@
     <div style="display:flex; gap:1.5rem; margin:1.5rem 0; flex-wrap:wrap; justify-content:center;">
       <div style="flex:1; min-width:200px; background:#DBD095; border-radius:16px; padding:1.2rem;">
         <h3 style="color:#572700;">Wings Closed</h3>
+        <img src="images/slide20_dead_leaf_butterfly_brown.jpg" alt="Dead Leaf Butterfly wings closed" style="max-width: 100%; height: auto; border-radius: 8px; margin: 0.5rem 0;">
         <p>When the wings are closed, they look exactly like a dead, brown leaf — complete with veins and even spots that mimic decay!</p>
       </div>
       <div style="flex:1; min-width:200px; background:#A1D2DD; border-radius:16px; padding:1.2rem;">
         <h3 style="color:#006682;">Wings Open</h3>
+        <img src="images/slide20_dead_leaf_butterfly_isolated.png" alt="Dead Leaf Butterfly wings open" style="max-width: 100%; height: auto; border-radius: 8px; margin: 0.5rem 0;">
         <p>When the wings open, they reveal beautiful bright orange and blue colors that surprise predators!</p>
       </div>
     </div>
@@ -982,7 +1039,7 @@
 </div>
 
 <!-- ===== SLIDE 21: CAMOUFLAGE SCENE 2 - Comma Butterfly ===== -->
-<div id="slide-21" class="screen bg-forest">
+<div id="slide-21" class="screen" style="background-image: url('images/slide21_green_leaves_background_camouflage.jpg'); background-size: cover; background-position: center;">
   <h2 style="color:#fff; text-shadow: 1px 2px 4px rgba(87,39,0,0.5); margin-bottom:1rem;">Find the Hidden Butterfly!</h2>
   <p style="color:#DBD095; margin-bottom:1rem;">A butterfly is hiding near the top-left of this scene. Can you spot it?</p>
   <div class="camo-scene" id="camo-scene-21" onclick="camoWrongClick21(event)">
@@ -1017,15 +1074,19 @@
 <div id="slide-22" class="screen bg-forest">
   <div class="card">
     <h2 style="color:#DA6126;">You Found It!</h2>
-    <p style="margin: 1rem 0; font-size: 1.1rem;">This is a <strong>Comma Butterfly</strong>!</p>
+    <p style="margin: 1rem 0; font-size: 1.1rem;">This is a <strong>Brimstone Butterfly</strong>!</p>
+    <div style="margin: 1rem 0;">
+      <img src="images/slide21_brimstone_butterfly_green_camouflage.png" alt="Brimstone butterfly camouflaged" style="max-width: 100%; height: auto; border-radius: 12px; margin: 0.5rem 0;">
+      <img src="images/slide34_brimstone_sulphur_butterfly.jpg" alt="Brimstone butterfly specimen" style="max-width: 100%; height: auto; border-radius: 12px; margin: 0.5rem 0;">
+    </div>
     <div style="display:flex; gap:1.5rem; margin:1.5rem 0; flex-wrap:wrap; justify-content:center;">
       <div style="flex:1; min-width:200px; background:#DBD095; border-radius:16px; padding:1.2rem;">
         <h3 style="color:#572700;">How It Hides</h3>
-        <p>The Comma Butterfly has jagged wing edges that look like torn leaves. When resting on a branch, it becomes nearly invisible!</p>
+        <p>The Brimstone Butterfly has angular wings, veining, and spots that mimic tree leaves, making it blend perfectly with green foliage!</p>
       </div>
       <div style="flex:1; min-width:200px; background:#A1D2DD; border-radius:16px; padding:1.2rem;">
         <h3 style="color:#006682;">Fun Fact</h3>
-        <p>It gets its name from a tiny white comma-shaped mark on the underside of its hindwing.</p>
+        <p>Its leaf-like appearance is so convincing that predators often fly right past it!</p>
       </div>
     </div>
   </div>
@@ -1035,7 +1096,7 @@
 </div>
 
 <!-- ===== SLIDE 23: CAMOUFLAGE SCENE 3 - Leaf Wing ===== -->
-<div id="slide-23" class="screen bg-forest">
+<div id="slide-23" class="screen" style="background-image: url('images/slide23_black_eyed_susan_flowers.png'); background-size: cover; background-position: center;">
   <h2 style="color:#fff; text-shadow: 1px 2px 4px rgba(87,39,0,0.5); margin-bottom:1rem;">Find Another Hidden Butterfly!</h2>
   <p style="color:#DBD095; margin-bottom:1rem;">This one is also near the top-left. Look carefully among the bark and leaves!</p>
   <div class="camo-scene" id="camo-scene-23" onclick="camoWrongClick23(event)">
@@ -1069,15 +1130,19 @@
 <div id="slide-24" class="screen bg-forest">
   <div class="card">
     <h2 style="color:#DA6126;">Excellent Eye!</h2>
-    <p style="margin: 1rem 0; font-size: 1.1rem;">This is a <strong>Leaf Wing Butterfly</strong>!</p>
+    <p style="margin: 1rem 0; font-size: 1.1rem;">This is an <strong>Eastern Tiger Swallowtail</strong>!</p>
+    <div style="margin: 1rem 0;">
+      <img src="images/slide23_eastern_tiger_swallowtail_sunflowers.jpg" alt="Tiger Swallowtail in flowers" style="max-width: 100%; height: auto; border-radius: 12px; margin: 0.5rem 0;">
+      <img src="images/slide31_eastern_tiger_swallowtail_specimen.png" alt="Tiger Swallowtail specimen" style="max-width: 100%; height: auto; border-radius: 12px; margin: 0.5rem 0;">
+    </div>
     <div style="display:flex; gap:1.5rem; margin:1.5rem 0; flex-wrap:wrap; justify-content:center;">
       <div style="flex:1; min-width:200px; background:#DBD095; border-radius:16px; padding:1.2rem;">
-        <h3 style="color:#572700;">Bark Mimic</h3>
-        <p>The Leaf Wing's brown, textured underwings perfectly mimic tree bark and dried leaves. Predators walk right past!</p>
+        <h3 style="color:#572700;">Flower Camouflage</h3>
+        <p>This butterfly's yellow wings with black markings blend perfectly with yellow flowers, making it hard for predators to spot!</p>
       </div>
       <div style="flex:1; min-width:200px; background:#A1D2DD; border-radius:16px; padding:1.2rem;">
         <h3 style="color:#006682;">Fun Fact</h3>
-        <p>When it opens its wings, bright orange and red patterns flash to startle predators. It's a defense called "flash coloration."</p>
+        <p>While most are yellow with black markings, some females have a dark brown or black form that mimics the poisonous Pipevine Swallowtail!</p>
       </div>
     </div>
   </div>
@@ -1087,7 +1152,7 @@
 </div>
 
 <!-- ===== SLIDE 25: CAMOUFLAGE SCENE 4 - Peppered Moth ===== -->
-<div id="slide-25" class="screen bg-forest">
+<div id="slide-25" class="screen" style="background-image: url('images/tree_bark.png'); background-size: cover; background-position: center;">
   <h2 style="color:#fff; text-shadow: 1px 2px 4px rgba(87,39,0,0.5); margin-bottom:1rem;">One More Hidden Butterfly!</h2>
   <p style="color:#DBD095; margin-bottom:1rem;">This last one is hiding near the top-left too. Can you find it among the lichen?</p>
   <div class="camo-scene" id="camo-scene-25" onclick="camoWrongClick25(event)">
@@ -1122,15 +1187,18 @@
 <div id="slide-26" class="screen bg-forest">
   <div class="card">
     <h2 style="color:#DA6126;">Amazing Find!</h2>
-    <p style="margin: 1rem 0; font-size: 1.1rem;">This is a <strong>Peppered Moth</strong>!</p>
+    <p style="margin: 1rem 0; font-size: 1.1rem;">This is a <strong>Gray Cracker Butterfly</strong>!</p>
+    <div style="margin: 1rem 0;">
+      <img src="images/slide26_gray_cracker_on_bark.jpg" alt="Gray Cracker on bark" style="max-width: 100%; height: auto; border-radius: 12px; margin: 0.5rem 0;">
+    </div>
     <div style="display:flex; gap:1.5rem; margin:1.5rem 0; flex-wrap:wrap; justify-content:center;">
       <div style="flex:1; min-width:200px; background:#DBD095; border-radius:16px; padding:1.2rem;">
-        <h3 style="color:#572700;">Lichen Mimic</h3>
-        <p>The Peppered Moth's speckled wings blend perfectly with lichen-covered bark. Its pattern matches the background so well that birds can't see it!</p>
+        <h3 style="color:#572700;">Bark Mimic</h3>
+        <p>The Gray Cracker's gray and brown coloring helps it blend perfectly into tree bark, making it nearly invisible to predators!</p>
       </div>
       <div style="flex:1; min-width:200px; background:#A1D2DD; border-radius:16px; padding:1.2rem;">
         <h3 style="color:#006682;">Fun Fact</h3>
-        <p>During the Industrial Revolution, dark-colored Peppered Moths became more common because pollution darkened tree bark. This is one of the most famous examples of natural selection!</p>
+        <p>When it opens its wings, the underside reveals colorful patterns that surprise and startle potential predators!</p>
       </div>
     </div>
   </div>
@@ -1153,6 +1221,7 @@
 <div id="slide-28" class="screen bg-sky">
   <div class="card">
     <h2>Butterfly Species Gallery</h2>
+    <img src="images/slide28_tigerwing_butterfly_family_intro.png" alt="Butterfly gallery" style="max-width: 100%; height: auto; border-radius: 12px; margin: 1rem 0;">
     <p style="margin: 1rem 0;">Welcome to the gallery! Here you'll meet six incredible butterfly species. Click on each one to discover what makes it unique.</p>
     <p style="font-weight:600; color:#572700;">Visit all six butterflies to complete your exploration!</p>
   </div>
@@ -1167,39 +1236,71 @@
   <p style="color:#935D3C; margin-bottom:1.5rem; font-weight:500;">Click each butterfly to learn about it. Visit all six to continue!</p>
   <div class="butterfly-hub" id="butterfly-hub">
     <div class="butterfly-hub-item" id="hub-btn-31" onclick="visitButterfly(31)">
-      <span class="hub-emoji">&#x1F98B;</span>
+      <span class="hub-emoji"><img src="images/slide46_monarch_butterfly_illustration.png" alt="Monarch" style="max-width: 100%; height: auto;"></span>
       <span class="hub-label">Monarch</span>
     </div>
     <div class="butterfly-hub-item" id="hub-btn-32" onclick="visitButterfly(32)">
-      <span class="hub-emoji">&#x1F99A;</span>
+      <span class="hub-emoji"><img src="images/slide55_blue_morpho_butterfly.png" alt="Blue Morpho" style="max-width: 100%; height: auto;"></span>
       <span class="hub-label">Blue Morpho</span>
     </div>
     <div class="butterfly-hub-item" id="hub-btn-33" onclick="visitButterfly(33)">
-      <span class="hub-emoji">&#x1F3A8;</span>
+      <span class="hub-emoji"><img src="images/slide36_painted_lady_brushfoot.png" alt="Painted Lady" style="max-width: 100%; height: auto;"></span>
       <span class="hub-label">Painted Lady</span>
     </div>
     <div class="butterfly-hub-item" id="hub-btn-34" onclick="visitButterfly(34)">
-      <span class="hub-emoji">&#x2B50;</span>
+      <span class="hub-emoji"><img src="images/slide31_eastern_tiger_swallowtail_specimen.png" alt="Swallowtail" style="max-width: 100%; height: auto;"></span>
       <span class="hub-label">Swallowtail</span>
     </div>
     <div class="butterfly-hub-item" id="hub-btn-35" onclick="visitButterfly(35)">
-      <span class="hub-emoji">&#x1F525;</span>
+      <span class="hub-emoji"><img src="images/slide36_red_admiral_butterfly.jpg" alt="Red Admiral" style="max-width: 100%; height: auto;"></span>
       <span class="hub-label">Red Admiral</span>
     </div>
     <div class="butterfly-hub-item" id="hub-btn-36" onclick="visitButterfly(36)">
-      <span class="hub-emoji">&#x1F31F;</span>
+      <span class="hub-emoji"><img src="images/slide36_viceroy_butterfly.png" alt="Viceroy" style="max-width: 100%; height: auto;"></span>
       <span class="hub-label">Viceroy</span>
     </div>
   </div>
 </div>
 
 <!-- ===== SLIDE 30: (unused placeholder) ===== -->
-<div id="slide-30" class="screen" style="display:none;"></div>
+<div id="slide-30" class="screen" style="background: linear-gradient(180deg, #A1D2DD 0%, #DBD095 40%, #C0B88D 100%);">
+  <h2 style="color:#572700; margin-bottom:0.5rem;">All Butterfly Species</h2>
+  <p style="color:#935D3C; margin-bottom:1.5rem; font-weight:500;">Click any butterfly to learn more about it!</p>
+  <div class="butterfly-hub" id="butterfly-hub-all">
+    <div class="butterfly-hub-item" onclick="goToSlide(31)">
+      <span class="hub-emoji"><img src="images/slide46_monarch_butterfly_illustration.png" alt="Monarch" style="max-width: 100%; height: auto;"></span>
+      <span class="hub-label">Monarch</span>
+    </div>
+    <div class="butterfly-hub-item" onclick="goToSlide(32)">
+      <span class="hub-emoji"><img src="images/slide55_blue_morpho_butterfly.png" alt="Blue Morpho" style="max-width: 100%; height: auto;"></span>
+      <span class="hub-label">Blue Morpho</span>
+    </div>
+    <div class="butterfly-hub-item" onclick="goToSlide(33)">
+      <span class="hub-emoji"><img src="images/slide36_painted_lady_brushfoot.png" alt="Painted Lady" style="max-width: 100%; height: auto;"></span>
+      <span class="hub-label">Painted Lady</span>
+    </div>
+    <div class="butterfly-hub-item" onclick="goToSlide(34)">
+      <span class="hub-emoji"><img src="images/slide31_eastern_tiger_swallowtail_specimen.png" alt="Swallowtail" style="max-width: 100%; height: auto;"></span>
+      <span class="hub-label">Swallowtail</span>
+    </div>
+    <div class="butterfly-hub-item" onclick="goToSlide(35)">
+      <span class="hub-emoji"><img src="images/slide36_red_admiral_butterfly.jpg" alt="Red Admiral" style="max-width: 100%; height: auto;"></span>
+      <span class="hub-label">Red Admiral</span>
+    </div>
+    <div class="butterfly-hub-item" onclick="goToSlide(36)">
+      <span class="hub-emoji"><img src="images/slide36_viceroy_butterfly.png" alt="Viceroy" style="max-width: 100%; height: auto;"></span>
+      <span class="hub-label">Viceroy</span>
+    </div>
+  </div>
+  <button class="meadow-return-btn" onclick="goToSlide(10)">Return to the Meadow</button>
+</div>
 
 <!-- ===== SLIDE 31: MONARCH INFO ===== -->
 <div id="slide-31" class="screen bg-sky">
   <div class="card">
     <h2 style="color:#DA6126;">Monarch Butterfly</h2>
+    <img src="images/slide46_monarch_butterfly_illustration.png" alt="Monarch Butterfly" style="max-width: 100%; height: auto; border-radius: 12px; margin: 1rem 0;">
+    <img src="images/slide13_monarch_and_caterpillar_on_milkweed.jpg" alt="Monarch caterpillar" style="max-width: 100%; height: auto; border-radius: 12px; margin: 0.5rem 0;">
     <p style="margin: 1rem 0; font-size: 1.1rem;">The <strong>Monarch</strong> is one of the most recognized butterflies in North America.</p>
     <div style="display:flex; gap:1.5rem; margin:1.5rem 0; flex-wrap:wrap; justify-content:center;">
       <div style="flex:1; min-width:200px; background:#DBD095; border-radius:16px; padding:1.2rem;">
@@ -1219,6 +1320,8 @@
 <div id="slide-32" class="screen bg-sky">
   <div class="card">
     <h2 style="color:#006682;">Blue Morpho Butterfly</h2>
+    <img src="images/slide55_blue_morpho_butterfly.png" alt="Blue Morpho Butterfly" style="max-width: 100%; height: auto; border-radius: 12px; margin: 1rem 0;">
+    <img src="images/slide55_blue_morpho_caterpillar.png" alt="Blue Morpho caterpillar" style="max-width: 100%; height: auto; border-radius: 12px; margin: 0.5rem 0;">
     <p style="margin: 1rem 0; font-size: 1.1rem;">The <strong>Blue Morpho</strong> is one of the largest and most dazzling butterflies in the world.</p>
     <div style="display:flex; gap:1.5rem; margin:1.5rem 0; flex-wrap:wrap; justify-content:center;">
       <div style="flex:1; min-width:200px; background:#DBD095; border-radius:16px; padding:1.2rem;">
@@ -1238,6 +1341,7 @@
 <div id="slide-33" class="screen bg-sky">
   <div class="card">
     <h2 style="color:#DA6126;">Painted Lady Butterfly</h2>
+    <img src="images/slide36_painted_lady_brushfoot.png" alt="Painted Lady Butterfly" style="max-width: 100%; height: auto; border-radius: 12px; margin: 1rem 0;">
     <p style="margin: 1rem 0; font-size: 1.1rem;">The <strong>Painted Lady</strong> is the most widespread butterfly species in the world!</p>
     <div style="display:flex; gap:1.5rem; margin:1.5rem 0; flex-wrap:wrap; justify-content:center;">
       <div style="flex:1; min-width:200px; background:#DBD095; border-radius:16px; padding:1.2rem;">
@@ -1257,6 +1361,8 @@
 <div id="slide-34" class="screen bg-sky">
   <div class="card">
     <h2 style="color:#F8971D;">Eastern Tiger Swallowtail</h2>
+    <img src="images/slide31_eastern_tiger_swallowtail_specimen.png" alt="Eastern Tiger Swallowtail" style="max-width: 100%; height: auto; border-radius: 12px; margin: 1rem 0;">
+    <img src="images/slide31_zebra_swallowtail.png" alt="Zebra Swallowtail" style="max-width: 100%; height: auto; border-radius: 12px; margin: 0.5rem 0;">
     <p style="margin: 1rem 0; font-size: 1.1rem;">The <strong>Eastern Tiger Swallowtail</strong> is known for its striking yellow and black tiger stripes.</p>
     <div style="display:flex; gap:1.5rem; margin:1.5rem 0; flex-wrap:wrap; justify-content:center;">
       <div style="flex:1; min-width:200px; background:#DBD095; border-radius:16px; padding:1.2rem;">
@@ -1276,6 +1382,7 @@
 <div id="slide-35" class="screen bg-sky">
   <div class="card">
     <h2 style="color:#9C2F31;">Red Admiral Butterfly</h2>
+    <img src="images/slide36_red_admiral_butterfly.jpg" alt="Red Admiral Butterfly" style="max-width: 100%; height: auto; border-radius: 12px; margin: 1rem 0;">
     <p style="margin: 1rem 0; font-size: 1.1rem;">The <strong>Red Admiral</strong> is a common and boldly patterned butterfly found throughout North America and Europe.</p>
     <div style="display:flex; gap:1.5rem; margin:1.5rem 0; flex-wrap:wrap; justify-content:center;">
       <div style="flex:1; min-width:200px; background:#DBD095; border-radius:16px; padding:1.2rem;">
@@ -1295,6 +1402,8 @@
 <div id="slide-36" class="screen bg-sky">
   <div class="card">
     <h2 style="color:#DA6126;">Viceroy Butterfly</h2>
+    <img src="images/slide36_viceroy_butterfly.png" alt="Viceroy Butterfly" style="max-width: 100%; height: auto; border-radius: 12px; margin: 1rem 0;">
+    <img src="images/slide46_monarch_butterfly_illustration.png" alt="Monarch for comparison" style="max-width: 100%; height: auto; border-radius: 12px; margin: 0.5rem 0;">
     <p style="margin: 1rem 0; font-size: 1.1rem;">The <strong>Viceroy</strong> is famous for looking almost exactly like a Monarch — but it's a completely different species!</p>
     <div style="display:flex; gap:1.5rem; margin:1.5rem 0; flex-wrap:wrap; justify-content:center;">
       <div style="flex:1; min-width:200px; background:#DBD095; border-radius:16px; padding:1.2rem;">
@@ -1324,7 +1433,11 @@
 <!-- ===== SLIDE 38: FINAL SLIDE ===== -->
 <div id="slide-38" class="screen" style="background: linear-gradient(180deg, #F8971D 0%, #DBD095 30%, #CFDD3A 70%, #77833C 100%);">
   <div class="card">
-    <h1 style="font-size:clamp(1.5rem,4vw,2.5rem);">Congratulations, Explorer!</h1>
+    <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1rem;">
+      <img src="images/slide07_larry_lepidopterist_character.jpg" alt="Larry the Lepidopterist" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
+      <h1 style="font-size:clamp(1.5rem,4vw,2.5rem); margin: 0;">Congratulations, Explorer!</h1>
+    </div>
+    <img src="images/slide46_monarch_chrysalis_green.png" alt="Monarch chrysalis" style="max-width: 100%; height: auto; border-radius: 12px; margin: 1rem 0;">
     <p style="margin: 1.5rem 0; font-size: 1.1rem;">You've completed the Blooms &amp; Butterflies adventure! You now know about host plants, camouflage, butterfly mimicry, and so much more.</p>
     <p style="color:#555;">Thank you for visiting the Franklin Park Conservatory &amp; Botanical Gardens virtual meadow.</p>
     <div class="flowers-row" style="margin:1.5rem 0;" aria-hidden="true">
@@ -1365,65 +1478,57 @@
     {
       plant: "Milkweed",
       butterfly: "Monarch",
-      plantEmoji: "\u{1F338}",
-      butterflyEmoji: "\u{1F98B}",
-      plantColor: "linear-gradient(135deg, #DBD095, #C0B88D)",
+      plantImage: "images/milkweed.jpg",
+      butterflyImage: "images/monarch_milkweed.jpg",
       desc: "Monarch caterpillars feed exclusively on milkweed. The toxins in milkweed make Monarchs taste bad to predators!"
     },
     {
       plant: "Carrot",
       butterfly: "Black Swallowtail",
-      plantEmoji: "\u{1F955}",
-      butterflyEmoji: "\u{1F98B}",
-      plantColor: "linear-gradient(135deg, #F8971D, #F99F1C)",
+      plantImage: "images/carrot.jpg",
+      butterflyImage: "images/swallowtail_carrot.jpg",
       desc: "Black Swallowtail caterpillars love plants in the carrot family, including parsley, dill, and fennel."
     },
     {
       plant: "Pawpaw",
       butterfly: "Zebra Swallowtail",
-      plantEmoji: "\u{1F333}",
-      butterflyEmoji: "\u{1F98B}",
-      plantColor: "linear-gradient(135deg, #CFDD3A, #77833C)",
+      plantImage: "images/pawpaw.jpg",
+      butterflyImage: "images/zebra_pawpaw.jpg",
       desc: "The Zebra Swallowtail depends on pawpaw trees. Its striking black and white stripes make it easy to identify!"
     },
     {
       plant: "Nettle",
       butterfly: "Red Admiral",
-      plantEmoji: "\u{1F33F}",
-      butterflyEmoji: "\u{1F98B}",
-      plantColor: "linear-gradient(135deg, #A1D2DD, #80866E)",
+      plantImage: "images/nettle.jpg",
+      butterflyImage: "images/admiral_nettle.jpg",
       desc: "Red Admiral caterpillars feed on stinging nettles. Despite the plant's sting, these tough caterpillars thrive on it!"
     },
     {
       plant: "Clover",
       butterfly: "Orange Sulphur",
-      plantEmoji: "\u2618\uFE0F",
-      butterflyEmoji: "\u{1F98B}",
-      plantColor: "linear-gradient(135deg, #CFDD3A, #C0B88D)",
+      plantImage: "images/clover.jpg",
+      butterflyImage: "images/sulphur_clover.jpg",
       desc: "Orange Sulphur butterflies are common in meadows and fields where clover grows abundantly."
     },
     {
       plant: "Cabbage",
       butterfly: "Cabbage White",
-      plantEmoji: "\u{1F96C}",
-      butterflyEmoji: "\u{1F98B}",
-      plantColor: "linear-gradient(135deg, #DBD095, #77833C)",
+      plantImage: "images/cabbage.jpg",
+      butterflyImage: "images/cabbage_white.jpg",
       desc: "Cabbage White butterflies lay eggs on cabbage and related plants. Gardeners often see their green caterpillars!"
     },
     {
       plant: "Violet",
       butterfly: "Fritillary",
-      plantEmoji: "\u{1F49C}",
-      butterflyEmoji: "\u{1F98B}",
-      plantColor: "linear-gradient(135deg, #A1D2DD, #006682)",
+      plantImage: "images/violet.jpg",
+      butterflyImage: "images/fritillary_violet.jpg",
       desc: "Fritillary butterflies depend on violets. Their orange wings with silver spots shimmer in the sunlight!"
     },
     {
       plant: "Sunflower",
       butterfly: "Silvery Checkerspot",
-      plantEmoji: "\u{1F33B}",
-      butterflyEmoji: "\u{1F98B}",
-      plantColor: "linear-gradient(135deg, #F8971D, #DBD095)",
+      plantImage: "images/sunflower.jpg",
+      butterflyImage: "images/checkerspot_sunflower.jpg",
       desc: "Silvery Checkerspots use sunflowers and related plants. Their checkered wing pattern is a beautiful sight!"
     }
   ];
@@ -1466,9 +1571,9 @@
     if (!plant) return;
 
     document.getElementById('plant-title').textContent = plant.plant;
-    document.getElementById('plant-image').style.background = plant.plantColor;
+    document.getElementById('plant-image').style.background = '#f5f5f5';
     document.getElementById('plant-image').innerHTML =
-      '<span style="font-size:clamp(3rem,10vw,6rem);">' + plant.plantEmoji + '</span>' +
+      '<img src="' + plant.plantImage + '" alt="' + plant.plant + '" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 12px;">' +
       '<span style="position:absolute;bottom:0.5rem;font-size:0.85rem;color:#666;">Click the plant!</span>';
     document.getElementById('plant-reveal').classList.remove('show');
     document.getElementById('plant-next-btn').style.display = 'none';
@@ -1492,9 +1597,13 @@
     plantRevealed = true;
     var plant = plants[currentPlantIndex];
 
+    // Switch to butterfly+plant image
+    document.getElementById('plant-image').innerHTML =
+      '<img src="' + plant.butterflyImage + '" alt="' + plant.butterfly + ' on ' + plant.plant + '" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 12px;">';
+
     document.getElementById('butterfly-name').textContent = plant.butterfly + ' Butterfly';
     document.getElementById('butterfly-desc').textContent = plant.desc;
-    document.getElementById('butterfly-emoji').textContent = plant.butterflyEmoji;
+    document.getElementById('butterfly-emoji').textContent = '';
     document.getElementById('plant-reveal').classList.add('show');
     document.getElementById('plant-next-btn').style.display = 'flex';
   }
