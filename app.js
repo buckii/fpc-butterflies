@@ -11,6 +11,17 @@ let wrongClicks25 = 0;
 // Butterfly hub visited tracking (slide 29)
 const visitedButterflies = new Set();
 
+// Differences hub visited tracking (slide 40)
+const visitedDifferences = new Set();
+
+// Matching game correct answers
+const matchAnswers = {
+  monarch: false,    // NO — caterpillar is Blue Morpho, not Monarch
+  tigerwing: false,  // NO — caterpillar doesn't match
+  spicebush: false,  // NO — chrysalis is actually a cocoon
+  bluemorpho: true   // YES — all match
+};
+
 // ===== PLANT DATA =====
 const plants = [
   {
@@ -94,6 +105,9 @@ function goToSlide(num) {
   }
   if (num === 29) {
     updateHubVisited();
+  }
+  if (num === 40) {
+    updateDiffVisited();
   }
 }
 
@@ -224,7 +238,7 @@ function visitButterfly(slideNum) {
 function returnToHub(slideNum) {
   visitedButterflies.add(slideNum);
   if (visitedButterflies.size >= 6) {
-    goToSlide(36);
+    goToSlide(37);
   } else {
     goToSlide(29);
   }
@@ -237,6 +251,48 @@ function updateHubVisited() {
       btn.classList.add('visited');
     }
   });
+}
+
+// ===== DIFFERENCES HUB LOGIC (Slide 40) =====
+function visitDifference(slideNum) {
+  visitedDifferences.add(slideNum);
+  goToSlide(slideNum);
+}
+
+function returnToDiffHub(slideNum) {
+  visitedDifferences.add(slideNum);
+  goToSlide(40);
+  updateDiffVisited();
+}
+
+function updateDiffVisited() {
+  var map = { 41: 'antennae', 42: 'body', 43: 'wings' };
+  [41, 42, 43].forEach(function(num) {
+    var btn = document.getElementById('diff-btn-' + map[num]);
+    if (btn && visitedDifferences.has(num)) {
+      btn.classList.add('visited');
+    }
+  });
+  if (visitedDifferences.size >= 3) {
+    var completeBtn = document.getElementById('moth-complete-btn');
+    if (completeBtn) completeBtn.style.display = 'inline-block';
+  }
+}
+
+// ===== MATCHING GAME LOGIC (Slides 46-57) =====
+function checkMatch(species, answer) {
+  var correct = matchAnswers[species];
+  var slideMap = {
+    monarch:    { wrong: 47, right: 48 },
+    tigerwing:  { wrong: 50, right: 51 },
+    spicebush:  { wrong: 53, right: 54 },
+    bluemorpho: { wrong: 56, right: 57 }
+  };
+  if (answer === correct) {
+    goToSlide(slideMap[species].right);
+  } else {
+    goToSlide(slideMap[species].wrong);
+  }
 }
 
 // ===== ERROR HANDLING =====
