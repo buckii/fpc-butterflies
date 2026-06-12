@@ -774,7 +774,7 @@
       </div>
     </div>
     <p style="margin-top:1rem; color:#555;">You've explored all the butterflies in the gallery!</p>
-    <button class="btn btn-orange" onclick="goToSlide(37)" style="margin-top:1rem;">Back to the Meadow</button>
+    <button class="btn btn-orange" onclick="goToSlide(39)" style="margin-top:1rem;">Continue the Adventure</button>
   </div>
 </div>
 
@@ -806,6 +806,568 @@
   <button class="arrow-btn" onclick="goToSlide(1)" title="Return to Menu">
     <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
   </button>
+</div>
+
+<!-- ===== SLIDE 39: BUTTERFLIES VS MOTHS INTRO ===== -->
+<div id="slide-39" class="screen bg-sky">
+  <div class="card card-wide">
+    <h2>Butterflies &amp; Moths</h2>
+    <p style="margin: 1rem 0;">Butterflies and moths both belong to an insect order called <strong>Lepidoptera</strong>, which means "scaly wings."</p>
+    <p style="margin-bottom: 1rem;">They look alike at a glance, but once you know what to look for, telling them apart is easy! Next, try to spot the differences.</p>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1rem 0;">
+      <div style="background:#DBD095; border-radius:16px; padding:1rem;">
+        <div style="font-size:3rem;">&#x1F98B;</div>
+        <h3 style="color:#572700; margin-top:0.25rem;">Butterfly</h3>
+        <p style="font-size:0.95rem;">Bright, slim, daytime flier</p>
+      </div>
+      <div style="background:#C0B88D; border-radius:16px; padding:1rem;">
+        <div style="font-size:3rem;">&#x1F99F;</div>
+        <h3 style="color:#572700; margin-top:0.25rem;">Moth</h3>
+        <p style="font-size:0.95rem;">Muted, fuzzy, nighttime flier</p>
+      </div>
+    </div>
+  </div>
+  <button class="arrow-btn" onclick="goToSlide(40)" title="Next">
+    <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+  </button>
+</div>
+
+<!-- ===== SLIDE 40: SPOT THE DIFFERENCES (CLICKABLE) ===== -->
+<div id="slide-40" class="screen bg-sky">
+  <h2 style="color:#572700; margin-bottom:0.25rem;">Spot the Differences</h2>
+  <p style="color:#572700; margin-bottom:1rem; max-width:720px; text-align:center;">Click the <strong>antennae</strong>, <strong>body</strong>, or <strong>wings</strong> on either creature to learn how butterflies and moths differ.</p>
+  <div class="compare-stage">
+    <div class="compare-creature" data-label="Butterfly">
+      <div class="compare-title">Butterfly</div>
+      <button class="compare-region region-antennae" onclick="spotDifference('antennae')" aria-label="Butterfly antennae" data-part="antennae">
+        <svg viewBox="0 0 120 60">
+          <path d="M60 55 Q40 25 25 10" stroke="#572700" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <path d="M60 55 Q80 25 95 10" stroke="#572700" stroke-width="3" fill="none" stroke-linecap="round"/>
+          <circle cx="23" cy="9" r="5" fill="#572700"/>
+          <circle cx="97" cy="9" r="5" fill="#572700"/>
+        </svg>
+        <span class="region-hint">Antennae</span>
+      </button>
+      <button class="compare-region region-wings" onclick="spotDifference('wings')" aria-label="Butterfly wings" data-part="wings">
+        <svg viewBox="0 0 220 160">
+          <ellipse cx="70" cy="60" rx="55" ry="45" fill="#F8971D"/>
+          <ellipse cx="150" cy="60" rx="55" ry="45" fill="#F8971D"/>
+          <ellipse cx="70" cy="115" rx="42" ry="35" fill="#DA6126"/>
+          <ellipse cx="150" cy="115" rx="42" ry="35" fill="#DA6126"/>
+          <path d="M35 60 L105 60 M50 45 L100 45 M50 75 L100 75" stroke="#572700" stroke-width="2" opacity="0.6"/>
+          <path d="M115 60 L185 60 M120 45 L180 45 M120 75 L180 75" stroke="#572700" stroke-width="2" opacity="0.6"/>
+          <circle cx="70" cy="60" r="8" fill="#572700" opacity="0.5"/>
+          <circle cx="150" cy="60" r="8" fill="#572700" opacity="0.5"/>
+        </svg>
+        <span class="region-hint">Wings</span>
+      </button>
+      <button class="compare-region region-body" onclick="spotDifference('body')" aria-label="Butterfly body" data-part="body">
+        <svg viewBox="0 0 40 140">
+          <ellipse cx="20" cy="25" rx="9" ry="12" fill="#3E2723"/>
+          <ellipse cx="20" cy="90" rx="6" ry="55" fill="#3E2723"/>
+        </svg>
+        <span class="region-hint">Body</span>
+      </button>
+    </div>
+    <div class="compare-creature" data-label="Moth">
+      <div class="compare-title">Moth</div>
+      <button class="compare-region region-antennae" onclick="spotDifference('antennae')" aria-label="Moth antennae" data-part="antennae">
+        <svg viewBox="0 0 120 60">
+          <path d="M60 55 Q40 25 25 10" stroke="#80866E" stroke-width="3" fill="none"/>
+          <path d="M60 55 Q80 25 95 10" stroke="#80866E" stroke-width="3" fill="none"/>
+          <g fill="#80866E">
+            <path d="M55 50 L45 48 M50 42 L38 38 M45 34 L33 28 M40 26 L30 20 M35 18 L26 12"/>
+            <path d="M65 50 L75 48 M70 42 L82 38 M75 34 L87 28 M80 26 L90 20 M85 18 L94 12"/>
+          </g>
+          <g stroke="#80866E" stroke-width="2">
+            <line x1="55" y1="50" x2="45" y2="48"/>
+            <line x1="50" y1="42" x2="38" y2="38"/>
+            <line x1="45" y1="34" x2="33" y2="28"/>
+            <line x1="40" y1="26" x2="30" y2="20"/>
+            <line x1="35" y1="18" x2="26" y2="12"/>
+            <line x1="65" y1="50" x2="75" y2="48"/>
+            <line x1="70" y1="42" x2="82" y2="38"/>
+            <line x1="75" y1="34" x2="87" y2="28"/>
+            <line x1="80" y1="26" x2="90" y2="20"/>
+            <line x1="85" y1="18" x2="94" y2="12"/>
+          </g>
+        </svg>
+        <span class="region-hint">Antennae</span>
+      </button>
+      <button class="compare-region region-wings" onclick="spotDifference('wings')" aria-label="Moth wings" data-part="wings">
+        <svg viewBox="0 0 220 160">
+          <ellipse cx="70" cy="65" rx="58" ry="48" fill="#935D3C"/>
+          <ellipse cx="150" cy="65" rx="58" ry="48" fill="#935D3C"/>
+          <ellipse cx="70" cy="120" rx="40" ry="30" fill="#80866E"/>
+          <ellipse cx="150" cy="120" rx="40" ry="30" fill="#80866E"/>
+          <path d="M40 50 Q70 40 100 50 M40 80 Q70 90 100 80" stroke="#5a4010" stroke-width="1.5" fill="none" opacity="0.5"/>
+          <path d="M120 50 Q150 40 180 50 M120 80 Q150 90 180 80" stroke="#5a4010" stroke-width="1.5" fill="none" opacity="0.5"/>
+        </svg>
+        <span class="region-hint">Wings</span>
+      </button>
+      <button class="compare-region region-body" onclick="spotDifference('body')" aria-label="Moth body" data-part="body">
+        <svg viewBox="0 0 48 140">
+          <ellipse cx="24" cy="28" rx="14" ry="15" fill="#5a4010"/>
+          <ellipse cx="24" cy="90" rx="13" ry="52" fill="#5a4010"/>
+          <g stroke="#3a2408" stroke-width="0.8" opacity="0.7">
+            <line x1="12" y1="45" x2="6" y2="42"/>
+            <line x1="12" y1="60" x2="4" y2="58"/>
+            <line x1="12" y1="75" x2="4" y2="74"/>
+            <line x1="12" y1="95" x2="4" y2="95"/>
+            <line x1="12" y1="115" x2="6" y2="118"/>
+            <line x1="36" y1="45" x2="42" y2="42"/>
+            <line x1="36" y1="60" x2="44" y2="58"/>
+            <line x1="36" y1="75" x2="44" y2="74"/>
+            <line x1="36" y1="95" x2="44" y2="95"/>
+            <line x1="36" y1="115" x2="42" y2="118"/>
+          </g>
+        </svg>
+        <span class="region-hint">Body</span>
+      </button>
+    </div>
+  </div>
+  <div class="compare-progress">
+    <span class="compare-dot" id="cmp-dot-antennae"></span>
+    <span class="compare-dot" id="cmp-dot-body"></span>
+    <span class="compare-dot" id="cmp-dot-wings"></span>
+    <span class="compare-progress-label">Explore all three differences</span>
+  </div>
+</div>
+
+<!-- ===== SLIDE 41: ANTENNAE DETAIL ===== -->
+<div id="slide-41" class="screen bg-warm">
+  <div class="card card-wide">
+    <h2>Antennae</h2>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1rem 0;">
+      <div style="background:#DBD095; border-radius:16px; padding:1.2rem;">
+        <h3 style="color:#572700;">Butterfly</h3>
+        <svg viewBox="0 0 120 80" style="max-width:100%;">
+          <path d="M60 75 Q40 40 22 15" stroke="#572700" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <path d="M60 75 Q80 40 98 15" stroke="#572700" stroke-width="4" fill="none" stroke-linecap="round"/>
+          <circle cx="20" cy="12" r="7" fill="#572700"/>
+          <circle cx="100" cy="12" r="7" fill="#572700"/>
+        </svg>
+        <p>Butterflies have <strong>slender, club-tipped</strong> antennae — long and smooth with a little bulb at the end.</p>
+      </div>
+      <div style="background:#C0B88D; border-radius:16px; padding:1.2rem;">
+        <h3 style="color:#572700;">Moth</h3>
+        <svg viewBox="0 0 120 80" style="max-width:100%;">
+          <path d="M60 75 Q40 40 22 15" stroke="#80866E" stroke-width="4" fill="none"/>
+          <path d="M60 75 Q80 40 98 15" stroke="#80866E" stroke-width="4" fill="none"/>
+          <g stroke="#80866E" stroke-width="2.5">
+            <line x1="54" y1="65" x2="40" y2="62"/>
+            <line x1="48" y1="55" x2="34" y2="50"/>
+            <line x1="42" y1="45" x2="28" y2="38"/>
+            <line x1="36" y1="35" x2="22" y2="28"/>
+            <line x1="30" y1="25" x2="20" y2="20"/>
+            <line x1="66" y1="65" x2="80" y2="62"/>
+            <line x1="72" y1="55" x2="86" y2="50"/>
+            <line x1="78" y1="45" x2="92" y2="38"/>
+            <line x1="84" y1="35" x2="98" y2="28"/>
+            <line x1="90" y1="25" x2="100" y2="20"/>
+          </g>
+        </svg>
+        <p>Moths have <strong>feathery, comb-like</strong> antennae — perfect for sensing scents on the night breeze.</p>
+      </div>
+    </div>
+  </div>
+  <button class="arrow-btn" onclick="goToSlide(40)" title="Back to comparison">
+    <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+  </button>
+</div>
+
+<!-- ===== SLIDE 42: BODY DETAIL ===== -->
+<div id="slide-42" class="screen bg-warm">
+  <div class="card card-wide">
+    <h2>Body Shape</h2>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1rem 0;">
+      <div style="background:#DBD095; border-radius:16px; padding:1.2rem;">
+        <h3 style="color:#572700;">Butterfly</h3>
+        <svg viewBox="0 0 60 140" style="max-width:120px;">
+          <ellipse cx="30" cy="25" rx="13" ry="15" fill="#3E2723"/>
+          <ellipse cx="30" cy="90" rx="8" ry="55" fill="#3E2723"/>
+        </svg>
+        <p>Butterflies have a <strong>long, slim abdomen</strong> — built for graceful daytime flight.</p>
+      </div>
+      <div style="background:#C0B88D; border-radius:16px; padding:1.2rem;">
+        <h3 style="color:#572700;">Moth</h3>
+        <svg viewBox="0 0 70 140" style="max-width:140px;">
+          <ellipse cx="35" cy="28" rx="18" ry="18" fill="#5a4010"/>
+          <ellipse cx="35" cy="90" rx="18" ry="52" fill="#5a4010"/>
+          <g stroke="#3a2408" stroke-width="1" opacity="0.6">
+            <line x1="17" y1="50" x2="8" y2="48"/>
+            <line x1="17" y1="65" x2="5" y2="64"/>
+            <line x1="17" y1="80" x2="5" y2="80"/>
+            <line x1="17" y1="100" x2="5" y2="102"/>
+            <line x1="53" y1="50" x2="62" y2="48"/>
+            <line x1="53" y1="65" x2="65" y2="64"/>
+            <line x1="53" y1="80" x2="65" y2="80"/>
+            <line x1="53" y1="100" x2="65" y2="102"/>
+          </g>
+        </svg>
+        <p>Moths have a <strong>thick, furry abdomen</strong> — the fuzz helps them stay warm on cool nights.</p>
+      </div>
+    </div>
+  </div>
+  <button class="arrow-btn" onclick="goToSlide(40)" title="Back to comparison">
+    <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+  </button>
+</div>
+
+<!-- ===== SLIDE 43: WINGS DETAIL ===== -->
+<div id="slide-43" class="screen bg-warm">
+  <div class="card card-wide">
+    <h2>Wings</h2>
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin: 1rem 0;">
+      <div style="background:#DBD095; border-radius:16px; padding:1.2rem;">
+        <h3 style="color:#572700;">Butterfly</h3>
+        <img src="images/slide36_red_admiral_butterfly.jpg" alt="Bright butterfly wings" style="max-width:100%; height:auto; border-radius:12px; margin:0.5rem 0;">
+        <p>Butterflies usually have <strong>bright, colorful wings</strong> and rest with wings held <strong>upright</strong>.</p>
+      </div>
+      <div style="background:#C0B88D; border-radius:16px; padding:1.2rem;">
+        <h3 style="color:#572700;">Moth</h3>
+        <svg viewBox="0 0 220 160" style="max-width:100%; border-radius:12px; background:#DBD095; margin:0.5rem 0;">
+          <ellipse cx="70" cy="65" rx="58" ry="48" fill="#935D3C"/>
+          <ellipse cx="150" cy="65" rx="58" ry="48" fill="#935D3C"/>
+          <ellipse cx="70" cy="120" rx="40" ry="30" fill="#80866E"/>
+          <ellipse cx="150" cy="120" rx="40" ry="30" fill="#80866E"/>
+          <ellipse cx="110" cy="85" rx="14" ry="55" fill="#5a4010"/>
+        </svg>
+        <p>Moths usually have <strong>dull, neutral wings</strong> and rest with wings held <strong>flat over their body</strong>.</p>
+      </div>
+    </div>
+  </div>
+  <button class="arrow-btn" onclick="goToSlide(40)" title="Back to comparison">
+    <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+  </button>
+</div>
+
+<!-- ===== SLIDE 44: BUTTERFLIES VS MOTHS COMPLETE ===== -->
+<div id="slide-44" class="screen" style="background: linear-gradient(180deg, #A1D2DD 0%, #CFDD3A 60%, #77833C 100%); cursor:pointer;" onclick="goToSlide(45)">
+  <div class="card">
+    <h2>Nicely Spotted!</h2>
+    <p style="margin: 1rem 0;">Now you can tell butterflies and moths apart by looking at their antennae, body, and wings.</p>
+    <p style="font-weight:600; color:#572700;">Next up: watch butterflies transform! One of the most amazing journeys in nature is about to begin.</p>
+  </div>
+  <div class="click-hint">Click anywhere to continue</div>
+</div>
+
+<!-- ===== SLIDE 45: METAMORPHOSIS INTRO ===== -->
+<div id="slide-45" class="screen bg-sky">
+  <div class="card card-wide">
+    <h2>Metamorphosis</h2>
+    <p style="margin: 1rem 0;">Every butterfly begins life as a tiny <strong>egg</strong>. It hatches into a hungry <strong>caterpillar</strong>, then forms a <strong>chrysalis</strong> where it transforms, and finally emerges as an adult <strong>butterfly</strong>.</p>
+    <div style="display:grid; grid-template-columns: repeat(4, 1fr); gap: 0.75rem; margin: 1.5rem 0;">
+      <div style="background:#DBD095; border-radius:12px; padding:0.75rem; text-align:center;">
+        <div style="font-size:2rem;">&#x1F95A;</div>
+        <strong style="color:#572700; font-size:0.9rem;">Egg</strong>
+      </div>
+      <div style="background:#CFDD3A; border-radius:12px; padding:0.75rem; text-align:center;">
+        <div style="font-size:2rem;">&#x1F41B;</div>
+        <strong style="color:#572700; font-size:0.9rem;">Caterpillar</strong>
+      </div>
+      <div style="background:#77833C; border-radius:12px; padding:0.75rem; text-align:center; color:#fff;">
+        <img src="images/slide46_monarch_chrysalis_green.png" alt="Chrysalis" style="width:40px; height:auto;">
+        <div><strong style="font-size:0.9rem;">Chrysalis</strong></div>
+      </div>
+      <div style="background:#F8971D; border-radius:12px; padding:0.75rem; text-align:center; color:#fff;">
+        <div style="font-size:2rem;">&#x1F98B;</div>
+        <strong style="font-size:0.9rem;">Butterfly</strong>
+      </div>
+    </div>
+    <p style="font-weight:600; color:#DA6126;">In the next activity, you'll see three life-cycle pictures at a time. Decide: do all three belong to the same butterfly?</p>
+  </div>
+  <button class="arrow-btn" onclick="goToSlide(46)" title="Start matching">
+    <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
+  </button>
+</div>
+
+<!-- ===== SLIDE 46: MONARCH MATCH ===== -->
+<div id="slide-46" class="screen bg-sky">
+  <h2 style="color:#572700;">Monarch Match</h2>
+  <p style="color:#572700; text-align:center; max-width:720px; margin-bottom:1rem;">Are the caterpillar, chrysalis, and butterfly all the same species?</p>
+  <div class="match-row" id="match-row-46">
+    <div class="match-circle">
+      <img src="images/slide13_monarch_and_caterpillar_on_milkweed.jpg" alt="Monarch caterpillar on milkweed">
+      <span class="match-label">Caterpillar</span>
+    </div>
+    <div class="match-circle">
+      <img src="images/slide46_monarch_chrysalis_green.png" alt="Monarch chrysalis">
+      <span class="match-label">Chrysalis</span>
+    </div>
+    <div class="match-circle">
+      <img src="images/slide46_monarch_butterfly_illustration.png" alt="Monarch butterfly">
+      <span class="match-label">Butterfly</span>
+    </div>
+  </div>
+  <div class="match-buttons">
+    <button class="btn btn-green" onclick="matchAnswer('monarch', true)">YES</button>
+    <button class="btn btn-red" onclick="matchAnswer('monarch', false)">NO</button>
+  </div>
+</div>
+
+<!-- ===== SLIDE 47: MONARCH INCORRECT ===== -->
+<div id="slide-47" class="screen bg-sky">
+  <h2 style="color:#9C2F31;">Not quite!</h2>
+  <p style="color:#572700; text-align:center; max-width:720px; margin-bottom:1rem;">Take another look at the three pictures.</p>
+  <div class="match-row">
+    <div class="match-circle marked-x">
+      <img src="images/slide13_monarch_and_caterpillar_on_milkweed.jpg" alt="Monarch caterpillar">
+      <span class="match-label">Caterpillar</span>
+    </div>
+    <div class="match-circle marked-x">
+      <img src="images/slide46_monarch_chrysalis_green.png" alt="Monarch chrysalis">
+      <span class="match-label">Chrysalis</span>
+    </div>
+    <div class="match-circle marked-x">
+      <img src="images/slide46_monarch_butterfly_illustration.png" alt="Monarch butterfly">
+      <span class="match-label">Butterfly</span>
+    </div>
+  </div>
+  <button class="btn btn-orange" onclick="goToSlide(46)" style="margin-top:1rem;">TRY AGAIN!</button>
+</div>
+
+<!-- ===== SLIDE 48: MONARCH CORRECT ===== -->
+<div id="slide-48" class="screen bg-sky">
+  <h2 style="color:#77833C;">Correct!</h2>
+  <p style="color:#572700; text-align:center; max-width:720px; margin-bottom:1rem;">They are all Monarchs! Let's see if you can match more butterfly species.</p>
+  <div class="match-row">
+    <div class="match-circle marked-check">
+      <img src="images/slide13_monarch_and_caterpillar_on_milkweed.jpg" alt="Monarch caterpillar">
+      <span class="match-label">Caterpillar</span>
+    </div>
+    <div class="match-circle marked-check">
+      <img src="images/slide46_monarch_chrysalis_green.png" alt="Monarch chrysalis">
+      <span class="match-label">Chrysalis</span>
+    </div>
+    <div class="match-circle marked-check">
+      <img src="images/slide46_monarch_butterfly_illustration.png" alt="Monarch butterfly">
+      <span class="match-label">Butterfly</span>
+    </div>
+  </div>
+  <button class="btn btn-brown" onclick="goToSlide(49)" style="margin-top:1rem;">NEXT</button>
+</div>
+
+<!-- ===== SLIDE 49: TIGERWING MATCH ===== -->
+<div id="slide-49" class="screen bg-sky">
+  <h2 style="color:#572700;">Tigerwing Match</h2>
+  <p style="color:#572700; text-align:center; max-width:720px; margin-bottom:1rem;">Are the caterpillar, chrysalis, and butterfly all the same species?</p>
+  <div class="match-row">
+    <div class="match-circle">
+      <div class="match-svg" aria-label="Spiky orange caterpillar">
+        <svg viewBox="0 0 120 60">
+          <ellipse cx="60" cy="35" rx="50" ry="18" fill="#DA6126"/>
+          <g fill="#572700">
+            <circle cx="20" cy="35" r="3"/><circle cx="35" cy="35" r="3"/>
+            <circle cx="50" cy="35" r="3"/><circle cx="65" cy="35" r="3"/>
+            <circle cx="80" cy="35" r="3"/><circle cx="95" cy="35" r="3"/>
+          </g>
+          <g stroke="#3E2723" stroke-width="2">
+            <line x1="20" y1="20" x2="20" y2="12"/>
+            <line x1="35" y1="20" x2="35" y2="10"/>
+            <line x1="50" y1="20" x2="50" y2="8"/>
+            <line x1="65" y1="20" x2="65" y2="8"/>
+            <line x1="80" y1="20" x2="80" y2="10"/>
+            <line x1="95" y1="20" x2="95" y2="12"/>
+          </g>
+          <circle cx="105" cy="32" r="3" fill="#572700"/>
+        </svg>
+      </div>
+      <span class="match-label">Caterpillar</span>
+    </div>
+    <div class="match-circle">
+      <div class="match-svg" aria-label="Gold chrysalis">
+        <svg viewBox="0 0 80 120">
+          <path d="M40 10 Q25 30 25 60 Q25 100 40 115 Q55 100 55 60 Q55 30 40 10 Z" fill="#F8971D" stroke="#935D3C" stroke-width="2"/>
+          <path d="M30 40 L50 40 M30 55 L50 55 M32 75 L48 75 M34 95 L46 95" stroke="#DA6126" stroke-width="1.5"/>
+        </svg>
+      </div>
+      <span class="match-label">Chrysalis</span>
+    </div>
+    <div class="match-circle">
+      <img src="images/slide18_35_49_tigerwing_butterfly_on_leaf.png" alt="Tigerwing butterfly">
+      <span class="match-label">Butterfly</span>
+    </div>
+  </div>
+  <div class="match-buttons">
+    <button class="btn btn-green" onclick="matchAnswer('tigerwing', true)">YES</button>
+    <button class="btn btn-red" onclick="matchAnswer('tigerwing', false)">NO</button>
+  </div>
+</div>
+
+<!-- ===== SLIDE 50: TIGERWING INCORRECT ===== -->
+<div id="slide-50" class="screen bg-sky">
+  <h2 style="color:#9C2F31;">Not this time!</h2>
+  <p style="color:#572700; text-align:center; max-width:720px; margin-bottom:1rem;">Look closer — one of these doesn't belong.</p>
+  <button class="btn btn-orange" onclick="goToSlide(49)" style="margin-top:1rem;">TRY AGAIN!</button>
+</div>
+
+<!-- ===== SLIDE 51: TIGERWING CORRECT ===== -->
+<div id="slide-51" class="screen bg-sky">
+  <h2 style="color:#77833C;">Correct!</h2>
+  <p style="color:#572700; text-align:center; max-width:720px; margin-bottom:1rem;">The chrysalis and the butterfly are both Tigerwings, but the caterpillar is not — it belongs to a different species.</p>
+  <div class="match-row">
+    <div class="match-circle marked-x">
+      <div class="match-svg">
+        <svg viewBox="0 0 120 60">
+          <ellipse cx="60" cy="35" rx="50" ry="18" fill="#DA6126"/>
+          <g fill="#572700"><circle cx="20" cy="35" r="3"/><circle cx="40" cy="35" r="3"/><circle cx="60" cy="35" r="3"/><circle cx="80" cy="35" r="3"/><circle cx="100" cy="35" r="3"/></g>
+        </svg>
+      </div>
+      <span class="match-label">Caterpillar</span>
+    </div>
+    <div class="match-circle marked-check">
+      <div class="match-svg">
+        <svg viewBox="0 0 80 120">
+          <path d="M40 10 Q25 30 25 60 Q25 100 40 115 Q55 100 55 60 Q55 30 40 10 Z" fill="#F8971D" stroke="#935D3C" stroke-width="2"/>
+        </svg>
+      </div>
+      <span class="match-label">Chrysalis</span>
+    </div>
+    <div class="match-circle marked-check">
+      <img src="images/slide18_35_49_tigerwing_butterfly_on_leaf.png" alt="Tigerwing butterfly">
+      <span class="match-label">Butterfly</span>
+    </div>
+  </div>
+  <button class="btn btn-brown" onclick="goToSlide(52)" style="margin-top:1rem;">NEXT</button>
+</div>
+
+<!-- ===== SLIDE 52: SPICEBUSH MATCH ===== -->
+<div id="slide-52" class="screen bg-sky">
+  <h2 style="color:#572700;">Spicebush Match</h2>
+  <p style="color:#572700; text-align:center; max-width:720px; margin-bottom:1rem;">Are the caterpillar, chrysalis, and butterfly all the same species?</p>
+  <div class="match-row">
+    <div class="match-circle">
+      <div class="match-svg" aria-label="Spicebush caterpillar with eyespots">
+        <svg viewBox="0 0 120 60">
+          <ellipse cx="60" cy="35" rx="50" ry="18" fill="#77833C"/>
+          <ellipse cx="35" cy="28" rx="7" ry="7" fill="#FEFEDC"/>
+          <circle cx="35" cy="28" r="3" fill="#000"/>
+          <ellipse cx="55" cy="28" rx="7" ry="7" fill="#FEFEDC"/>
+          <circle cx="55" cy="28" r="3" fill="#000"/>
+          <path d="M95 35 Q108 30 108 40 Q105 45 95 42 Z" fill="#77833C"/>
+        </svg>
+      </div>
+      <span class="match-label">Caterpillar</span>
+    </div>
+    <div class="match-circle">
+      <div class="match-svg" aria-label="Moth cocoon">
+        <svg viewBox="0 0 80 120">
+          <path d="M40 15 Q20 25 22 70 Q25 110 40 115 Q55 110 58 70 Q60 25 40 15 Z" fill="#DBD095" stroke="#935D3C" stroke-width="2"/>
+          <path d="M28 35 Q40 45 52 35 M28 55 Q40 65 52 55 M28 75 Q40 85 52 75 M28 95 Q40 105 52 95" stroke="#80866E" stroke-width="1.2" fill="none"/>
+        </svg>
+      </div>
+      <span class="match-label">Chrysalis</span>
+    </div>
+    <div class="match-circle">
+      <img src="images/slide31_eastern_tiger_swallowtail_specimen.png" alt="Swallowtail butterfly">
+      <span class="match-label">Butterfly</span>
+    </div>
+  </div>
+  <div class="match-buttons">
+    <button class="btn btn-green" onclick="matchAnswer('spicebush', true)">YES</button>
+    <button class="btn btn-red" onclick="matchAnswer('spicebush', false)">NO</button>
+  </div>
+</div>
+
+<!-- ===== SLIDE 53: SPICEBUSH INCORRECT ===== -->
+<div id="slide-53" class="screen bg-sky">
+  <h2 style="color:#9C2F31;">Try Again!</h2>
+  <p style="color:#572700; text-align:center; max-width:720px; margin-bottom:1rem;">Take another careful look — something here isn't what it seems.</p>
+  <button class="btn btn-orange" onclick="goToSlide(52)" style="margin-top:1rem;">TRY AGAIN!</button>
+</div>
+
+<!-- ===== SLIDE 54: SPICEBUSH CORRECT ===== -->
+<div id="slide-54" class="screen bg-sky">
+  <h2 style="color:#77833C;">Correct!</h2>
+  <p style="color:#572700; text-align:center; max-width:720px; margin-bottom:1rem;">The caterpillar and butterfly are both Spicebush Swallowtails — but the middle picture is actually a <strong>moth cocoon</strong>, not a butterfly chrysalis!</p>
+  <div class="match-row">
+    <div class="match-circle marked-check">
+      <div class="match-svg">
+        <svg viewBox="0 0 120 60">
+          <ellipse cx="60" cy="35" rx="50" ry="18" fill="#77833C"/>
+          <ellipse cx="35" cy="28" rx="7" ry="7" fill="#FEFEDC"/><circle cx="35" cy="28" r="3" fill="#000"/>
+          <ellipse cx="55" cy="28" rx="7" ry="7" fill="#FEFEDC"/><circle cx="55" cy="28" r="3" fill="#000"/>
+        </svg>
+      </div>
+      <span class="match-label">Caterpillar</span>
+    </div>
+    <div class="match-circle marked-x">
+      <div class="match-svg">
+        <svg viewBox="0 0 80 120">
+          <path d="M40 15 Q20 25 22 70 Q25 110 40 115 Q55 110 58 70 Q60 25 40 15 Z" fill="#DBD095" stroke="#935D3C" stroke-width="2"/>
+        </svg>
+      </div>
+      <span class="match-label">Cocoon!</span>
+    </div>
+    <div class="match-circle marked-check">
+      <img src="images/slide31_eastern_tiger_swallowtail_specimen.png" alt="Swallowtail butterfly">
+      <span class="match-label">Butterfly</span>
+    </div>
+  </div>
+  <p style="color:#555; max-width:520px; text-align:center; margin-top:1rem; font-size:0.95rem;">Butterflies form a smooth <strong>chrysalis</strong>, while most moths spin a silk <strong>cocoon</strong>.</p>
+  <button class="btn btn-brown" onclick="goToSlide(55)" style="margin-top:1rem;">NEXT</button>
+</div>
+
+<!-- ===== SLIDE 55: BLUE MORPHO MATCH ===== -->
+<div id="slide-55" class="screen bg-sky">
+  <h2 style="color:#572700;">Blue Morpho Match</h2>
+  <p style="color:#572700; text-align:center; max-width:720px; margin-bottom:1rem;">Are the caterpillar, chrysalis, and butterfly all the same species?</p>
+  <div class="match-row">
+    <div class="match-circle">
+      <img src="images/slide55_blue_morpho_caterpillar.png" alt="Blue Morpho caterpillar">
+      <span class="match-label">Caterpillar</span>
+    </div>
+    <div class="match-circle">
+      <div class="match-svg" aria-label="Blue Morpho chrysalis">
+        <svg viewBox="0 0 80 120">
+          <path d="M40 8 Q22 22 22 60 Q22 104 40 115 Q58 104 58 60 Q58 22 40 8 Z" fill="#CFDD3A" stroke="#77833C" stroke-width="2"/>
+          <path d="M32 30 Q40 26 48 30 M32 50 Q40 46 48 50 M32 70 Q40 66 48 70" stroke="#77833C" stroke-width="1" fill="none"/>
+        </svg>
+      </div>
+      <span class="match-label">Chrysalis</span>
+    </div>
+    <div class="match-circle">
+      <img src="images/slide55_blue_morpho_butterfly.png" alt="Blue Morpho butterfly">
+      <span class="match-label">Butterfly</span>
+    </div>
+  </div>
+  <div class="match-buttons">
+    <button class="btn btn-green" onclick="matchAnswer('morpho', true)">YES</button>
+    <button class="btn btn-red" onclick="matchAnswer('morpho', false)">NO</button>
+  </div>
+</div>
+
+<!-- ===== SLIDE 56: BLUE MORPHO INCORRECT ===== -->
+<div id="slide-56" class="screen bg-sky">
+  <h2 style="color:#9C2F31;">Not quite!</h2>
+  <p style="color:#572700; text-align:center; max-width:720px; margin-bottom:1rem;">Take another look at these three Blue Morpho life-cycle pictures.</p>
+  <button class="btn btn-orange" onclick="goToSlide(55)" style="margin-top:1rem;">TRY AGAIN!</button>
+</div>
+
+<!-- ===== SLIDE 57: BLUE MORPHO CORRECT ===== -->
+<div id="slide-57" class="screen bg-sky">
+  <h2 style="color:#77833C;">Correct!</h2>
+  <p style="color:#572700; text-align:center; max-width:720px; margin-bottom:1rem;">They are all Blue Morphos. Great job matching all those butterfly species!</p>
+  <div class="match-row">
+    <div class="match-circle marked-check">
+      <img src="images/slide55_blue_morpho_caterpillar.png" alt="Blue Morpho caterpillar">
+      <span class="match-label">Caterpillar</span>
+    </div>
+    <div class="match-circle marked-check">
+      <div class="match-svg">
+        <svg viewBox="0 0 80 120">
+          <path d="M40 8 Q22 22 22 60 Q22 104 40 115 Q58 104 58 60 Q58 22 40 8 Z" fill="#CFDD3A" stroke="#77833C" stroke-width="2"/>
+        </svg>
+      </div>
+      <span class="match-label">Chrysalis</span>
+    </div>
+    <div class="match-circle marked-check">
+      <img src="images/slide55_blue_morpho_butterfly.png" alt="Blue Morpho butterfly">
+      <span class="match-label">Butterfly</span>
+    </div>
+  </div>
+  <button class="btn btn-orange" onclick="goToSlide(37)" style="margin-top:1rem;">Back to the Meadow</button>
 </div>
 
 <!-- ===== ERROR MODAL ===== -->

@@ -95,6 +95,9 @@ function goToSlide(num) {
   if (num === 29) {
     updateHubVisited();
   }
+  if (num === 40) {
+    updateComparisonProgress();
+  }
 }
 
 // ===== HOST PLANTS LOGIC =====
@@ -239,7 +242,57 @@ function updateHubVisited() {
   });
 }
 
-// ===== ERROR HANDLING =====
+// ===== BUTTERFLIES vs MOTHS (Slide 40) =====
+const visitedDifferences = new Set();
+const differenceRoutes = { antennae: 41, body: 42, wings: 43 };
+
+function spotDifference(part) {
+  visitedDifferences.add(part);
+  document.querySelectorAll('#slide-40 .compare-region[data-part="' + part + '"]').forEach(function(el) {
+    el.classList.add('visited');
+  });
+  var dot = document.getElementById('cmp-dot-' + part);
+  if (dot) dot.classList.add('done');
+  goToSlide(differenceRoutes[part]);
+}
+
+function updateComparisonProgress() {
+  ['antennae', 'body', 'wings'].forEach(function(part) {
+    var dot = document.getElementById('cmp-dot-' + part);
+    if (dot && visitedDifferences.has(part)) dot.classList.add('done');
+    document.querySelectorAll('#slide-40 .compare-region[data-part="' + part + '"]').forEach(function(el) {
+      if (visitedDifferences.has(part)) el.classList.add('visited');
+    });
+  });
+  if (visitedDifferences.size >= 3) {
+    var label = document.querySelector('#slide-40 .compare-progress-label');
+    if (label) label.textContent = 'All three spotted! Ready to continue.';
+    // Auto-advance once all three are explored and user returns to slide 40
+    setTimeout(function() {
+      if (currentSlide === 40 && visitedDifferences.size >= 3) {
+        goToSlide(44);
+      }
+    }, 900);
+  }
+}
+
+// ===== METAMORPHOSIS MATCHING (Slides 46–57) =====
+// Correct answers: Monarch=true (all match), Tigerwing=false (caterpillar wrong),
+// Spicebush=false (chrysalis is a cocoon), Morpho=true (all match)
+const matchRoutes = {
+  monarch:   { correct: true,  right: 48, wrong: 47 },
+  tigerwing: { correct: false, right: 51, wrong: 50 },
+  spicebush: { correct: false, right: 54, wrong: 53 },
+  morpho:    { correct: true,  right: 57, wrong: 56 }
+};
+
+function matchAnswer(species, userSaidYes) {
+  var data = matchRoutes[species];
+  if (!data) return;
+  goToSlide(userSaidYes === data.correct ? data.right : data.wrong);
+}
+
+
 var errorStayOnScreen = false;
 
 function showError(message, stayOnScreen) {
