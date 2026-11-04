@@ -13,7 +13,7 @@ This is a **single-page educational slideshow** with three files:
 - `index.html` — All 38 slide divs, each with `id="slide-N"`
 - `styles.css` — All styling (brand colors, screen layout, component styles)
 - `app.js` — All interactivity (navigation, host plants matching, camouflage game, butterfly hub)
-- `images/` — All photos and illustrations (filenames prefixed by slide number, e.g. `slide07_larry_lepidopterist_character.jpg`)
+- `images/` — Every image from the original PowerPoint, prefixed by its original slide number (`shared_` for UI pieces). `BLOOMS_BUTTERFLIES_IMAGE_GUIDE.md` maps each file to its slide and says what it shows. Keep every file under 10 MB and 2000 px; transparent images stay PNG.
 
 ### Slide Navigation
 
@@ -68,4 +68,4 @@ Primary font: **Droid Serif** (headings) + **Arial** (body). Loaded from Google 
 
 ## Intended Full Scope (not yet implemented)
 
-`BLOOMS_BUTTERFLIES_IMAGE_GUIDE.md` documents the full 59-slide structure from the original PowerPoint. Sections not yet built include: Butterfly Families grid (slides ~28–36 in original), Butterflies vs Moths comparison (slides ~38–43), and Metamorphosis matching game (slides ~45–57). The current `app.js` repurposes the slide numbers 29–36 for a simplified butterfly species gallery rather than the full family taxonomy system.
+The original PowerPoint has 59 slides (slide text and image map in `BLOOMS_BUTTERFLIES_IMAGE_GUIDE.md`). Sections not yet built include: Butterfly Families grid (slides ~28–36 in original), Butterflies vs Moths comparison (slides ~38–43), and Metamorphosis matching game (slides ~45–57). The current `app.js` repurposes the slide numbers 29–36 for a simplified butterfly species gallery rather than the full family taxonomy system.
