@@ -126,7 +126,7 @@ function renderPlant() {
   document.getElementById('plant-image').style.background = '#f5f5f5';
   document.getElementById('plant-image').innerHTML =
     '<img src="' + plant.plantImage + '" alt="' + plant.plant + '" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 12px;">' +
-    '<span style="position:absolute;bottom:0.5rem;font-size:0.85rem;color:#666;">Click the plant!</span>';
+    '<span style="position:absolute;bottom:0.5rem;font-size:0.85rem;color:#935D3C;">Click the plant!</span>';
   document.getElementById('plant-reveal').classList.remove('show');
   document.getElementById('plant-next-btn').style.display = 'none';
   document.getElementById('butterfly-name').textContent = '';

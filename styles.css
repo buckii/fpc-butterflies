@@ -38,19 +38,19 @@ html, body {
 
 /* ===== COMMON BACKGROUNDS ===== */
 .bg-meadow {
-  background: linear-gradient(180deg, #A1D2DD 0%, #CFDD3A 35%, #77833C 55%, #572700 100%);
+  background: url('images/meadow_background.jpg') center/cover no-repeat;
 }
 .bg-sky {
-  background: linear-gradient(180deg, #A1D2DD 0%, #DBD095 50%, #C0B88D 100%);
+  background: #A1D2DD;
 }
 .bg-forest {
-  background: linear-gradient(180deg, #77833C 0%, #572700 40%, #3a1a00 100%);
+  background: #77833C;
 }
 .bg-warm {
-  background: linear-gradient(135deg, #DBD095 0%, #C0B88D 50%, #B8B1AB 100%);
+  background: #DBD095;
 }
 .bg-guide {
-  background: linear-gradient(135deg, #DBD095 0%, #C0B88D 50%, #80866E 100%);
+  background: #DBD095;
 }
 
 /* ===== TYPOGRAPHY ===== */
@@ -78,7 +78,7 @@ h3 {
 p, li {
   font-family: Arial, 'Helvetica Neue', sans-serif;
   font-size: clamp(0.95rem, 2vw, 1.15rem);
-  color: #333;
+  color: #572700;
   line-height: 1.6;
 }
 
@@ -120,11 +120,11 @@ p, li {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 15px rgba(87,39,0,0.2);
   transition: transform 0.2s, box-shadow 0.2s;
   z-index: 100;
 }
-.arrow-btn:hover { transform: scale(1.1); box-shadow: 0 6px 25px rgba(0,0,0,0.4); }
+.arrow-btn:hover { transform: scale(1.1); box-shadow: 0 6px 25px rgba(87,39,0,0.25); }
 .arrow-btn svg { width: 28px; height: 28px; fill: #fff; }
 
 /* ===== ORANGE RECTANGLE (return to meadow) ===== */
@@ -141,7 +141,7 @@ p, li {
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 15px rgba(87,39,0,0.2);
   transition: transform 0.2s;
   z-index: 100;
 }
@@ -161,7 +161,7 @@ p, li {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 4px 15px rgba(87,39,0,0.2);
   transition: transform 0.2s;
   z-index: 100;
 }
@@ -189,7 +189,7 @@ p, li {
   padding: 2rem 2.5rem;
   max-width: 700px;
   width: 100%;
-  box-shadow: 0 8px 32px rgba(87,39,0,0.15);
+  box-shadow: 0 4px 16px rgba(87,39,0,0.12);
   text-align: center;
 }
 .card-wide {
@@ -197,10 +197,12 @@ p, li {
 }
 
 /* ===== TITLE SCREEN SPECIFIC ===== */
-.title-butterfly {
-  font-size: 4rem;
-  margin-bottom: 0.5rem;
-  animation: float 3s ease-in-out infinite;
+.title-logo {
+  display: block;
+  width: 100%;
+  max-width: 300px; /* ~1.5in web size per brand standards */
+  height: auto;
+  margin: 0.5rem auto 2rem; /* clear space around the logo */
 }
 @keyframes float {
   0%, 100% { transform: translateY(0); }
@@ -248,8 +250,7 @@ p, li {
   aspect-ratio: 16/10;
   border-radius: 20px;
   overflow: hidden;
-  background: linear-gradient(180deg, #A1D2DD 0%, #CFDD3A 50%, #77833C 100%);
-  box-shadow: 0 8px 32px rgba(87,39,0,0.25);
+  background: none;
 }
 .meadow-area {
   position: absolute;
@@ -265,7 +266,7 @@ p, li {
 }
 .meadow-area:hover {
   transform: scale(1.05);
-  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  box-shadow: 0 6px 20px rgba(87,39,0,0.2);
 }
 .meadow-area .area-icon { font-size: clamp(2rem, 5vw, 3.5rem); }
 .meadow-area .area-label {
@@ -280,21 +281,22 @@ p, li {
 .area-host-plants {
   top: 15%; left: 5%;
   width: 35%; height: 40%;
-  background: linear-gradient(135deg, rgba(119,131,60,0.9), rgba(128,134,110,0.9));
+  background: rgba(119,131,60,0.92);
   border: 3px solid rgba(255,255,255,0.5);
 }
 .area-camouflage {
   top: 15%; right: 5%;
   width: 35%; height: 40%;
-  background: linear-gradient(135deg, rgba(147,93,60,0.9), rgba(87,39,0,0.9));
+  background: rgba(147,93,60,0.92);
   border: 3px solid rgba(255,255,255,0.5);
 }
 .area-net {
   bottom: 8%; left: 50%; transform: translateX(-50%);
   width: 30%; height: 28%;
-  background: linear-gradient(135deg, rgba(248,151,29,0.9), rgba(218,97,38,0.9));
-  border: 3px solid rgba(255,255,255,0.5);
+  background: none;
+  border: none;
 }
+.area-net:hover { box-shadow: none; }
 
 /* Meadow decorative elements */
 .meadow-sun {
@@ -325,7 +327,7 @@ p, li {
   padding: 2rem;
   max-width: 650px;
   width: 100%;
-  box-shadow: 0 8px 32px rgba(87,39,0,0.18);
+  box-shadow: 0 4px 16px rgba(87,39,0,0.12);
   text-align: center;
 }
 .plant-image-area {
@@ -369,7 +371,7 @@ p, li {
   border-radius: 20px;
   overflow: hidden;
   cursor: crosshair;
-  box-shadow: 0 8px 32px rgba(87,39,0,0.35);
+  box-shadow: 0 4px 16px rgba(87,39,0,0.12);
 }
 .camo-scene .leaf-bg {
   position: absolute; inset: 0;
@@ -449,7 +451,7 @@ p, li {
   border: 3px solid #9C2F31;
 }
 .error-content h3 { color: #9C2F31; font-size: 1.3rem; margin-bottom: 0.5rem; }
-.error-content p { color: #555; margin-bottom: 1rem; }
+.error-content p { color: #935D3C; margin-bottom: 1rem; }
 
 /* ===== LARRY CHARACTER ===== */
 .larry-container {
@@ -462,7 +464,7 @@ p, li {
   width: clamp(100px, 20vw, 160px);
   height: clamp(100px, 20vw, 160px);
   border-radius: 50%;
-  background: linear-gradient(135deg, #F8971D, #F99F1C);
+  background: #F8971D;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -576,7 +578,7 @@ p, li {
   background: #C0B88D;
   transition: background 0.3s;
 }
-.progress-dot.active { background: #F8971D; }
+.progress-dot.active { background: #B8B308; }
 .progress-dot.done { background: #572700; }
 
 /* ===== BUTTERFLY GALLERY HUB (Slide 29) ===== */
@@ -603,8 +605,8 @@ p, li {
   box-shadow: 0 6px 20px rgba(87,39,0,0.2);
 }
 .butterfly-hub-item.visited {
-  border-color: #77833C;
-  background: rgba(207,221,58,0.2);
+  border-color: #B8B308;
+  background: rgba(213,209,14,0.15);
 }
 .butterfly-hub-item.visited::after {
   content: '\2713';
@@ -639,24 +641,39 @@ p, li {
   width: 28%; height: 42%;
 }
 .meadow-5 .area-moths {
-  top: 5%; left: 34%;
-  width: 32%; height: 42%;
-  background: linear-gradient(135deg, rgba(0,102,130,0.9), rgba(161,210,221,0.9));
-  border: 3px solid rgba(255,255,255,0.5);
-  border-radius: 16px;
+  bottom: 5%; right: 3%;
+  width: 38%; height: 36%;
+  background: none;
+  border: none;
 }
+.meadow-5 .area-moths:hover { box-shadow: none; }
 .meadow-5 .area-metamorphosis {
   bottom: 5%; left: 3%;
   width: 38%; height: 36%;
-  background: linear-gradient(135deg, rgba(207,221,58,0.9), rgba(119,131,60,0.9));
-  border: 3px solid rgba(255,255,255,0.5);
-  border-radius: 16px;
+  background: none;
+  border: none;
 }
+.meadow-5 .area-metamorphosis:hover { box-shadow: none; }
 .meadow-5 .area-net {
-  bottom: 5%; right: 3%;
-  width: 38%; height: 36%;
-  left: auto;
+  top: 5%; left: 34%; bottom: auto; right: auto;
+  width: 32%; height: 42%;
   transform: none;
+}
+.meadow-5 .area-net:hover { transform: scale(1.05); }
+.net-icon {
+  display: block;
+  max-width: 100%;
+  max-height: clamp(4rem, 12vw, 6.5rem);
+  width: auto;
+  height: auto;
+}
+
+.moths-icon {
+  display: block;
+  max-width: 100%;
+  max-height: clamp(3.5rem, 10vw, 5.5rem);
+  width: auto;
+  height: auto;
 }
 
 /* ===== BUTTERFLIES VS MOTHS - COMPARISON ===== */

@@ -13,8 +13,8 @@
 
 <!-- ===== SLIDE 1: MAIN MENU ===== -->
 <div id="slide-1" class="screen active" style="background-image: url('images/meadow_background.jpg'); background-size: cover; background-position: center;">
-  <div style="background: rgba(255,255,255,0.82); border-radius: 20px; padding: 2rem 2.5rem; max-width: 500px; width: 100%; text-align: center; box-shadow: 0 8px 32px rgba(87,39,0,0.25);">
-    <div class="title-butterfly" aria-hidden="true">&#x1F98B;</div>
+  <div style="background: #fff; border-radius: 20px; padding: 2rem 2.5rem; max-width: 500px; width: 100%; text-align: center; box-shadow: 0 4px 16px rgba(87,39,0,0.15);">
+    <img class="title-logo" src="images/fpc_logo.png" alt="Franklin Park Conservatory and Botanical Gardens">
     <h1>Blooms &amp; Butterflies</h1>
     <p class="title-subtitle">Classroom Extension</p>
     <div class="flowers-row" aria-hidden="true">
@@ -25,7 +25,6 @@
       <button class="btn btn-teal" onclick="goToSlide(2)">Tutorial</button>
       <button class="btn btn-brown" onclick="goToSlide(3)">Teacher's Guide</button>
     </div>
-    <p class="title-fpc">Franklin Park Conservatory &amp; Botanical Gardens</p>
   </div>
 </div>
 
@@ -205,15 +204,15 @@
       <span class="area-label">Camouflage</span>
     </div>
     <div class="meadow-area area-moths" onclick="goToSlide(39)" role="button" tabindex="0" aria-label="Butterflies vs Moths activity">
-      <span class="area-icon">&#x1F98B;&#x1FA76;</span>
+      <span class="area-icon"><img class="moths-icon" src="images/slide10_butterfly_photo2.png" alt="Monarch butterfly"></span>
       <span class="area-label">Butterflies vs Moths</span>
     </div>
     <div class="meadow-area area-metamorphosis" onclick="goToSlide(45)" role="button" tabindex="0" aria-label="Metamorphosis matching game">
-      <span class="area-icon">&#x1F41B;&#x27A1;&#xFE0F;&#x1F98B;</span>
+      <span class="area-icon"><img class="moths-icon" src="images/slide10_butterfly_photo4.png" alt="Swallowtail butterfly"></span>
       <span class="area-label">Metamorphosis</span>
     </div>
     <div class="meadow-area area-net" onclick="goToSlide(58)" role="button" tabindex="0" aria-label="Finish activity with butterfly net">
-      <span class="area-icon"><img src="images/slide10_butterfly_net_icon.png" alt="Butterfly Net" style="max-width: 100%; max-height: 3.5rem; width: auto; height: auto;"></span>
+      <span class="area-icon"><img class="net-icon" src="images/slide10_butterfly_net_icon.png" alt="Butterfly Net"></span>
       <span class="area-label">Butterfly Net</span>
     </div>
   </div>
@@ -237,7 +236,7 @@
   <div class="plant-card" id="plant-card">
     <div class="progress-dots" id="plant-progress"></div>
     <h3 id="plant-title" style="color:#572700; font-size:1.3rem;"></h3>
-    <p style="margin-bottom:0.5rem; color:#555;">Click the plant to reveal which butterfly species depends on it!</p>
+    <p style="margin-bottom:0.5rem; color:#935D3C;">Click the plant to reveal which butterfly species depends on it!</p>
     <div class="plant-image-area" id="plant-image" onclick="revealButterfly()">
     </div>
     <div class="plant-reveal" id="plant-reveal">
@@ -372,7 +371,7 @@
         <p>When the wings open, they reveal beautiful bright orange and blue colors that surprise predators!</p>
       </div>
     </div>
-    <p style="color:#555;">This amazing adaptation helps the butterfly hide in plain sight among fallen leaves on the forest floor.</p>
+    <p style="color:#935D3C;">This amazing adaptation helps the butterfly hide in plain sight among fallen leaves on the forest floor.</p>
   </div>
   <button class="arrow-btn" onclick="goToSlide(19)" title="Next">
     <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>
@@ -390,11 +389,11 @@
 </div>
 
 <!-- ===== SLIDE 20: ACTIVITY COMPLETE ===== -->
-<div id="slide-20" class="screen" style="background: linear-gradient(180deg, #F8971D 0%, #DBD095 30%, #CFDD3A 70%, #77833C 100%);">
+<div id="slide-20" class="screen" style="background: url('images/meadow_background.jpg') center/cover no-repeat;">
   <div class="card">
     <h1 style="font-size:clamp(1.5rem,4vw,2.5rem);">Thanks for Exploring the Meadow!</h1>
     <p style="margin: 1.5rem 0; font-size: 1.1rem;">You've learned about host plants, camouflage, and the amazing world of butterflies.</p>
-    <p style="color:#555;">Keep exploring nature — there's always something new to discover!</p>
+    <p style="color:#935D3C;">Keep exploring nature — there's always something new to discover!</p>
     <div class="flowers-row" style="margin:1.5rem 0;" aria-hidden="true">
       <span>&#x1F338;</span><span>&#x1F98B;</span><span>&#x1F33C;</span><span>&#x1F98B;</span><span>&#x1F33A;</span><span>&#x1F98B;</span><span>&#x1F33B;</span>
     </div>
@@ -574,7 +573,7 @@
 </div>
 
 <!-- ===== SLIDE 27: TRANSITION ===== -->
-<div id="slide-27" class="screen" style="background: linear-gradient(180deg, #A1D2DD 0%, #CFDD3A 50%, #77833C 100%); cursor:pointer;" onclick="goToSlide(28)">
+<div id="slide-27" class="screen" style="background: url('images/meadow_background.jpg') center/cover no-repeat; cursor:pointer;" onclick="goToSlide(28)">
   <div class="card">
     <h2>You're a Camouflage Expert!</h2>
     <p style="margin: 1rem 0;">You've found all three hidden butterflies! Now it's time to learn more about different butterfly species up close.</p>
@@ -597,7 +596,7 @@
 </div>
 
 <!-- ===== SLIDE 29: BUTTERFLY SELECTION HUB ===== -->
-<div id="slide-29" class="screen" style="background: linear-gradient(180deg, #A1D2DD 0%, #DBD095 40%, #C0B88D 100%);">
+<div id="slide-29" class="screen" style="background: #A1D2DD;">
   <h2 style="color:#572700; margin-bottom:0.5rem;">Choose a Butterfly to Explore</h2>
   <p style="color:#935D3C; margin-bottom:1.5rem; font-weight:500;">Click each butterfly to learn about it. Visit all six to continue!</p>
   <div class="butterfly-hub" id="butterfly-hub">
@@ -629,7 +628,7 @@
 </div>
 
 <!-- ===== SLIDE 30: (unused placeholder) ===== -->
-<div id="slide-30" class="screen" style="background: linear-gradient(180deg, #A1D2DD 0%, #DBD095 40%, #C0B88D 100%);">
+<div id="slide-30" class="screen" style="background: #A1D2DD;">
   <h2 style="color:#572700; margin-bottom:0.5rem;">All Butterfly Species</h2>
   <p style="color:#935D3C; margin-bottom:1.5rem; font-weight:500;">Click any butterfly to learn more about it!</p>
   <div class="butterfly-hub" id="butterfly-hub-all">
@@ -781,13 +780,13 @@
         <p>Look for a black line crossing the hindwing veins. Monarchs don't have this line, but Viceroys always do!</p>
       </div>
     </div>
-    <p style="margin-top:1rem; color:#555;">You've explored all the butterflies in the gallery!</p>
+    <p style="margin-top:1rem; color:#935D3C;">You've explored all the butterflies in the gallery!</p>
     <button class="btn btn-orange" onclick="goToSlide(10)" style="margin-top:1rem;">Back to the Meadow</button>
   </div>
 </div>
 
 <!-- ===== SLIDE 37: GALLERY COMPLETE TRANSITION ===== -->
-<div id="slide-37" class="screen" style="background: linear-gradient(180deg, #A1D2DD 0%, #CFDD3A 50%, #77833C 100%); cursor:pointer;" onclick="goToSlide(10)">
+<div id="slide-37" class="screen" style="background: url('images/meadow_background.jpg') center/cover no-repeat; cursor:pointer;" onclick="goToSlide(10)">
   <div class="card">
     <h2>Great Exploring!</h2>
     <p style="margin: 1rem 0;">You've discovered some amazing butterfly species in the gallery. Head back to the meadow to try more activities!</p>
@@ -806,7 +805,7 @@
 </div>
 
 <!-- ===== SLIDE 39: BUTTERFLIES VS MOTHS - INTRODUCTION ===== -->
-<div id="slide-39" class="screen" style="background: linear-gradient(180deg, #A1D2DD 0%, #DBD095 50%, #C0B88D 100%);">
+<div id="slide-39" class="screen" style="background: #A1D2DD;">
   <div class="card card-wide">
     <h2 style="color:#572700;">Butterflies vs Moths</h2>
     <p style="margin: 1rem 0; font-size: 1.1rem;">Butterflies and moths are both members of the order <strong>Lepidoptera</strong>, which means "scale wing." But how can you tell them apart?</p>
@@ -835,7 +834,7 @@
 </div>
 
 <!-- ===== SLIDE 40: SPOT THE DIFFERENCES - INTERACTIVE HUB ===== -->
-<div id="slide-40" class="screen" style="background: linear-gradient(180deg, #A1D2DD 0%, #DBD095 50%, #C0B88D 100%);">
+<div id="slide-40" class="screen" style="background: #A1D2DD;">
   <h2 style="color:#572700; margin-bottom:0.5rem;">Spot the Differences</h2>
   <p style="color:#935D3C; margin-bottom:1rem; font-weight:500;">Click on each body part to learn how butterflies and moths differ!</p>
   <div class="diff-hub">
@@ -928,7 +927,7 @@
 </div>
 
 <!-- ===== SLIDE 44: (reserved transition) ===== -->
-<div id="slide-44" class="screen" style="background: linear-gradient(180deg, #A1D2DD 0%, #CFDD3A 50%, #77833C 100%); cursor:pointer;" onclick="goToSlide(10)">
+<div id="slide-44" class="screen" style="background: url('images/meadow_background.jpg') center/cover no-repeat; cursor:pointer;" onclick="goToSlide(10)">
   <div class="card">
     <h2>Now You Know!</h2>
     <p style="margin:1rem 0;">You can tell butterflies and moths apart by looking at their antennae, body shape, and wings. Keep an eye out next time you're outdoors!</p>
@@ -937,7 +936,7 @@
 </div>
 
 <!-- ===== SLIDE 45: METAMORPHOSIS - INTRODUCTION ===== -->
-<div id="slide-45" class="screen" style="background: linear-gradient(180deg, #77833C 0%, #CFDD3A 40%, #A1D2DD 100%);">
+<div id="slide-45" class="screen" style="background: url('images/meadow_background.jpg') center/cover no-repeat;">
   <div class="card">
     <h2 style="color:#572700;">Metamorphosis</h2>
     <img src="images/slide46_monarch_chrysalis_green.png" alt="Monarch chrysalis" style="max-width:200px; height:auto; border-radius:12px; margin:1rem auto; display:block;">
@@ -971,7 +970,7 @@
 </div>
 
 <!-- ===== SLIDE 46: MATCHING GAME - MONARCH ===== -->
-<div id="slide-46" class="screen" style="background: linear-gradient(180deg, #A1D2DD 0%, #DBD095 50%, #C0B88D 100%);">
+<div id="slide-46" class="screen" style="background: #A1D2DD;">
   <div class="card card-wide">
     <h2 style="color:#572700;">Match the Life Stages</h2>
     <p style="color:#935D3C; margin-bottom:1rem;">Are the caterpillar, chrysalis, and butterfly all from the same species?</p>
@@ -997,7 +996,7 @@
 </div>
 
 <!-- ===== SLIDE 47: MONARCH - INCORRECT ===== -->
-<div id="slide-47" class="screen" style="background: linear-gradient(180deg, #9C2F31 0%, #C0B88D 60%, #DBD095 100%);">
+<div id="slide-47" class="screen" style="background: #C0B88D;">
   <div class="card">
     <div class="result-icon result-wrong">&#x274C;</div>
     <h2 style="color:#9C2F31;">Not Quite!</h2>
@@ -1007,7 +1006,7 @@
 </div>
 
 <!-- ===== SLIDE 48: MONARCH - CORRECT ===== -->
-<div id="slide-48" class="screen" style="background: linear-gradient(180deg, #77833C 0%, #CFDD3A 40%, #DBD095 100%);">
+<div id="slide-48" class="screen" style="background: #77833C;">
   <div class="card">
     <div class="result-icon result-correct">&#x2705;</div>
     <h2 style="color:#77833C;">Correct!</h2>
@@ -1031,20 +1030,20 @@
 </div>
 
 <!-- ===== SLIDE 49: MATCHING GAME - TIGERWING ===== -->
-<div id="slide-49" class="screen" style="background: linear-gradient(180deg, #A1D2DD 0%, #DBD095 50%, #C0B88D 100%);">
+<div id="slide-49" class="screen" style="background: #A1D2DD;">
   <div class="card card-wide">
     <h2 style="color:#572700;">Match the Life Stages</h2>
     <p style="color:#935D3C; margin-bottom:1rem;">Are the caterpillar, chrysalis, and butterfly all from the same species?</p>
     <div class="match-circles">
       <div class="match-circle">
-        <div class="match-placeholder" style="background:linear-gradient(135deg, #F8971D, #DA6126);">
+        <div class="match-placeholder" style="background:#F8971D;">
           <span style="font-size:2.5rem;">&#x1F41B;</span>
         </div>
         <span class="match-label">Caterpillar</span>
         <span class="match-hint">Orange with spikes</span>
       </div>
       <div class="match-circle">
-        <div class="match-placeholder" style="background:linear-gradient(135deg, #F8971D, #C0B88D);">
+        <div class="match-placeholder" style="background:#F8971D;">
           <span style="font-size:2.5rem;">&#x1FAB7;</span>
         </div>
         <span class="match-label">Chrysalis</span>
@@ -1063,7 +1062,7 @@
 </div>
 
 <!-- ===== SLIDE 50: TIGERWING - INCORRECT ===== -->
-<div id="slide-50" class="screen" style="background: linear-gradient(180deg, #9C2F31 0%, #C0B88D 60%, #DBD095 100%);">
+<div id="slide-50" class="screen" style="background: #C0B88D;">
   <div class="card">
     <div class="result-icon result-wrong">&#x274C;</div>
     <h2 style="color:#9C2F31;">Not Quite!</h2>
@@ -1073,7 +1072,7 @@
 </div>
 
 <!-- ===== SLIDE 51: TIGERWING - CORRECT ===== -->
-<div id="slide-51" class="screen" style="background: linear-gradient(180deg, #77833C 0%, #CFDD3A 40%, #DBD095 100%);">
+<div id="slide-51" class="screen" style="background: #77833C;">
   <div class="card">
     <div class="result-icon result-correct">&#x2705;</div>
     <h2 style="color:#77833C;">Correct!</h2>
@@ -1083,27 +1082,27 @@
 </div>
 
 <!-- ===== SLIDE 52: MATCHING GAME - SPICEBUSH SWALLOWTAIL ===== -->
-<div id="slide-52" class="screen" style="background: linear-gradient(180deg, #A1D2DD 0%, #DBD095 50%, #C0B88D 100%);">
+<div id="slide-52" class="screen" style="background: #A1D2DD;">
   <div class="card card-wide">
     <h2 style="color:#572700;">Match the Life Stages</h2>
     <p style="color:#935D3C; margin-bottom:1rem;">Are the caterpillar, chrysalis, and butterfly all from the same species?</p>
     <div class="match-circles">
       <div class="match-circle">
-        <div class="match-placeholder" style="background:linear-gradient(135deg, #77833C, #CFDD3A);">
+        <div class="match-placeholder" style="background:#77833C;">
           <span style="font-size:2.5rem;">&#x1F41B;</span>
         </div>
         <span class="match-label">Caterpillar</span>
         <span class="match-hint">Green with eyespots</span>
       </div>
       <div class="match-circle">
-        <div class="match-placeholder" style="background:linear-gradient(135deg, #935D3C, #572700);">
+        <div class="match-placeholder" style="background:#935D3C;">
           <span style="font-size:2.5rem;">&#x1FAB7;</span>
         </div>
         <span class="match-label">Chrysalis</span>
         <span class="match-hint">Brown, leaf-like</span>
       </div>
       <div class="match-circle">
-        <div class="match-placeholder" style="background:linear-gradient(135deg, #006682, #572700);">
+        <div class="match-placeholder" style="background:#006682;">
           <span style="font-size:2.5rem;">&#x1F98B;</span>
         </div>
         <span class="match-label">Butterfly</span>
@@ -1118,7 +1117,7 @@
 </div>
 
 <!-- ===== SLIDE 53: SPICEBUSH - INCORRECT ===== -->
-<div id="slide-53" class="screen" style="background: linear-gradient(180deg, #9C2F31 0%, #C0B88D 60%, #DBD095 100%);">
+<div id="slide-53" class="screen" style="background: #C0B88D;">
   <div class="card">
     <div class="result-icon result-wrong">&#x274C;</div>
     <h2 style="color:#9C2F31;">Not Quite!</h2>
@@ -1128,7 +1127,7 @@
 </div>
 
 <!-- ===== SLIDE 54: SPICEBUSH - CORRECT ===== -->
-<div id="slide-54" class="screen" style="background: linear-gradient(180deg, #77833C 0%, #CFDD3A 40%, #DBD095 100%);">
+<div id="slide-54" class="screen" style="background: #77833C;">
   <div class="card">
     <div class="result-icon result-correct">&#x2705;</div>
     <h2 style="color:#77833C;">Correct!</h2>
@@ -1142,7 +1141,7 @@
 </div>
 
 <!-- ===== SLIDE 55: MATCHING GAME - BLUE MORPHO ===== -->
-<div id="slide-55" class="screen" style="background: linear-gradient(180deg, #A1D2DD 0%, #DBD095 50%, #C0B88D 100%);">
+<div id="slide-55" class="screen" style="background: #A1D2DD;">
   <div class="card card-wide">
     <h2 style="color:#572700;">Match the Life Stages</h2>
     <p style="color:#935D3C; margin-bottom:1rem;">Last one! Are the caterpillar, chrysalis, and butterfly all from the same species?</p>
@@ -1152,7 +1151,7 @@
         <span class="match-label">Caterpillar</span>
       </div>
       <div class="match-circle">
-        <div class="match-placeholder" style="background:linear-gradient(135deg, #77833C, #A1D2DD);">
+        <div class="match-placeholder" style="background:#77833C;">
           <span style="font-size:2.5rem;">&#x1FAB7;</span>
         </div>
         <span class="match-label">Chrysalis</span>
@@ -1171,7 +1170,7 @@
 </div>
 
 <!-- ===== SLIDE 56: BLUE MORPHO - INCORRECT ===== -->
-<div id="slide-56" class="screen" style="background: linear-gradient(180deg, #9C2F31 0%, #C0B88D 60%, #DBD095 100%);">
+<div id="slide-56" class="screen" style="background: #C0B88D;">
   <div class="card">
     <div class="result-icon result-wrong">&#x274C;</div>
     <h2 style="color:#9C2F31;">Not Quite!</h2>
@@ -1181,7 +1180,7 @@
 </div>
 
 <!-- ===== SLIDE 57: BLUE MORPHO - CORRECT ===== -->
-<div id="slide-57" class="screen" style="background: linear-gradient(180deg, #77833C 0%, #CFDD3A 40%, #DBD095 100%);">
+<div id="slide-57" class="screen" style="background: #77833C;">
   <div class="card">
     <div class="result-icon result-correct">&#x2705;</div>
     <h2 style="color:#77833C;">Correct!</h2>
@@ -1192,7 +1191,7 @@
         <span class="match-label" style="color:#77833C;">Blue Morpho &#x2713;</span>
       </div>
       <div class="match-circle">
-        <div class="match-placeholder" style="background:linear-gradient(135deg, #77833C, #A1D2DD);">
+        <div class="match-placeholder" style="background:#77833C;">
           <span style="font-size:2.5rem;">&#x1FAB7;</span>
         </div>
         <span class="match-label" style="color:#77833C;">Blue Morpho &#x2713;</span>
@@ -1207,7 +1206,7 @@
 </div>
 
 <!-- ===== SLIDE 58: FAREWELL TRANSITION ===== -->
-<div id="slide-58" class="screen" style="background: linear-gradient(180deg, #A1D2DD 0%, #CFDD3A 50%, #77833C 100%); cursor:pointer;" onclick="goToSlide(59)">
+<div id="slide-58" class="screen" style="background: url('images/meadow_background.jpg') center/cover no-repeat; cursor:pointer;" onclick="goToSlide(59)">
   <div class="card">
     <h2>What a Journey!</h2>
     <p style="margin: 1rem 0;">You've explored camouflage masters, compared butterflies and moths, learned about metamorphosis, and discovered the amazing adaptations these creatures use to survive.</p>
@@ -1217,7 +1216,7 @@
 </div>
 
 <!-- ===== SLIDE 59: FINAL CONGRATULATIONS ===== -->
-<div id="slide-59" class="screen" style="background: linear-gradient(180deg, #F8971D 0%, #DBD095 30%, #CFDD3A 70%, #77833C 100%);">
+<div id="slide-59" class="screen" style="background: url('images/meadow_background.jpg') center/cover no-repeat;">
   <div class="card">
     <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 1rem;">
       <img src="images/slide07_larry_lepidopterist_character.jpg" alt="Larry the Lepidopterist" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover;">
@@ -1225,7 +1224,7 @@
     </div>
     <img src="images/slide46_monarch_chrysalis_green.png" alt="Monarch chrysalis" style="max-width: 200px; height: auto; border-radius: 12px; margin: 1rem auto; display:block;">
     <p style="margin: 1.5rem 0; font-size: 1.1rem;">Your metamorphosis is now complete! You have transformed into a <strong>Junior Lepidopterist</strong>. You now know about host plants, camouflage, butterfly vs moth differences, metamorphosis, and so much more.</p>
-    <p style="color:#555;">Thank you for visiting the Franklin Park Conservatory &amp; Botanical Gardens virtual meadow.</p>
+    <p style="color:#935D3C;">Thank you for visiting the Franklin Park Conservatory &amp; Botanical Gardens virtual meadow.</p>
     <div class="flowers-row" style="margin:1.5rem 0;" aria-hidden="true">
       <span>&#x1F338;</span><span>&#x1F98B;</span><span>&#x1F33C;</span><span>&#x1F98B;</span><span>&#x1F33A;</span><span>&#x1F98B;</span><span>&#x1F33B;</span>
     </div>
