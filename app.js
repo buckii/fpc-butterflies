@@ -56,7 +56,7 @@ const plants = [
     plant: "Clover",
     butterfly: "Orange Sulphur",
     plantImage: "images/clover.jpg",
-    butterflyImage: "images/sulphur_clover.jpg",
+    butterflyImage: "images/slide15_orange_sulphur_on_clover.png",
     desc: "Orange Sulphur butterflies are common in meadows and fields where clover grows abundantly."
   },
   {
