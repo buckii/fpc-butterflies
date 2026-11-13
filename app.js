@@ -327,3 +327,23 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 });
+
+// ===== MEADOW BUTTERFLY FLIGHT =====
+// Each butterfly on the meadow hub wanders to a new random offset and angle,
+// with a random travel time and pause, so the motion never forms a pattern.
+document.addEventListener('DOMContentLoaded', function() {
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  var icons = document.querySelectorAll('#slide-10 .meadow-area:not(.area-net) .area-icon');
+  function rand(min, max) { return min + Math.random() * (max - min); }
+  icons.forEach(function(icon) {
+    var tilt = parseFloat(getComputedStyle(icon.parentElement).getPropertyValue('--tilt')) || 0;
+    function wander() {
+      var travel = rand(1.6, 4.2);
+      icon.style.transitionDuration = travel + 's';
+      icon.style.transform = 'translate(' + rand(-22, 22).toFixed(1) + 'px, ' + rand(-18, 14).toFixed(1) + 'px) ' +
+        'rotate(' + (tilt + rand(-12, 12)).toFixed(1) + 'deg)';
+      setTimeout(wander, (travel + rand(0, 1.2)) * 1000);
+    }
+    setTimeout(wander, rand(0, 1500));
+  });
+});
