@@ -114,7 +114,7 @@ Original slide numbers below refer to the PowerPoint. The HTML in `index.html` h
 
 | File | What it is | Slide |
 |------|------------|-------|
-| `slide45_chrysalis_on_leaf.jpg` | Chrysalis on a leaf | 45 |
+| `slide45_chrysalis_on_leaf.jpg` | Giant swallowtail caterpillar on a leaf (looks like a bird dropping; the file name is misleading) | 45 |
 | `slide45_giant_swallowtail_illustration.png` | Giant swallowtail illustration (transparent) | 45 |
 | `slide46_monarch_caterpillar.png` | Monarch caterpillar | 46–48 |
 | `slide46_monarch_chrysalis.png` | Monarch chrysalis | 46–48 |
