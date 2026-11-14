@@ -858,10 +858,11 @@ p, li {
   flex: 1 1 0;
   min-height: 0;
   height: auto;
-  padding: 9% 9% 0;
+  padding: 3% 3% 0;
+  transform: scale(1.15);
 }
 /* The blue morpho chrysalis file lies on its side; stand it upright so it hangs */
-.match-circle img.match-upright { transform: rotate(-90deg); }
+.match-circle img.match-upright { transform: rotate(-90deg) scale(1.15); }
 .match-buttons {
   display: flex;
   gap: 1.5rem;
