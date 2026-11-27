@@ -36,7 +36,7 @@
       <p style="margin-bottom:1rem;">Welcome to Blooms &amp; Butterflies! Here's how to explore:</p>
       <ul style="padding-left: 1.5rem; display:flex; flex-direction:column; gap:0.75rem;">
         <li><strong>Click or tap</strong> to interact with everything on screen.</li>
-        <li>When you see a <strong>brown arrow</strong> in the bottom-right corner, click it to go to the next screen.</li>
+        <li>When you see an <strong>orange arrow</strong> in the bottom-right corner, click it to go to the next screen.</li>
         <li>When you see an <strong>orange rectangle</strong>, click it to return to the meadow hub.</li>
         <li>In the meadow, <strong>click on butterfly areas</strong> to learn about different species.</li>
         <li>Click the <strong>butterfly net</strong> when you're done exploring.</li>
@@ -147,31 +147,20 @@
 </div>
 
 <!-- ===== SLIDE 7: LARRY INTRO ===== -->
-<div id="slide-7" class="screen" onclick="goToSlide(8)" style="cursor:pointer; background-image: url('images/meadow_background.jpg'); background-size: cover; background-position: center;">
+<div id="slide-7" class="screen" style="background-image: url('images/meadow_background.jpg'); background-size: cover; background-position: center;">
   <div class="larry-container">
     <div class="larry-avatar">
-      <img src="images/slide07_larry_lepidopterist_character.png" alt="Larry the Lepidopterist" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+      <img src="images/slide07_larry_lepidopterist_character.png" alt="Larry the Lepidopterist">
     </div>
     <div class="speech-bubble">
       <h2 style="margin-bottom:0.75rem;">Meet Larry the Lepidopterist!</h2>
       <p>Hello there, young explorer! I'm Larry, and I study butterflies. Today, we're going on an adventure through a beautiful meadow filled with amazing butterflies and the plants they love.</p>
-      <p style="margin-top:0.75rem;">Are you ready? Let's go!</p>
+    </div>
+    <div class="larry-start">
+      <p class="larry-ready">Are you ready?</p>
+      <button class="btn btn-orange larry-go-btn" onclick="goToSlide(10)">Let's Go!</button>
     </div>
   </div>
-  <div class="click-hint">Click anywhere to continue</div>
-</div>
-
-<!-- ===== SLIDE 8: BUTTERFLY INSTRUCTIONS ===== -->
-<div id="slide-8" class="screen" onclick="goToSlide(9)" style="cursor:pointer; background-image: url('images/meadow_background.jpg'); background-size: cover; background-position: center;">
-  <div class="card">
-    <h2>Exploring the Meadow</h2>
-    <p style="margin: 1rem 0;">In the meadow, you'll find different areas to explore. <strong>Click on the butterfly icons</strong> to learn about different butterfly species and their fascinating world.</p>
-    <p>Each area will teach you something new about butterflies — from the plants they depend on, to how they hide from predators!</p>
-    <div class="flowers-row" aria-hidden="true">
-      <span>&#x1F33F;</span><span>&#x1F338;</span><span>&#x1F98B;</span><span>&#x1F33A;</span><span>&#x1F33F;</span>
-    </div>
-  </div>
-  <div class="click-hint">Click anywhere to continue</div>
 </div>
 
 <!-- ===== SLIDE 9: WHAT YOU WILL LEARN ===== -->
@@ -193,7 +182,18 @@
 <!-- ===== SLIDE 10: MEADOW HUB ===== -->
 <div id="slide-10" class="screen" style="background-image: url('images/meadow_background.jpg'); background-size: cover; background-position: center;">
   <h2 style="color:#fff; text-shadow: 1px 2px 4px rgba(87,39,0,0.4); margin-bottom:1rem;">The Meadow</h2>
-  <p style="color:#fff; text-shadow: 1px 1px 3px rgba(87,39,0,0.3); margin-bottom:1.5rem; font-weight:500;">Click any area to begin exploring. Click the net when you're finished!</p>
+  <p style="color:#fff; text-shadow: 1px 1px 3px rgba(87,39,0,0.3); margin-bottom:0.75rem; font-weight:500;">Click any butterfly to begin exploring. Click the net when you're finished!</p>
+  <!-- Progress bar: fills one step each time a meadow activity is finished (see updateMeadowProgress in app.js) -->
+  <div class="meadow-progress" id="meadow-progress" role="progressbar" aria-label="Meadow activities completed" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0">
+    <div class="meadow-progress-bar">
+      <div class="meadow-progress-track"><div class="meadow-progress-fill" id="meadow-progress-fill"></div></div>
+      <span class="meadow-star" style="left:25%;"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg></span>
+      <span class="meadow-star" style="left:50%;"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg></span>
+      <span class="meadow-star" style="left:75%;"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg></span>
+      <span class="meadow-star" style="left:100%;"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg></span>
+    </div>
+    <span class="meadow-progress-label" id="meadow-progress-label">0 / 4 stars earned</span>
+  </div>
   <div class="meadow-container meadow-5">
     <div class="meadow-area area-host-plants" onclick="goToSlide(11)" role="button" tabindex="0" aria-label="Host Plants activity">
       <span class="area-icon"><img class="moths-icon" src="images/shared_swallowtail_butterfly_icon.png" alt="Yellow tiger swallowtail butterfly"></span>
@@ -311,11 +311,12 @@
 </div>
 
 <!-- ===== SLIDE 16: CAMOUFLAGE INTRO ===== -->
-<div id="slide-16" class="screen bg-forest" onclick="goToSlide(17)" style="cursor:pointer;">
-  <div class="card">
+<div id="slide-16" class="screen" onclick="goToSlide(17)" style="cursor:pointer; background-image: url('images/meadow_background.jpg'); background-size: cover; background-position: center; padding-bottom: 5rem;">
+  <div class="card" style="padding: 1.5rem 2rem;">
     <h2>Camouflage</h2>
-    <img src="images/slide18_35_49_tigerwing_butterfly_on_leaf.png" alt="Butterfly camouflage example" style="max-width: 100%; height: auto; border-radius: 12px; margin: 1rem 0;">
-    <p style="margin: 1rem 0;">Some butterflies are masters of disguise! They use <strong>camouflage</strong> to blend in with their surroundings and hide from predators.</p>
+    <!-- Image height is capped to the screen height so the whole slide fits without scrolling -->
+    <img src="images/slide18_35_49_tigerwing_butterfly_on_leaf.png" alt="Butterfly camouflage example" style="display: block; max-width: 100%; max-height: 36vh; width: auto; height: auto; border-radius: 12px; margin: 0.75rem auto;">
+    <p style="margin: 0.75rem 0;">Some butterflies are masters of disguise! They use <strong>camouflage</strong> to blend in with their surroundings and hide from predators.</p>
     <p>Can you spot a hidden butterfly in the next scene? Look closely — it won't be easy!</p>
   </div>
   <div class="click-hint">Click anywhere to continue</div>
@@ -805,7 +806,7 @@
 </div>
 
 <!-- ===== SLIDE 39: BUTTERFLIES VS MOTHS - INTRODUCTION ===== -->
-<div id="slide-39" class="screen" style="background: #A1D2DD;">
+<div id="slide-39" class="screen" style="background: url('images/meadow_background.jpg') center/cover no-repeat;">
   <div class="card card-wide">
     <h2 style="color:#572700;">Butterflies vs Moths</h2>
     <p style="margin: 1rem 0; font-size: 1.1rem;">Butterflies and moths are both members of the order <strong>Lepidoptera</strong>, which means "scale wing." But how can you tell them apart?</p>
@@ -834,9 +835,9 @@
 </div>
 
 <!-- ===== SLIDE 40: SPOT THE DIFFERENCES - INTERACTIVE HUB ===== -->
-<div id="slide-40" class="screen" style="background: #A1D2DD;">
-  <h2 style="color:#572700; margin-bottom:0.5rem;">Spot the Differences</h2>
-  <p style="color:#935D3C; margin-bottom:1rem; font-weight:500;">Click on each body part to learn how butterflies and moths differ!</p>
+<div id="slide-40" class="screen" style="background: url('images/meadow_background.jpg') center/cover no-repeat;">
+  <h2 style="color:#fff; text-shadow: 1px 2px 4px rgba(87,39,0,0.5); margin-bottom:0.5rem;">Spot the Differences</h2>
+  <p style="color:#fff; text-shadow: 1px 1px 3px rgba(87,39,0,0.5); margin-bottom:1rem; font-weight:500;">Click on each body part to learn how butterflies and moths differ!</p>
   <div class="diff-hub">
     <div class="diff-hub-item" id="diff-btn-antennae" onclick="visitDifference(41)">
       <span class="diff-icon">&#x1F4E1;</span>
@@ -855,7 +856,7 @@
 </div>
 
 <!-- ===== SLIDE 41: DIFFERENCE - ANTENNAE ===== -->
-<div id="slide-41" class="screen bg-sky">
+<div id="slide-41" class="screen" style="background: url('images/meadow_background.jpg') center/cover no-repeat;">
   <div class="card card-wide">
     <h2 style="color:#006682;">Antennae</h2>
     <div class="compare-detail">
@@ -879,7 +880,7 @@
 </div>
 
 <!-- ===== SLIDE 42: DIFFERENCE - BODY SHAPE ===== -->
-<div id="slide-42" class="screen bg-sky">
+<div id="slide-42" class="screen" style="background: url('images/meadow_background.jpg') center/cover no-repeat;">
   <div class="card card-wide">
     <h2 style="color:#006682;">Body Shape</h2>
     <div class="compare-detail">
@@ -903,7 +904,7 @@
 </div>
 
 <!-- ===== SLIDE 43: DIFFERENCE - WINGS ===== -->
-<div id="slide-43" class="screen bg-sky">
+<div id="slide-43" class="screen" style="background: url('images/meadow_background.jpg') center/cover no-repeat;">
   <div class="card card-wide">
     <h2 style="color:#006682;">Wings</h2>
     <div class="compare-detail">
@@ -937,10 +938,10 @@
 
 <!-- ===== SLIDE 45: METAMORPHOSIS - INTRODUCTION ===== -->
 <div id="slide-45" class="screen" style="background: url('images/meadow_background.jpg') center/cover no-repeat;">
-  <div class="card">
+  <div class="card" style="padding: 1.5rem 2rem;">
     <h2 style="color:#572700;">Metamorphosis</h2>
-    <img src="images/slide46_monarch_chrysalis.png" alt="Monarch chrysalis" style="max-width:200px; height:auto; border-radius:12px; margin:1rem auto; display:block;">
-    <p style="margin:1rem 0; font-size:1.1rem;">All butterflies go through <strong>4 stages of metamorphosis</strong>:</p>
+    <img src="images/slide46_monarch_chrysalis.png" alt="Monarch chrysalis" style="max-width:200px; max-height:16vh; width:auto; height:auto; border-radius:12px; margin:0.5rem auto; display:block;">
+    <p style="margin:0.5rem 0; font-size:1.1rem;">All butterflies go through <strong>4 stages of metamorphosis</strong>:</p>
     <div class="lifecycle-stages">
       <div class="lifecycle-stage" style="background:#DBD095;">
         <img class="lifecycle-img" src="images/slide12_butterfly_eggs_on_leaf.jpg" alt="Butterfly eggs on a leaf">
@@ -962,7 +963,8 @@
         <strong>Adult</strong>
       </div>
     </div>
-    <p style="margin-top:1.5rem; font-weight:600; color:#DA6126;">Can you match the caterpillar, chrysalis, and butterfly to the correct species?</p>
+    <p style="margin-top:1rem; font-weight:600; color:#DA6126;">Can you match the caterpillar, chrysalis, and butterfly to the correct species?</p>
+    <p style="margin-top:0.25rem; color:#935D3C;">Click the <strong style="color:#F8971D;">orange arrow</strong> to start the matching game!</p>
   </div>
   <button class="arrow-btn" onclick="goToSlide(46)" title="Start matching game">
     <svg viewBox="0 0 24 24"><path d="M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z"/></svg>

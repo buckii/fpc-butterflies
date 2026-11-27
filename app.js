@@ -14,6 +14,10 @@ const visitedButterflies = new Set();
 // Differences hub visited tracking (slide 40)
 const visitedDifferences = new Set();
 
+// Meadow activities finished so far, shown by the progress bar on slide 10
+const MEADOW_SECTIONS = ['hostPlants', 'camouflage', 'moths', 'metamorphosis'];
+const completedSections = new Set();
+
 // Matching game correct answers
 const matchAnswers = {
   monarch: false,    // NO — caterpillar is Blue Morpho, not Monarch
@@ -77,6 +81,7 @@ const plants = [
     plant: "Sunflower",
     butterfly: "Silvery Checkerspot",
     plantImage: "images/sunflower.jpg",
+    plantPosition: "50% 8%", // tall photo: keep the flower heads in frame, not the stems
     butterflyImage: "images/checkerspot_sunflower.jpg",
     desc: "Silvery Checkerspots use sunflowers and related plants. Their checkered wing pattern is a beautiful sight!"
   }
@@ -100,6 +105,13 @@ function goToSlide(num) {
   next.classList.add('active');
   next.style.opacity = '1';
 
+  // Reaching a section's final slide counts that section as finished
+  if (num === 15) completeSection('hostPlants');
+  if (num === 19 || num === 27) completeSection('camouflage');
+  if (num === 44) completeSection('moths');
+  if (num === 57) completeSection('metamorphosis');
+  if (num === 10) updateMeadowProgress();
+
   if (num === 12) {
     renderPlant();
   }
@@ -109,6 +121,45 @@ function goToSlide(num) {
   if (num === 40) {
     updateDiffVisited();
   }
+}
+
+// ===== MEADOW PROGRESS BAR =====
+function completeSection(name) {
+  completedSections.add(name);
+  updateMeadowProgress();
+}
+
+// Stars already shown on the hub, so only newly earned ones get the pop animation
+var meadowStarsShown = 0;
+
+function updateMeadowProgress() {
+  // Only draw while the hub is on screen, so the fill and star pop play when the student returns
+  if (currentSlide !== 10) return;
+  var done = MEADOW_SECTIONS.filter(function(name) { return completedSections.has(name); }).length;
+  var total = MEADOW_SECTIONS.length;
+  var fill = document.getElementById('meadow-progress-fill');
+  var label = document.getElementById('meadow-progress-label');
+  var bar = document.getElementById('meadow-progress');
+  if (!fill || !label || !bar) return;
+  fill.style.width = (done / total * 100) + '%';
+  bar.querySelectorAll('.meadow-star').forEach(function(star, i) {
+    var earned = i < done;
+    var isNew = earned && i >= meadowStarsShown;
+    if (!isNew) star.classList.toggle('earned', earned);
+    if (isNew) {
+      // light up and pop each new star once the growing fill reaches it
+      setTimeout(function() {
+        star.classList.add('earned', 'just-earned');
+        setTimeout(function() { star.classList.remove('just-earned'); }, 900);
+      }, 500 + (i - meadowStarsShown) * 250);
+    }
+  });
+  meadowStarsShown = done;
+  label.textContent = done === total
+    ? '\u2605 All 4 stars earned! Click the net to finish. \u2605'
+    : '\u2605 ' + done + ' / ' + total + ' stars earned';
+  bar.setAttribute('aria-valuenow', done);
+  bar.setAttribute('aria-valuetext', done + ' of ' + total + ' stars earned');
 }
 
 // ===== HOST PLANTS LOGIC =====
@@ -125,8 +176,8 @@ function renderPlant() {
   document.getElementById('plant-title').textContent = plant.plant;
   document.getElementById('plant-image').style.background = '#f5f5f5';
   document.getElementById('plant-image').innerHTML =
-    '<img src="' + plant.plantImage + '" alt="' + plant.plant + '" style="max-width: 100%; max-height: 100%; object-fit: contain; border-radius: 12px;">' +
-    '<span style="position:absolute;bottom:0.5rem;font-size:0.85rem;color:#935D3C;">Click the plant!</span>';
+    '<img src="' + plant.plantImage + '" alt="' + plant.plant + '" style="width: 100%; height: 100%; object-fit: cover; object-position: ' + (plant.plantPosition || 'center') + '; display: block;">' +
+    '<span style="position:absolute;bottom:0.6rem;font-size:0.85rem;color:#935D3C;background:rgba(255,255,255,0.9);padding:0.25rem 0.75rem;border-radius:50px;font-weight:600;">Click the plant!</span>';
   document.getElementById('plant-reveal').classList.remove('show');
   document.getElementById('plant-next-btn').style.display = 'none';
   document.getElementById('butterfly-name').textContent = '';
@@ -163,6 +214,7 @@ function revealButterfly() {
 function nextPlant() {
   currentPlantIndex++;
   if (currentPlantIndex >= plants.length) {
+    completeSection('hostPlants');
     goToSlide(10);
     currentPlantIndex = 0;
   } else {
@@ -274,6 +326,7 @@ function updateDiffVisited() {
     }
   });
   if (visitedDifferences.size >= 3) {
+    completeSection('moths');
     var completeBtn = document.getElementById('moth-complete-btn');
     if (completeBtn) completeBtn.style.display = 'inline-block';
   }
