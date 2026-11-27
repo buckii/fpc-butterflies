@@ -196,8 +196,14 @@
   <p style="color:#fff; text-shadow: 1px 1px 3px rgba(87,39,0,0.3); margin-bottom:0.75rem; font-weight:500;">Click any area to begin exploring. Click the net when you're finished!</p>
   <!-- Progress bar: fills one step each time a meadow activity is finished (see updateMeadowProgress in app.js) -->
   <div class="meadow-progress" id="meadow-progress" role="progressbar" aria-label="Meadow activities completed" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0">
-    <div class="meadow-progress-track"><div class="meadow-progress-fill" id="meadow-progress-fill"></div></div>
-    <span class="meadow-progress-label" id="meadow-progress-label">0 of 4 activities complete</span>
+    <div class="meadow-progress-bar">
+      <div class="meadow-progress-track"><div class="meadow-progress-fill" id="meadow-progress-fill"></div></div>
+      <span class="meadow-star" style="left:25%;"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg></span>
+      <span class="meadow-star" style="left:50%;"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg></span>
+      <span class="meadow-star" style="left:75%;"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg></span>
+      <span class="meadow-star" style="left:100%;"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8z"/></svg></span>
+    </div>
+    <span class="meadow-progress-label" id="meadow-progress-label">0 / 4 stars earned</span>
   </div>
   <div class="meadow-container meadow-5">
     <div class="meadow-area area-host-plants" onclick="goToSlide(11)" role="button" tabindex="0" aria-label="Host Plants activity">

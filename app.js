@@ -129,7 +129,12 @@ function completeSection(name) {
   updateMeadowProgress();
 }
 
+// Stars already shown on the hub, so only newly earned ones get the pop animation
+var meadowStarsShown = 0;
+
 function updateMeadowProgress() {
+  // Only draw while the hub is on screen, so the fill and star pop play when the student returns
+  if (currentSlide !== 10) return;
   var done = MEADOW_SECTIONS.filter(function(name) { return completedSections.has(name); }).length;
   var total = MEADOW_SECTIONS.length;
   var fill = document.getElementById('meadow-progress-fill');
@@ -137,10 +142,24 @@ function updateMeadowProgress() {
   var bar = document.getElementById('meadow-progress');
   if (!fill || !label || !bar) return;
   fill.style.width = (done / total * 100) + '%';
+  bar.querySelectorAll('.meadow-star').forEach(function(star, i) {
+    var earned = i < done;
+    var isNew = earned && i >= meadowStarsShown;
+    if (!isNew) star.classList.toggle('earned', earned);
+    if (isNew) {
+      // light up and pop each new star once the growing fill reaches it
+      setTimeout(function() {
+        star.classList.add('earned', 'just-earned');
+        setTimeout(function() { star.classList.remove('just-earned'); }, 900);
+      }, 500 + (i - meadowStarsShown) * 250);
+    }
+  });
+  meadowStarsShown = done;
   label.textContent = done === total
-    ? 'All 4 activities complete! Click the net to finish.'
-    : done + ' of ' + total + ' activities complete';
+    ? '\u2605 All 4 stars earned! Click the net to finish. \u2605'
+    : '\u2605 ' + done + ' / ' + total + ' stars earned';
   bar.setAttribute('aria-valuenow', done);
+  bar.setAttribute('aria-valuetext', done + ' of ' + total + ' stars earned');
 }
 
 // ===== HOST PLANTS LOGIC =====
