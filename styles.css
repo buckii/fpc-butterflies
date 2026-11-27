@@ -252,6 +252,40 @@ p, li {
 }
 
 /* ===== MEADOW HUB ===== */
+/* ===== MEADOW PROGRESS BAR (slide 10) ===== */
+.meadow-progress {
+  width: 100%;
+  max-width: 420px;
+  margin: 0 auto 1.25rem;
+  text-align: center;
+}
+.meadow-progress-track {
+  height: 14px;
+  background: rgba(255,255,255,0.85);
+  border: 2px solid #fff;
+  border-radius: 50px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(87,39,0,0.25);
+}
+.meadow-progress-fill {
+  height: 100%;
+  width: 0;
+  background: #F8971D;
+  border-radius: 50px;
+  transition: width 0.6s ease;
+}
+.meadow-progress-label {
+  display: block;
+  margin-top: 0.35rem;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-shadow: 1px 1px 3px rgba(87,39,0,0.5);
+}
+@media (prefers-reduced-motion: reduce) {
+  .meadow-progress-fill { transition: none; }
+}
+
 .meadow-container {
   position: relative;
   width: 100%;

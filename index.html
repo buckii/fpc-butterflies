@@ -193,7 +193,12 @@
 <!-- ===== SLIDE 10: MEADOW HUB ===== -->
 <div id="slide-10" class="screen" style="background-image: url('images/meadow_background.jpg'); background-size: cover; background-position: center;">
   <h2 style="color:#fff; text-shadow: 1px 2px 4px rgba(87,39,0,0.4); margin-bottom:1rem;">The Meadow</h2>
-  <p style="color:#fff; text-shadow: 1px 1px 3px rgba(87,39,0,0.3); margin-bottom:1.5rem; font-weight:500;">Click any area to begin exploring. Click the net when you're finished!</p>
+  <p style="color:#fff; text-shadow: 1px 1px 3px rgba(87,39,0,0.3); margin-bottom:0.75rem; font-weight:500;">Click any area to begin exploring. Click the net when you're finished!</p>
+  <!-- Progress bar: fills one step each time a meadow activity is finished (see updateMeadowProgress in app.js) -->
+  <div class="meadow-progress" id="meadow-progress" role="progressbar" aria-label="Meadow activities completed" aria-valuemin="0" aria-valuemax="4" aria-valuenow="0">
+    <div class="meadow-progress-track"><div class="meadow-progress-fill" id="meadow-progress-fill"></div></div>
+    <span class="meadow-progress-label" id="meadow-progress-label">0 of 4 activities complete</span>
+  </div>
   <div class="meadow-container meadow-5">
     <div class="meadow-area area-host-plants" onclick="goToSlide(11)" role="button" tabindex="0" aria-label="Host Plants activity">
       <span class="area-icon"><img class="moths-icon" src="images/shared_swallowtail_butterfly_icon.png" alt="Yellow tiger swallowtail butterfly"></span>

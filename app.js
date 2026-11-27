@@ -14,6 +14,10 @@ const visitedButterflies = new Set();
 // Differences hub visited tracking (slide 40)
 const visitedDifferences = new Set();
 
+// Meadow activities finished so far, shown by the progress bar on slide 10
+const MEADOW_SECTIONS = ['hostPlants', 'camouflage', 'moths', 'metamorphosis'];
+const completedSections = new Set();
+
 // Matching game correct answers
 const matchAnswers = {
   monarch: false,    // NO — caterpillar is Blue Morpho, not Monarch
@@ -101,6 +105,13 @@ function goToSlide(num) {
   next.classList.add('active');
   next.style.opacity = '1';
 
+  // Reaching a section's final slide counts that section as finished
+  if (num === 15) completeSection('hostPlants');
+  if (num === 19 || num === 27) completeSection('camouflage');
+  if (num === 44) completeSection('moths');
+  if (num === 57) completeSection('metamorphosis');
+  if (num === 10) updateMeadowProgress();
+
   if (num === 12) {
     renderPlant();
   }
@@ -110,6 +121,26 @@ function goToSlide(num) {
   if (num === 40) {
     updateDiffVisited();
   }
+}
+
+// ===== MEADOW PROGRESS BAR =====
+function completeSection(name) {
+  completedSections.add(name);
+  updateMeadowProgress();
+}
+
+function updateMeadowProgress() {
+  var done = MEADOW_SECTIONS.filter(function(name) { return completedSections.has(name); }).length;
+  var total = MEADOW_SECTIONS.length;
+  var fill = document.getElementById('meadow-progress-fill');
+  var label = document.getElementById('meadow-progress-label');
+  var bar = document.getElementById('meadow-progress');
+  if (!fill || !label || !bar) return;
+  fill.style.width = (done / total * 100) + '%';
+  label.textContent = done === total
+    ? 'All 4 activities complete! Click the net to finish.'
+    : done + ' of ' + total + ' activities complete';
+  bar.setAttribute('aria-valuenow', done);
 }
 
 // ===== HOST PLANTS LOGIC =====
@@ -164,6 +195,7 @@ function revealButterfly() {
 function nextPlant() {
   currentPlantIndex++;
   if (currentPlantIndex >= plants.length) {
+    completeSection('hostPlants');
     goToSlide(10);
     currentPlantIndex = 0;
   } else {
@@ -275,6 +307,7 @@ function updateDiffVisited() {
     }
   });
   if (visitedDifferences.size >= 3) {
+    completeSection('moths');
     var completeBtn = document.getElementById('moth-complete-btn');
     if (completeBtn) completeBtn.style.display = 'inline-block';
   }
