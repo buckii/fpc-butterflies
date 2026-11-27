@@ -77,6 +77,7 @@ const plants = [
     plant: "Sunflower",
     butterfly: "Silvery Checkerspot",
     plantImage: "images/sunflower.jpg",
+    plantPosition: "50% 8%", // tall photo: keep the flower heads in frame, not the stems
     butterflyImage: "images/checkerspot_sunflower.jpg",
     desc: "Silvery Checkerspots use sunflowers and related plants. Their checkered wing pattern is a beautiful sight!"
   }
@@ -125,7 +126,7 @@ function renderPlant() {
   document.getElementById('plant-title').textContent = plant.plant;
   document.getElementById('plant-image').style.background = '#f5f5f5';
   document.getElementById('plant-image').innerHTML =
-    '<img src="' + plant.plantImage + '" alt="' + plant.plant + '" style="width: 100%; height: 100%; object-fit: cover; display: block;">' +
+    '<img src="' + plant.plantImage + '" alt="' + plant.plant + '" style="width: 100%; height: 100%; object-fit: cover; object-position: ' + (plant.plantPosition || 'center') + '; display: block;">' +
     '<span style="position:absolute;bottom:0.6rem;font-size:0.85rem;color:#935D3C;background:rgba(255,255,255,0.9);padding:0.25rem 0.75rem;border-radius:50px;font-weight:600;">Click the plant!</span>';
   document.getElementById('plant-reveal').classList.remove('show');
   document.getElementById('plant-next-btn').style.display = 'none';
