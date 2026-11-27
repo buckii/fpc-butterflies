@@ -106,14 +106,14 @@ p, li {
 .btn-red { background: #9C2F31; color: #fff; }
 .btn-white { background: #fff; color: #572700; border: 2px solid #935D3C; }
 
-/* ===== ARROW BUTTON (bottom-right, brown per brand) ===== */
+/* ===== ARROW BUTTON (bottom-right, brand orange PMS 144) ===== */
 .arrow-btn {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
   width: 60px;
   height: 60px;
-  background: #935D3C;
+  background: #F8971D;
   border: none;
   border-radius: 50%;
   cursor: pointer;
