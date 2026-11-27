@@ -809,7 +809,7 @@ p, li {
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  margin: 1.5rem 0;
+  margin: 1rem 0;
   flex-wrap: wrap;
 }
 .lifecycle-stage {
@@ -923,7 +923,11 @@ p, li {
   .match-circles { flex-direction: column; align-items: center; }
   .match-circle { width: 190px; height: 190px; }
   .diff-hub { flex-direction: column; align-items: center; }
-  .lifecycle-stages { flex-direction: column; align-items: center; }
-  .lifecycle-arrow { transform: rotate(90deg); }
+  /* Keep the 4 stages in one compact row so the slide fits without scrolling */
+  .lifecycle-stages { flex-wrap: nowrap; gap: 0.25rem; }
+  .lifecycle-stage { min-width: 0; padding: 0.5rem 0.4rem; }
+  .lifecycle-stage strong { font-size: 0.75rem; }
+  .lifecycle-img { width: 44px; height: 44px; }
+  .lifecycle-arrow { font-size: 0.8rem; }
   .meadow-5 .meadow-area .area-label { font-size: clamp(0.55rem, 1.2vw, 0.85rem); }
 }
