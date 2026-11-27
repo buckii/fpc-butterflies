@@ -147,7 +147,7 @@
 </div>
 
 <!-- ===== SLIDE 7: LARRY INTRO ===== -->
-<div id="slide-7" class="screen" onclick="goToSlide(8)" style="cursor:pointer; background-image: url('images/meadow_background.jpg'); background-size: cover; background-position: center;">
+<div id="slide-7" class="screen" style="background-image: url('images/meadow_background.jpg'); background-size: cover; background-position: center;">
   <div class="larry-container">
     <div class="larry-avatar">
       <img src="images/slide07_larry_lepidopterist_character.png" alt="Larry the Lepidopterist">
@@ -155,10 +155,12 @@
     <div class="speech-bubble">
       <h2 style="margin-bottom:0.75rem;">Meet Larry the Lepidopterist!</h2>
       <p>Hello there, young explorer! I'm Larry, and I study butterflies. Today, we're going on an adventure through a beautiful meadow filled with amazing butterflies and the plants they love.</p>
-      <p style="margin-top:0.75rem;">Are you ready? Let's go!</p>
+    </div>
+    <div class="larry-start">
+      <p class="larry-ready">Are you ready?</p>
+      <button class="btn btn-orange larry-go-btn" onclick="goToSlide(8)">Let's Go!</button>
     </div>
   </div>
-  <div class="click-hint">Click anywhere to continue</div>
 </div>
 
 <!-- ===== SLIDE 8: BUTTERFLY INSTRUCTIONS ===== -->
